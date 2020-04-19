@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="br.cademeubicho.ui.home.AnimaisDesaparecidosFragment"
+        android:label="@string/menu_home" />
+
+    <fragment
+        android:id="@+id/nav_meus_pets"
+        android:name="br.cademeubicho.ui.meusbichosperdidos.MeusBichosPerdidosFragment"
+        android:label="@string/menu_meus_pets" />
+
+    <fragment
+        android:id="@+id/nav_mensagens"
+        android:name="br.cademeubicho.ui.mensagens.MensagensFragment"
+        android:label="@string/menu_mensagens" />
+    <fragment
+        android:id="@+id/nav_minha_conta"
+        android:name="br.cademeubicho.ui.minhaconta.MinhaContaFragment"
+        android:label="@string/menu_minha_conta" />
+    <fragment
+        android:id="@+id/nav_configuracao"
+        android:name="br.cademeubicho.ui.configuracao.ConfiguracaoFragment"
+        android:label="@string/menu_configuracao" />
+
+    <activity
+        android:id="@+id/nav_cadastro_animal"
+        android:name="br.cademeubicho.ui.cadastroanimal.CadastroAnimalActivity"
+        android:label="@string/nav_cadastroanimal" />
+
+</navigation>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="@string/menu_home" />
+    <item
+        android:id="@+id/nav_meus_pets"
+        android:title="@string/menu_meus_pets" />
+    <item
+        android:id="@+id/nav_mensagens"
+        android:title="@string/menu_mensagens" />
+    <item
+        android:id="@+id/nav_minha_conta"
+        android:title="@string/menu_minha_conta" />
+    <item
+        android:id="@+id/nav_configuracao"
+        android:title="@string/menu_configuracao" />
+    <group
+        android:id="@+id/fabCadastrar"
+        android:visible="true"/>
+
+</menu>

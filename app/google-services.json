@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "172778597123",
+    "firebase_url": "https://cade-meu-bicho.firebaseio.com",
+    "project_id": "cade-meu-bicho",
+    "storage_bucket": "cade-meu-bicho.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172778597123:android:0495f7c7a0f8befcc2d736",
+        "android_client_info": {
+          "package_name": "br.cademeubicho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172778597123-lvmvecpcul5brq8lsg7k29vmk2rlo28p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.cademeubicho",
+            "certificate_hash": "e2a7856e6e676566890aed601d8433094c2b655e"
+          }
+        },
+        {
+          "client_id": "172778597123-bgkn8lu21ksq78hcmdro15sehg7v78bj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvKke9DF5DLqFhz6sl6UfqmjtvCcUKuYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172778597123-bgkn8lu21ksq78hcmdro15sehg7v78bj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
