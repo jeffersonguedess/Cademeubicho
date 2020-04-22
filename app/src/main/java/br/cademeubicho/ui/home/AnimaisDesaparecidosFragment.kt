@@ -1,5 +1,6 @@
 package br.cademeubicho.ui.home
 
+import android.R.attr.button
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import br.cademeubicho.ui.cadastroanimal.CadastroAnimalActivity
 import br.cademeubicho.ui.home.adapter.AnimaisDesaparecidosAdapter
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
+
 
 class AnimaisDesaparecidosFragment : Fragment() {
 
@@ -49,6 +51,7 @@ class AnimaisDesaparecidosFragment : Fragment() {
             } else {
                 Intent(activity, LoginActivity::class.java)
             }
+
 
             startActivity(intent)
         }

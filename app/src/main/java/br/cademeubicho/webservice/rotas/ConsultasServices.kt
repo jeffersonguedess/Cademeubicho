@@ -16,4 +16,5 @@ interface ConsultasServices {
     fun getUsuario(@Field("uidFirebase") uid: String): Call<Usuario>
 
 
+
 }

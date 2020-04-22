@@ -14,14 +14,13 @@ class ConsultasController {
 
     fun localidadesServices(uf: String): MutableList<String> {
         val call = service?.getCidadesIbge(uf)
-        val resul = mutableListOf<String>()
-        
+        val cidadesList = mutableListOf<String>()
+
         call?.enqueue(object : Callback<Localidade> {
             override fun onResponse(call: Call<Localidade>, response: Response<Localidade>) {
                 if (response.code() == 200) {
-
-                    response.let {result->
-                        result.body()?.cidades?.let { cidades -> resul.addAll(cidades) }
+                    response.let { result ->
+                        result.body()?.cidades?.let { cidades -> cidadesList.addAll(cidades) }
                     }
                 }
             }
@@ -30,7 +29,7 @@ class ConsultasController {
                 println(t)
             }
         })
-        return resul
+        return cidadesList
     }
 
 

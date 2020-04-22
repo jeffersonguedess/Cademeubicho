@@ -10,6 +10,8 @@
     <string name="menu_mensagens">Mensagens</string>
     <string name="menu_minha_conta">Minha conta</string>
     <string name="menu_configuracao">Configurações</string>
+    <string name="menu_cadastroanimal">Cadastro de Animais</string>
+    <string name="menu_maps">Google Maps</string>
 
     <string name="login">Login</string>
     <string name="nav_logout">Sair</string>
@@ -33,7 +35,7 @@
     <string name="textview">TextView</string>
 
     // Strings tela de Cadastro de Animais
-    <string name="nav_cadastroanimal">Cadastro de Animais</string>
+
     <string name="foto">Fotos Animal</string>
     <string name="tipoanimal">Tipo do Animal</string>
     <string name="racaAnimal">Raça do Animal</string>
@@ -51,11 +53,17 @@
     <string name="cadastro_animais">Cadastrar</string>
 
 
+
     //mensagens de erro
     <string name="error_localidades">Erro ao Buscar Localidades</string>
 
 
-
     <string name="click">+</string>
 
+    //Maps
+    <string name="title_activity_maps">"Mapa "</string>
+    <string name="fabMaps">+</string>
+
+    <string name="google_maps_key">AIzaSyBx-3_O9kRnk67rhwWq7Zf0JAi4eAvQFIc</string>
+    <string name="abrir_maps">Select</string>
 </resources>

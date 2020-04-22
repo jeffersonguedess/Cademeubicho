@@ -35,18 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        >
-
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="bottom|end"-->
-<!--            app:layout_drawOnPictureSnapshot="true"-->
-<!--            app:layout_drawOnPreview="true"-->
-<!--            app:layout_drawOnVideoSnapshot="true"-->
-<!--            app:srcCompat="@drawable/ic_menu_gallery" />-->
-
-    </com.otaliastudios.cameraview.CameraView>
+        />
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etTipoAnimal"
         android:layout_width="match_parent"
@@ -192,24 +181,48 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
 
-    <com.google.android.gms.maps.MapView
+   <!-- <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda" />
+        app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda" />-->
 
-    <Button
-        android:id="@+id/btnCadastroAnimais"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="36dp"
-        android:text="@string/cadastro_animais"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView" />
+        <!--<Button
+            android:id="@+id/select_maps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/abrir_maps"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda" />-->
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabMaps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="60dp"
+            app:backgroundTint="@color/design_default_color_error"
+            android:src="@drawable/ic_action_maps"
+            app:fabSize="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda" />
+
+        <Button
+            android:id="@+id/btnCadastroAnimais"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="53dp"
+            android:layout_marginEnd="44dp"
+            android:text="@string/cadastro_animais"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fabMaps" />
 
         <EditText
             android:id="@+id/editText"
@@ -223,6 +236,8 @@
             android:inputType="number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtConfirmacaoReconpensa" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 

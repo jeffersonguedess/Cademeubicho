@@ -6,29 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.AnimaisDesaparecidosFragment">
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_cidades"
-        android:layout_width="200dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="16dp"
-        android:prompt="@string/estado"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner_estado"
-        app:layout_constraintStart_toEndOf="@+id/spinner_estado"
-        app:layout_constraintTop_toTopOf="@+id/spinner_estado" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvNome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/nome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <!--<com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tlEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -45,40 +22,29 @@
     </com.google.android.material.textfield.TextInputLayout>-->
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvEmail"
-        android:layout_width="match_parent"
+        android:id="@+id/tvNome"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="16dp"
-        android:hint="@string/e_mail"
-        android:inputType="textEmailAddress"
+        android:hint="@string/nome"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNome" />
-
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etEndereco"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/endereco"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_estado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:id="@+id/spinner_cidades"
+        android:layout_width="200dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="16dp"
         android:prompt="@string/estado"
-        app:layout_constraintStart_toStartOf="@+id/etDDD"
-        app:layout_constraintTop_toBottomOf="@+id/etDDD" />
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_estado"
+        app:layout_constraintStart_toEndOf="@+id/spinner_estado"
+        app:layout_constraintTop_toTopOf="@+id/spinner_estado"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etTelefone"
@@ -91,7 +57,7 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etDDD"
-        app:layout_constraintTop_toBottomOf="@+id/etEndereco" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etDDD"
@@ -103,20 +69,56 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toStartOf="@+id/etTelefone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEndereco" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_estado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:prompt="@string/estado"
+        app:layout_constraintStart_toStartOf="@+id/etDDD"
+        app:layout_constraintTop_toBottomOf="@+id/etDDD" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/e_mail"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNome" />
+
 
     <Button
         android:id="@+id/btnCadastro"
         android:layout_width="131dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="100dp"
         android:text="@string/cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="286dp"
+        android:layout_height="305dp"
+        android:src="@drawable/ic_logo_sem_nome_colorido_svg"
+        app:layout_constraintBottom_toTopOf="@+id/btnCadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTelefone" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_estado"
+        app:layout_constraintVertical_bias="0.194" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
