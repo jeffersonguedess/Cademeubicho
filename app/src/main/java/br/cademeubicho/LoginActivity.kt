@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
                 .createSignInIntentBuilder()
                 .setIsSmartLockEnabled(false)
                 .setAvailableProviders(providers)
-                .setLogo(R.drawable.ic_launcher_login_foreground) // Set logo drawable
+                .setLogo(R.mipmap.logo_cortado) // Set logo drawable
                 .build(),
             RC_SIGN_IN
         )

@@ -21,53 +21,65 @@
 
     </com.google.android.material.textfield.TextInputLayout>-->
 
+    <TextView
+        android:id="@+id/txtNome"
+        android:layout_width="112dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/nome"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/tvNome"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvNome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="378dp"
+        android:layout_height="24dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/nome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_cidades"
-        android:layout_width="200dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="16dp"
-        android:prompt="@string/estado"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner_estado"
-        app:layout_constraintStart_toEndOf="@+id/spinner_estado"
-        app:layout_constraintTop_toTopOf="@+id/spinner_estado"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etTelefone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/telefone"
-        android:inputType="textEmailAddress"
+    <TextView
+        android:id="@+id/txtTelefone"
+        android:layout_width="112dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="168dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/telefone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etDDD"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txtDDD"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etDDD"
-        android:layout_width="44dp"
+    <EditText
+        android:id="@+id/num_telefone"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/num_ddd"
+        app:layout_constraintTop_toBottomOf="@+id/txtTelefone" />
+
+    <TextView
+        android:id="@+id/txtDDD"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:hint="@string/ddd"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toStartOf="@+id/etTelefone"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/ddd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
@@ -75,50 +87,112 @@
         android:id="@+id/spinner_estado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
         android:prompt="@string/estado"
-        app:layout_constraintStart_toStartOf="@+id/etDDD"
-        app:layout_constraintTop_toBottomOf="@+id/etDDD" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEstado" />
+
+    <TextView
+        android:id="@+id/txtCidade"
+        android:layout_width="50dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="124dp"
+        android:text="@string/cidade"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/num_telefone" />
+
+    <TextView
+        android:id="@+id/txtEstado"
+        android:layout_width="50dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/estado"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/num_ddd" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_cidades"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="52dp"
+        android:textColor="@color/colorAccent"
+        android:prompt="@string/estado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCidade" />
+
+    <EditText
+        android:id="@+id/num_ddd"
+        android:layout_width="57dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="6dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/num_telefone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDDD" />
+
+    <Button
+        android:id="@+id/btnCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="129dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/cadastrar"
+        app:layout_constraintBottom_toTopOf="@+id/imgLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_cidades" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="258dp"
+        android:layout_height="173dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginEnd="99dp"
+        android:src="@drawable/ic_logos_cademeubicho_texto_grande"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="378dp"
+        android:layout_height="24dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/e_mail"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNome" />
 
-
-    <Button
-        android:id="@+id/btnCadastro"
-        android:layout_width="131dp"
-        android:layout_height="48dp"
+    <TextView
+        android:id="@+id/txtNome2"
+        android:layout_width="112dp"
+        android:layout_height="20dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="100dp"
-        android:text="@string/cadastrar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="286dp"
-        android:layout_height="305dp"
-        android:src="@drawable/ic_logo_sem_nome_colorido_svg"
-        app:layout_constraintBottom_toTopOf="@+id/btnCadastro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/e_mail"
+        app:layout_constraintBottom_toTopOf="@+id/tvEmail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_estado"
-        app:layout_constraintVertical_bias="0.194" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNome"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

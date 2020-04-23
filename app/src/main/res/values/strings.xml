@@ -28,7 +28,7 @@
     <string name="nome">Nome</string>
     <string name="endereco">Endereço</string>
     <string name="cidade">Cidade</string>
-    <string name="estado">Estado</string>
+    <string name="estado" formatted="true" >Estado</string>
     <string name="ddd">DDD</string>
     <string name="telefone">Telefone</string>
     <string name="cadastrar">Cadastrar</string>
@@ -37,14 +37,13 @@
     // Strings tela de Cadastro de Animais
 
     <string name="foto">Fotos Animal</string>
-    <string name="tipoanimal">Tipo do Animal</string>
     <string name="racaAnimal">Raça do Animal</string>
     <string name="nomeAnimal">Nome do Animal</string>
     <string name="idadeAnimal">Idade do Animal</string>
     <string name="corAnimal">Cor do Animal</string>
     <string name="porteAnimal">Porte do Animal</string>
-    <string name="radioSim">Sim</string>
-    <string name="permitir_contato">Permitir Contato ?</string>
+    <string name="tipoAnimal">Tipo do Animal</string>
+    <!--<string name="permitir_contato">Permitir Contato ?</string>-->
     <string name="permitir_recompensa">Recompensa</string>
     <string name="recompensa">R$</string>
     <string name="sim">Sim</string>
@@ -56,6 +55,7 @@
 
     //mensagens de erro
     <string name="error_localidades">Erro ao Buscar Localidades</string>
+    <string name="error_porte_animal">Erro ao adicioanra o porte</string>
 
 
     <string name="click">+</string>

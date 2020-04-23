@@ -22,10 +22,9 @@
 
     <application
         android:allowBackup="true"
-        android:logo="@drawable/ic_logo_3_svg"
-        android:icon="@drawable/ic_logo_3_svg"
+        android:icon="@mipmap/logo_cortado"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_logo_3_svg"
+        android:roundIcon="@mipmap/logo_cortado_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 

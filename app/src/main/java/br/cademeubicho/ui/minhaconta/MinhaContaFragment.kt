@@ -100,10 +100,11 @@ class MinhaContaFragment : BaseFragment() {
         val arrayListCidades = ConsultasController().localidadesServices(uf)
         spinnerCidade?.adapter =
             ArrayAdapter(
-                context!!,
+                this.requireContext(),
                 R.layout.support_simple_spinner_dropdown_item,
                 arrayListCidades
             )
+
 
         spinnerCidade?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -117,6 +118,7 @@ class MinhaContaFragment : BaseFragment() {
                 id: Long
             ) {
                 val cidades = parent?.getItemAtPosition(position).toString()
+                alteraSpinnerCidades(cidades, root)
                 println(cidades)
             }
 
