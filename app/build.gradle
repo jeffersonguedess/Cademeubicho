@@ -73,6 +73,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.3.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
+    // A biblioteca abaixo é usado para executar a biblioteca easypermissions para gerenciar permissões de localização
+    // EasyPermissions é necessário para nos ajudar a solicitar permissão para acessar o local
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
     api 'com.otaliastudios:cameraview:2.6.2'
 
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
