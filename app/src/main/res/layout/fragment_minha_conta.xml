@@ -143,28 +143,29 @@
         android:id="@+id/btnCadastro"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="129dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="129dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="149dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="149dp"
+        android:layout_marginBottom="150dp"
         android:text="@string/cadastrar"
-        app:layout_constraintBottom_toTopOf="@+id/imgLogo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_cidades" />
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo"
+        app:layout_constraintVertical_bias="0.51" />
 
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="258dp"
-        android:layout_height="173dp"
+        android:layout_width="257dp"
+        android:layout_height="165dp"
         android:layout_marginStart="99dp"
+        android:layout_marginTop="42dp"
         android:layout_marginEnd="99dp"
         android:src="@drawable/ic_logos_cademeubicho_texto_grande"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_cidades" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvEmail"

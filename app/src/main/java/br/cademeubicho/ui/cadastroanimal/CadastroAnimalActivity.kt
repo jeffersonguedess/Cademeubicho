@@ -24,8 +24,9 @@ class CadastroAnimalActivity : AppCompatActivity() {
     val tipoAnimal = arrayOf(
         "Cachorro",
         "Gato",
-        "Ave",
-        "Roedor"
+        "Pássaro",
+        "Roedor",
+        "Réptil"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
