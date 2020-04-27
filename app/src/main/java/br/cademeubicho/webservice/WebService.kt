@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class WebService {
 
     fun getWebService(): Retrofit? {
+        print ("CHAMADA WEBSERVICE")
         return Retrofit.Builder()
             .baseUrl(BuildConfig.API_URL)
             .addConverterFactory(GsonConverterFactory.create())

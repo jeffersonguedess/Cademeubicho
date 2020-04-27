@@ -12,7 +12,6 @@ abstract class BaseFragment : Fragment() {
     private var authListener: FirebaseAuth.AuthStateListener =
         FirebaseAuth.AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
-
             if (user != null) {
                 if (!hasInitCalled) {
                     hasInitCalled = true

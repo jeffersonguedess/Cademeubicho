@@ -49,4 +49,14 @@ class Usuario {
         this.uidFirebase = uidFirebase
     }
 
+    constructor(
+        nomeUsuario: String?,
+        emailUsuario: String?,
+        uidFirebase: String?
+    ) {
+        this.nomeUsuario = nomeUsuario
+        this.emailUsuario = emailUsuario
+        this.uidFirebase = uidFirebase
+    }
+
 }
