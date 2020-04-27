@@ -7,8 +7,11 @@ class Usuario {
     @SerializedName("nomeUsuario")
     var nomeUsuario: String? = null
 
-    @SerializedName("telefoneCelular")
-    var telefoneCelular: String? = null
+    @SerializedName("numeroCelular")
+    var numeroCelular: String? = null
+
+    @SerializedName("dddCelular")
+    var dddCelular: String? = null
 
     @SerializedName("emailUsuario")
     var emailUsuario: String? = null
@@ -25,7 +28,25 @@ class Usuario {
     @SerializedName("uidFirebase")
     var uidFirebase: String? = null
 
-    @SerializedName("CodigoRetorno")
-    var CodigoRetorno: Int? = null
+    constructor()
+    constructor(
+        nomeUsuario: String?,
+        numeroCelular: String?,
+        dddCelular: String?,
+        emailUsuario: String?,
+        ufUsuario: String?,
+        cidadeUsuario: String?,
+        distanciaFeed: Float?,
+        uidFirebase: String?
+    ) {
+        this.nomeUsuario = nomeUsuario
+        this.numeroCelular = numeroCelular
+        this.dddCelular = dddCelular
+        this.emailUsuario = emailUsuario
+        this.ufUsuario = ufUsuario
+        this.cidadeUsuario = cidadeUsuario
+        this.distanciaFeed = distanciaFeed
+        this.uidFirebase = uidFirebase
+    }
 
 }

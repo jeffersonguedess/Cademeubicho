@@ -1,21 +1,20 @@
 package br.cademeubicho.webservice
 
 import br.cademeubicho.BuildConfig
-import br.cademeubicho.webservice.model.Localidade
-import br.cademeubicho.webservice.rotas.ConsultasServices
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class WebServiceInitializer {
+class WebService {
 
     fun getWebService(): Retrofit? {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    companion object {
+        val instance = WebService().getWebService()
     }
 
 

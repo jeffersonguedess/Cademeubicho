@@ -15,7 +15,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        def serverUrl = '\"' + (System.getenv("API_URL") ?: "https://d0ad38cf.ngrok.io") + '\"'
+
+        //LEMBRAR DE COLOCAR COM httpS
+        def serverUrl = '\"' + (System.getenv("API_URL") ?: "http://cademeubicho.ddns.net") + '\"'
         buildConfigField "String", "API_URL", serverUrl
     }
 

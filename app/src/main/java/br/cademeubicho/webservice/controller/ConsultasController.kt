@@ -1,6 +1,6 @@
 package br.cademeubicho.webservice.controller
 
-import br.cademeubicho.webservice.WebServiceInitializer
+import br.cademeubicho.webservice.WebService
 import br.cademeubicho.webservice.model.Localidade
 import br.cademeubicho.webservice.model.Usuario
 import br.cademeubicho.webservice.rotas.ConsultasServices
@@ -9,7 +9,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ConsultasController {
-    private val ws = WebServiceInitializer().getWebService()
+    private val ws = WebService.instance
     private val service = ws?.create(ConsultasServices::class.java)
 
     fun localidadesServices(uf: String): MutableList<String> {
@@ -33,14 +33,19 @@ class ConsultasController {
     }
 
 
-    fun autorizaAcesso(uid: String): Array<String> {
-        val call = service?.getUsuario(uid)
-        val resul = arrayOf("")
+    fun buscaUsuarios(uid: String?): Usuario {
+        val call = uid?.let { service?.getUsuario(it) }
+        val usuario = Usuario()//mutableListOf<String>()
+
+        mutableListOf<Usuario>()
 
         call?.enqueue(object : Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if (response.code() == 200) {
-                    response.body()!!.cidadeUsuario
+                    response.let { result ->
+                        result.body()?.let {  usuario }
+                        println(result.body()?.nomeUsuario)
+                    }
                 }
             }
 
@@ -48,6 +53,6 @@ class ConsultasController {
                 println(t)
             }
         })
-        return resul
+        return usuario
     }
 }
