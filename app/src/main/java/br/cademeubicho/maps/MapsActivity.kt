@@ -7,9 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -25,8 +23,7 @@ const val REQUEST_CODE_LOCATION = 123
 class MapsActivity() :
     AppCompatActivity(),
     OnMapReadyCallback,
-    GoogleMap.OnMarkerClickListener
-{
+    GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
     val position = LatLng(0.0, 0.0)
@@ -44,21 +41,28 @@ class MapsActivity() :
     override fun onMapReady(googleMap: GoogleMap?) {
         map = googleMap ?: return
         enableMyLocation()
-       // updateLocationUI()
+        // updateLocationUI()
+        val latlng = LatLng(0.0, 0.0)//local nulo no mei do mar
 
-       val marker =  map.addMarker(MarkerOptions()
-            .position(LatLng(0.0,0.0))
-            .title("Museum")
-            .snippet("National Air and Space Museum"))
-        marker.showInfoWindow()
-        marker.hideInfoWindow()
+        val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latlng, 10f)
+        map?.moveCamera(cameraUpdate)
 
-        onMarkerClick( marker)
-        //map?.animateCamera(CameraUpdateFactory.zoomIn())
+        val marker = map.addMarker(
+            MarkerOptions()
+                .position(latlng)
+                .title("Mar")
+                .snippet("Oceano Atlântica Sul")
+                .draggable(true)
+
+        )
+        /*marker.showInfoWindow()
+        marker.hideInfoWindow()*/
+
+        //onMarkerClick(marker)
 
         /*Tipos de Maps
         map?.mapType = GoogleMap.MAP_TYPE_SATELLITE*/
-}
+    }
 
     override fun onMarkerClick(marker: Marker): Boolean {
         val mMarker = WeakHashMap<Marker, String>()
@@ -70,7 +74,11 @@ class MapsActivity() :
         return false
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
 
@@ -86,7 +94,6 @@ class MapsActivity() :
         }
         updateLocationUI()
     }
-
 
 
     @SuppressLint("MissingPermission")

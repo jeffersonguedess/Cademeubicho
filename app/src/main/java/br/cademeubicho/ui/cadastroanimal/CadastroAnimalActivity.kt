@@ -34,11 +34,11 @@ class CadastroAnimalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
        val root =  setContentView(R.layout.activity_cadastro_animal)
         val user = FirebaseAuth.getInstance().currentUser
-        return root
+
 
         alteraSpinnerPorteAnimal(spinner_porte_animal)
         alteraSpinnerTipoAnimal(spinner_tipo_animal)
-
+        return root
 
     }
 
