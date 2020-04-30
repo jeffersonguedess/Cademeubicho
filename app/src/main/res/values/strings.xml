@@ -28,11 +28,12 @@
     <string name="nome">Nome</string>
     <string name="endereco">Endereço</string>
     <string name="cidade">Cidade</string>
-    <string name="estado" formatted="true" >Estado</string>
+    <string name="estado" formatted="true">Estado</string>
     <string name="ddd">DDD</string>
     <string name="telefone">Telefone</string>
-    <string name="cadastrar">Cadastrar</string>
+    <string name="salvar">Salvar</string>
     <string name="textview">TextView</string>
+    <string name="raio">Raio de Busca</string>
 
     // Strings tela de Cadastro de Animais
 
@@ -52,7 +53,6 @@
     <string name="cadastro_animais">Cadastrar</string>
 
 
-
     //mensagens de erro
     <string name="error_localidades">Erro ao Buscar Localidades</string>
     <string name="error_porte_animal">Erro ao adicioanra o porte</string>
@@ -63,8 +63,12 @@
     //Maps
     <string name="title_activity_maps">"Mapa "</string>
     <string name="fabMaps">+</string>
+    <string name="Almentar_zoom">+</string>
+    <string name="Diminuir_zoom">-</string>
+    <string name="tilt_less">\u2193</string>
+    <string name="tilt_more">\u2191</string>
 
-    <string name="google_maps_key">AIzaSyBx-3_O9kRnk67rhwWq7Zf0JAi4eAvQFIc</string>
+  <!--<string name="google_maps_key">AIzaSyBx-3_O9kRnk67rhwWq7Zf0JAi4eAvQFIc</string>-->
     <string name="abrir_maps">Select</string>
 
     <string name="checkbox_zoom">Zoom</string>
@@ -76,5 +80,6 @@
     <string name="checkbox_scroll_gesture">Gestos de rolagem</string>
     <string name="checkbox_tilt_gesture">Gestos de inclinação</string>
     <string name="checkbox_rotate_gesture">Girar gestos</string>
-    <string name="location">É necessária permissão de localização para executar a demonstração</string>
+    <string name="location">Não foi possível mostrar o local - é necessária permissão</string>
+    <string name="title_activity_maps2">Map</string>
 </resources>

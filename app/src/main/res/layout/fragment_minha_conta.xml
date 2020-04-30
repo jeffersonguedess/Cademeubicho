@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,7 +20,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </com.google.android.material.textfield.TextInputLayout>-->
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <TextView
         android:id="@+id/txtNome"
         android:layout_width="112dp"
@@ -87,7 +89,7 @@
         android:id="@+id/spinner_estado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:prompt="@string/estado"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +100,7 @@
         android:layout_width="50dp"
         android:layout_height="22dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="124dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/cidade"
         android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,21 +110,34 @@
         android:id="@+id/txtEstado"
         android:layout_width="50dp"
         android:layout_height="22dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/colorAccent"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/estado"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num_ddd" />
 
+    <TextView
+        android:id="@+id/txtRaio"
+        android:layout_width="106dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="268dp"
+        android:text="@string/raio"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_cidades" />
+
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinner_cidades"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="52dp"
-        android:textColor="@color/colorAccent"
+        android:layout_width="248dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:prompt="@string/estado"
+        android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCidade" />
 
@@ -140,32 +155,18 @@
         app:layout_constraintTop_toBottomOf="@+id/txtDDD" />
 
     <Button
-        android:id="@+id/btnCadastro"
+        android:id="@+id/btnSalva"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="149dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="115dp"
         android:layout_marginEnd="149dp"
         android:layout_marginBottom="150dp"
-        android:text="@string/cadastrar"
+        android:text="@string/salvar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo"
-        app:layout_constraintVertical_bias="0.51" />
-
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="257dp"
-        android:layout_height="165dp"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="99dp"
-        android:src="@drawable/ic_logos_cademeubicho_texto_grande"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_cidades" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvEmail"
@@ -195,6 +196,17 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNome"
         app:layout_constraintVertical_bias="0.0" />
 
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRaio" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 
