@@ -85,15 +85,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_estado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:prompt="@string/estado"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEstado" />
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_estado"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:prompt="@string/estado"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtEstado" />
 
     <TextView
         android:id="@+id/txtCidade"
@@ -130,16 +130,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_cidades" />
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_cidades"
-        android:layout_width="248dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:prompt="@string/estado"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCidade" />
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_cidades"
+            android:layout_width="220dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:prompt="@string/estado"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCidade" />
 
     <EditText
         android:id="@+id/num_ddd"

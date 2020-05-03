@@ -2,12 +2,14 @@ package br.cademeubicho.maps
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
-import com.google.android.gms.maps.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -19,7 +21,7 @@ import java.util.*
 const val REQUEST_CODE_LOCATION = 123
 
 
-@Suppress("DEPRECATED_IDENTITY_EQUALS")
+@Suppress("DEPRECATED_IDENTITY_EQUALS", "DEPRECATION")
 class MapsActivity() :
     AppCompatActivity(),
     OnMapReadyCallback,
@@ -27,6 +29,7 @@ class MapsActivity() :
 
     private lateinit var map: GoogleMap
     val position = LatLng(0.0, 0.0)
+    val marker = MarkerOptions()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,38 +44,54 @@ class MapsActivity() :
     override fun onMapReady(googleMap: GoogleMap?) {
         map = googleMap ?: return
         enableMyLocation()
-        // updateLocationUI()
-        val latlng = LatLng(0.0, 0.0)//local nulo no mei do mar
 
-        val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latlng, 10f)
-        map?.moveCamera(cameraUpdate)
+        /*   val latlng = LatLng(0.0, 0.0)//local nulo no mei do mar
+           val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latlng, 10f)
+           map?.moveCamera(cameraUpdate)
 
-        val marker = map.addMarker(
-            MarkerOptions()
-                .position(latlng)
-                .title("Mar")
-                .snippet("Oceano Atlântica Sul")
-                .draggable(true)
+             val marker = map.addMarker(
+                 MarkerOptions()
+                     .position(latlng)
+                     .title("Mar")
+                     .snippet("Oceano Atlântica Sul")
+                     .draggable(true)
 
+             )
+           marker.showInfoWindow()
+           marker.hideInfoWindow()
+           onMarkerClick(marker)
+           //Tipos de Maps
+           map?.mapType = GoogleMap.MAP_TYPE_SATELLITE*/
+        customAddMarker(
+            LatLng(position.latitude, position.longitude),
+            "Marcador Alterado",
+            "O marcador foi reposicionado"
         )
-        /*marker.showInfoWindow()
-        marker.hideInfoWindow()*/
+    }
 
-        //onMarkerClick(marker)
+    fun customAddMarker(latLng: LatLng, title: String, snippet: String) {
+        val options: MarkerOptions = MarkerOptions()
+        options.position(latLng).title(title).snippet(snippet).draggable(true)
+        val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10f)
+        map.addMarker(options)
 
-        /*Tipos de Maps
-        map?.mapType = GoogleMap.MAP_TYPE_SATELLITE*/
+        map.setOnMarkerClickListener { marker ->
+            true
+        }
+
+        //Testando
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
         val mMarker = WeakHashMap<Marker, String>()
 
-        mMarker.put(marker, String())
+        mMarker[marker] = String()
         map.setOnMarkerClickListener {
             onMarkerClick(marker)
         }
         return false
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -82,19 +101,7 @@ class MapsActivity() :
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
 
-        when (requestCode) {
-            REQUEST_CODE_LOCATION -> {
-
-                // Se a solicitação for cancelada, as matrizes de resultados estarão vazias.
-                if (grantResults.isNotEmpty()
-                    && grantResults[0] === PackageManager.PERMISSION_GRANTED
-                ) {
-                }
-            }
-        }
-        updateLocationUI()
     }
-
 
     @SuppressLint("MissingPermission")
     @AfterPermissionGranted(REQUEST_CODE_LOCATION)

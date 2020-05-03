@@ -25,32 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txtPorteAnimal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="14dp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/porteAnimal"
-            app:layout_constraintBottom_toTopOf="@+id/spinner_porte_animal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fotoAnimaisButton" />
-
-        <TextView
-            android:id="@+id/txtTipoAnimal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="73dp"
-            android:layout_marginBottom="14dp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/tipoAnimal"
-            app:layout_constraintBottom_toTopOf="@+id/spinner_tipo_animal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fotoAnimaisButton" />
-
         <com.otaliastudios.cameraview.CameraView
             android:id="@+id/fotoAnimaisButton"
             android:layout_width="106dp"
@@ -62,26 +36,37 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <Spinner
+            android:id="@+id/spinner_tipo_animal"
+            android:layout_width="145dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/spinner_porte_animal"
+            app:layout_constraintTop_toBottomOf="@+id/txtTipoAnimal" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etNomeAnimal"
+            android:id="@+id/etracaAnimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            android:hint="@string/nomeAnimal"
+            android:hint="@string/racaAnimal"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_porte_animal" />
+            app:layout_constraintTop_toBottomOf="@+id/etcorAnimal" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etIdadeAnimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:hint="@string/idadeAnimal"
             android:inputType="textEmailAddress"
@@ -90,11 +75,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etNomeAnimal" />
 
+        <TextView
+            android:id="@+id/txtPorteAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="166dp"
+            android:text="@string/porteAnimal"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtTipoAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="166dp"
+            android:layout_marginEnd="28dp"
+            android:text="@string/tipoAnimal"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinner_porte_animal"
+            android:layout_width="146dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toStartOf="@+id/spinner_tipo_animal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPorteAnimal" />
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etcorAnimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:hint="@string/corAnimal"
             android:inputType="textEmailAddress"
@@ -104,17 +123,79 @@
             app:layout_constraintTop_toBottomOf="@+id/etIdadeAnimal" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etracaAnimal"
+            android:id="@+id/etNomeAnimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
-            android:hint="@string/racaAnimal"
+            android:hint="@string/nomeAnimal"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etcorAnimal" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner_porte_animal" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabMaps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="76dp"
+            android:src="@drawable/ic_action_maps"
+            app:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
+            app:fabSize="auto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda"
+            app:tint="@android:color/holo_red_dark" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:autofillHints="no"
+            android:ems="10"
+            android:hint="@string/recompensa"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtConfirmacaoReconpensa" />
+
+        <TextView
+            android:id="@+id/txtConfirmacaoReconpensa"
+            android:layout_width="0dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/permitir_recompensa"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
+
+        <Button
+            android:id="@+id/btnCadastroAnimais"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="140dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/cadastro_animais"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fabMaps"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/txtLocalPerda"
+            android:layout_width="0dp"
+            android:layout_height="19dp"
+            android:layout_marginEnd="48dp"
+            android:text="@string/local_perda"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tlDivi"
@@ -122,7 +203,7 @@
             android:layout_width="371dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -130,28 +211,6 @@
             app:layout_constraintTop_toBottomOf="@+id/etracaAnimal">
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/txtConfirmacaoReconpensa"
-            android:layout_width="0dp"
-            android:layout_height="19dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/permitir_recompensa"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
-
-        <TextView
-            android:id="@+id/txtLocalPerda"
-            android:layout_width="0dp"
-            android:layout_height="19dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/local_perda"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
 
         <!-- <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
@@ -173,65 +232,6 @@
             android:text="@string/abrir_maps"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda" />-->
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabMaps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="60dp"
-            android:src="@drawable/ic_action_maps"
-            app:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
-            app:fabSize="auto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda"
-            app:tint="@android:color/holo_red_dark"/>
-
-        <Button
-            android:id="@+id/btnCadastroAnimais"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="140dp"
-            android:layout_marginBottom="32dp"
-            android:text="@string/cadastro_animais"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fabMaps"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:autofillHints="no"
-            android:ems="10"
-            android:hint="@string/recompensa"
-            android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtConfirmacaoReconpensa" />
-
-        <Spinner
-            android:id="@+id/spinner_porte_animal"
-            android:layout_width="146dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtPorteAnimal" />
-
-        <Spinner
-            android:id="@+id/spinner_tipo_animal"
-            android:layout_width="145dp"
-            android:layout_height="27dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTipoAnimal" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
