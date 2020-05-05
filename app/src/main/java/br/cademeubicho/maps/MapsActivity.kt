@@ -2,6 +2,7 @@ package br.cademeubicho.maps
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -28,7 +29,8 @@ class MapsActivity() :
     GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
-    val position = LatLng(0.0, 0.0)
+    var position: LatLng? = null
+    var myLocation: Location? = null
     val marker = MarkerOptions()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,11 +64,33 @@ class MapsActivity() :
            onMarkerClick(marker)
            //Tipos de Maps
            map?.mapType = GoogleMap.MAP_TYPE_SATELLITE*/
-        customAddMarker(
-            LatLng(position.latitude, position.longitude),
-            "Marcador Alterado",
-            "O marcador foi reposicionado"
-        )
+        /*    customAddMarker(
+                LatLng(position.latitude, position.longitude),
+                "Marcador Alterado",
+                "O marcador foi reposicionado"
+            )*/
+
+        centerMapMyLOcation()
+
+    }
+
+    private fun centerMapMyLOcation() {
+        myLocation = map.myLocation
+        if (myLocation != null) {
+            position =
+                myLocation?.latitude?.let { latitude ->
+                    myLocation?.longitude?.let { longitude ->
+                        LatLng(
+                            latitude,
+                            longitude
+                        )
+                    }
+                }
+
+            val cameraUpdate = CameraUpdateFactory.newLatLngZoom(position, 10f)
+            map.animateCamera(cameraUpdate)
+
+        }
     }
 
     fun customAddMarker(latLng: LatLng, title: String, snippet: String) {
@@ -75,11 +99,6 @@ class MapsActivity() :
         val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10f)
         map.addMarker(options)
 
-        map.setOnMarkerClickListener { marker ->
-            true
-        }
-
-        //Testando
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
@@ -108,6 +127,7 @@ class MapsActivity() :
     private fun enableMyLocation() {
         if (hasLocationPermission()) {
             map.isMyLocationEnabled = true
+            centerMapMyLOcation()
         } else {
             EasyPermissions.requestPermissions(
                 this, getString(R.string.location),

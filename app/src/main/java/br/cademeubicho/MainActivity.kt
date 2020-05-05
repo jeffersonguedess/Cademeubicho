@@ -17,7 +17,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.firebase.ui.auth.AuthUI
-import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -31,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    @SuppressLint("PackageManagerGetSignatures")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("RtlHardcoded")
     override fun onResume() {
         super.onResume()
         val view: View = nav_view.getHeaderView(0)

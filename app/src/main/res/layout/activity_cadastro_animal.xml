@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.otaliastudios.cameraview.CameraView
+      <!--  <com.otaliastudios.cameraview.CameraView
             android:id="@+id/fotoAnimaisButton"
             android:layout_width="106dp"
             android:layout_height="78dp"
@@ -35,7 +35,7 @@
             android:contentDescription="@string/foto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />-->
         <Spinner
             android:id="@+id/spinner_tipo_animal"
             android:layout_width="145dp"
@@ -211,6 +211,41 @@
             app:layout_constraintTop_toBottomOf="@+id/etracaAnimal">
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/iv_camera_primera"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+        <ImageView
+            android:id="@+id/iv_camera_segunda"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="37dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toStartOf="@+id/iv_camera_terceira"
+            app:layout_constraintStart_toEndOf="@+id/iv_camera_primera"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+        <ImageView
+            android:id="@+id/iv_camera_terceira"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/sym_def_app_icon" />
 
         <!-- <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"

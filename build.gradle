@@ -23,10 +23,10 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
-        maven {
+        /*maven {
             url 'https://esri.bintray.com/arcgis'
         }
-
+*/
     }
 }
 
