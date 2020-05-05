@@ -51,6 +51,7 @@
     <string name="nao">Não</string>
     <string name="local_perda">Local da Perda</string>
     <string name="cadastro_animais">Cadastrar</string>
+    <string name="select">Selecione Multiplas Imagens</string>
 
 
     //mensagens de erro
@@ -70,16 +71,6 @@
 
   <!--<string name="google_maps_key">AIzaSyBx-3_O9kRnk67rhwWq7Zf0JAi4eAvQFIc</string>-->
     <string name="abrir_maps">Select</string>
-
-    <string name="checkbox_zoom">Zoom</string>
-    <string name="checkbox_compass">Bussola</string>
-    <string name="checkbox_my_location_layer">Minha localização</string>
-    <string name="checkbox_level_picker">Selecionador de nível</string>
-    <string name="checkbox_map_toolbar">Ferramentas/Maps</string>
-    <string name="checkbox_zoom_gesture">Gestos de zoom</string>
-    <string name="checkbox_scroll_gesture">Gestos de rolagem</string>
-    <string name="checkbox_tilt_gesture">Gestos de inclinação</string>
-    <string name="checkbox_rotate_gesture">Girar gestos</string>
     <string name="location">Não foi possível mostrar o local - é necessária permissão</string>
     <string name="title_activity_maps2">Map</string>
 </resources>

@@ -47,6 +47,4 @@
             tools:text="marelo"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </com.google.android.material.card.MaterialCardView>

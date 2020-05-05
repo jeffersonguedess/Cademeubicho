@@ -1,24 +1,23 @@
 package br.cademeubicho.ui.cadastroanimal
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.view.ViewGroup
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.maps.MapsActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
+
 
 const val REQUEST_IMAGE_CAPTURE = 100
 
-@Suppress("UNREACHABLE_CODE", "DEPRECATION", "DEPRECATED_IDENTITY_EQUALS")
+
 class CadastroAnimalActivity : AppCompatActivity() {
     val porteAnimal = arrayOf(
         "Pequeno",
@@ -33,66 +32,136 @@ class CadastroAnimalActivity : AppCompatActivity() {
         "Roedor",
         "Réptil"
     )
+    private var PICK_IMAGE_MULTIPLE = 1
+    private lateinit var imageEncoded: String
+    private lateinit var imagesEncodedList: MutableList<String>
+    private var galleryAdapter: GalleryAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         val root = setContentView(R.layout.activity_cadastro_animal)
-        val user = FirebaseAuth.getInstance().currentUser
+        //val user = FirebaseAuth.getInstance().currentUser
 
-        iv_camera_primera.setOnClickListener {
-            CropImage.activity()
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .start(this)
-
+        btn.setOnClickListener {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(
+                Intent.createChooser(intent, "Select Picture"),
+                PICK_IMAGE_MULTIPLE
+            )
         }
 
-        iv_camera_segunda.setOnClickListener {
-            CropImage.activity()
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .start(this)
-
-        }
-
-        iv_camera_terceira.setOnClickListener {
-            CropImage.activity()
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .start(this)
-
-        }
         return root
-
     }
 
-    @SuppressLint("MissingSuperCall")
+    /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         //var dots: Array<ImageView?>? = null
+         @Override
+         if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+             val resultUm = CropImage.getActivityResult(data)
+             if (resultCode === Activity.RESULT_OK) {
+                 val resultUri = resultUm.uri
+                 iv_camera_primera.setImageURI(resultUri)
+             }
+         }
+         @Override
+         if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+             val resultDois = CropImage.getActivityResult(data)
+             if (resultCode === Activity.RESULT_OK) {
+                 val resultUri = resultDois.uri
+                 iv_camera_segunda.setImageURI(resultUri)
+             }
+         }
+         @Override
+         if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+             val resultTres = CropImage.getActivityResult(data)
+             if (resultCode === Activity.RESULT_OK) {
+                 val resultUri = resultTres.uri
+                 iv_camera_terceira.setImageURI(resultUri)
+             }
+         }
+     }*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            var resultPrimeriaImagem = CropImage.getActivityResult(data)
-            if (resultCode === Activity.RESULT_OK) {
-                iv_camera_primera.setImageURI(resultPrimeriaImagem.uri)
-            } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                val error: Exception = resultPrimeriaImagem.error
-            }
+        try {
+            //  Quando uma imagem é selecionada
+            if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == Activity.RESULT_OK
+                && null != data
+            ) {
+                //  Obtém a imagem dos dados
 
-        }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            var resultSegundaImagem = CropImage.getActivityResult(data)
-            if (resultCode === Activity.RESULT_OK) {
-                iv_camera_segunda.setImageURI(resultSegundaImagem.uri)
-            } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                val error: Exception = resultSegundaImagem.error
+                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+                imagesEncodedList = ArrayList()
+                if (data.data != null) {
+
+                    val mImageUri = data.data
+
+                    // Pega o cursor
+                    val cursor = mImageUri?.let {
+                        contentResolver.query(
+                            it,
+                            filePathColumn, null, null, null
+                        )
+                    }
+                    // Move para o cursor da primeira linha
+                    cursor?.moveToFirst()
+
+                    val columnIndex = cursor?.getColumnIndex(filePathColumn[0])
+                    imageEncoded = columnIndex?.let { cursor.getString(it)}.toString()
+                    cursor?.close()
+
+                    val mArrayUri = ArrayList<Uri>()
+                    mImageUri?.let { mArrayUri.add(it) }
+                    galleryAdapter = GalleryAdapter(applicationContext, mArrayUri)
+                    gv.adapter = galleryAdapter
+
+
+
+                } else {
+                    if (data.clipData != null) {
+                        val mClipData = data.clipData
+                        val mArrayUri = ArrayList<Uri>()
+                        for (i in 0 until mClipData?.itemCount!!) {
+
+                            val item = mClipData.getItemAt(i)
+                            val uri = item?.uri
+                            uri?.let { mArrayUri.add(it) }
+                            // Pega o cursor
+                            val cursor =
+                                uri?.let { contentResolver.query(it, filePathColumn, null, null, null) }
+                            // // Move para o cursor da primeira linha !!
+                            cursor?.moveToFirst()
+
+                            val columnIndex = cursor?.getColumnIndex(filePathColumn[0])
+                            imageEncoded = columnIndex?.let { cursor.getString(it) }.toString()
+                            imagesEncodedList.add(imageEncoded)
+                            cursor?.close()
+
+                            galleryAdapter = GalleryAdapter(applicationContext, mArrayUri)
+                            gv.adapter = galleryAdapter
+
+
+                        }
+                        Log.v("LOG_TAG", "Imagens selecionadas" + mArrayUri.size)
+                    }
+                }
+            } else {
+                Toast.makeText(
+                    this, "Você não escolheu a imagem",
+                    Toast.LENGTH_LONG
+                ).show()
             }
-        }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            var resultTerceiraImagem = CropImage.getActivityResult(data)
-            if (resultCode === Activity.RESULT_OK) {
-                iv_camera_terceira.setImageURI(resultTerceiraImagem.uri)
-            } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                val error: Exception = resultTerceiraImagem.error
-            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Algo deu errado", Toast.LENGTH_LONG)
+                .show()
         }
 
+        super.onActivityResult(requestCode, resultCode, data)
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -102,6 +171,24 @@ class CadastroAnimalActivity : AppCompatActivity() {
         })
         alteraSpinnerPorteAnimal(spinner_porte_animal)
         alteraSpinnerTipoAnimal(spinner_tipo_animal)
+
+        /* iv_camera_primera.setOnClickListener {
+             CropImage.activity()
+                 .setGuidelines(CropImageView.Guidelines.ON)
+                 .start(this)
+         }
+
+         iv_camera_segunda.setOnClickListener {
+             CropImage.activity()
+                 .setGuidelines(CropImageView.Guidelines.ON)
+                 .start(this)
+         }
+
+         iv_camera_terceira.setOnClickListener {
+             CropImage.activity()
+                 .setGuidelines(CropImageView.Guidelines.ON)
+                 .start(this)
+         }*/
     }
 
     private fun alteraSpinnerPorteAnimal(root: View?) {
