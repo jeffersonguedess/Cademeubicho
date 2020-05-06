@@ -7,8 +7,9 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.maps.MapsActivity
@@ -50,7 +51,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(
-                Intent.createChooser(intent, "Select Picture"),
+                Intent.createChooser(intent, "Selecionar imagem"),
                 PICK_IMAGE_MULTIPLE
             )
         }
@@ -94,7 +95,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 //  Obtém a imagem dos dados
 
                 val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-                imagesEncodedList = ArrayList()
+                imagesEncodedList = ArrayList(3)
                 if (data.data != null) {
 
                     val mImageUri = data.data
@@ -110,7 +111,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
                     cursor?.moveToFirst()
 
                     val columnIndex = cursor?.getColumnIndex(filePathColumn[0])
-                    imageEncoded = columnIndex?.let { cursor.getString(it)}.toString()
+                    imageEncoded = columnIndex?.let { cursor.getString(it) }.toString()
                     cursor?.close()
 
                     val mArrayUri = ArrayList<Uri>()
@@ -119,11 +120,10 @@ class CadastroAnimalActivity : AppCompatActivity() {
                     gv.adapter = galleryAdapter
 
 
-
                 } else {
                     if (data.clipData != null) {
                         val mClipData = data.clipData
-                        val mArrayUri = ArrayList<Uri>()
+                        val mArrayUri = ArrayList<Uri>(3)
                         for (i in 0 until mClipData?.itemCount!!) {
 
                             val item = mClipData.getItemAt(i)
@@ -131,7 +131,15 @@ class CadastroAnimalActivity : AppCompatActivity() {
                             uri?.let { mArrayUri.add(it) }
                             // Pega o cursor
                             val cursor =
-                                uri?.let { contentResolver.query(it, filePathColumn, null, null, null) }
+                                uri?.let {
+                                    contentResolver.query(
+                                        it,
+                                        filePathColumn,
+                                        null,
+                                        null,
+                                        null
+                                    )
+                                }
                             // // Move para o cursor da primeira linha !!
                             cursor?.moveToFirst()
 
@@ -157,6 +165,9 @@ class CadastroAnimalActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Toast.makeText(this, "Algo deu errado", Toast.LENGTH_LONG)
                 .show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Limite de Seleçõe de 3 fotos", Toast.LENGTH_LONG).show()
+
         }
 
         super.onActivityResult(requestCode, resultCode, data)
