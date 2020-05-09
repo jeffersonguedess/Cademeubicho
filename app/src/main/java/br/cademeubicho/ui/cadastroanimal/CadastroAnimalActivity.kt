@@ -1,6 +1,8 @@
 package br.cademeubicho.ui.cadastroanimal
 
 import android.app.Activity
+import android.content.Context
+import android.content.Context.CAMERA_SERVICE
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +15,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.maps.MapsActivity
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
 
 
@@ -41,21 +45,23 @@ class CadastroAnimalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         val root = setContentView(R.layout.activity_cadastro_animal)
         //val user = FirebaseAuth.getInstance().currentUser
 
         btn.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(
-                Intent.createChooser(intent, "Selecionar imagem"),
-                PICK_IMAGE_MULTIPLE
-            )
-        }
+                val intent = Intent()
+                intent.type = "image/*"
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                intent.action = Intent.ACTION_GET_CONTENT
+                startActivityForResult(
+                    Intent.createChooser(intent, "Selecionar imagem"),
+                    PICK_IMAGE_MULTIPLE
+                )
 
+                Toast.makeText(this, "selecione no maximo 3 fotos ", Toast.LENGTH_LONG).show()
+
+
+        }
         return root
     }
 
@@ -165,14 +171,10 @@ class CadastroAnimalActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Toast.makeText(this, "Algo deu errado", Toast.LENGTH_LONG)
                 .show()
-        } catch (e: Exception) {
-            Toast.makeText(this, "Limite de Seleçõe de 3 fotos", Toast.LENGTH_LONG).show()
-
         }
 
         super.onActivityResult(requestCode, resultCode, data)
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -239,6 +241,4 @@ class CadastroAnimalActivity : AppCompatActivity() {
         }
 
     }
-
-
 }
