@@ -10,13 +10,14 @@ import br.cademeubicho.R
 
 class ConfiguracaoFragment : BaseFragment() {
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_configuracao, container, false)
+
         return root
     }
-
 }

@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import br.cademeubicho.BaseFragment
 import br.cademeubicho.R
 import br.cademeubicho.webservice.controller.ConsultasController
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_minha_conta.*
 import kotlinx.android.synthetic.main.fragment_minha_conta.view.*
 
+
 class MinhaContaFragment : BaseFragment() {
+
     val estados = arrayOf(
         "AC",
         "AL",
@@ -58,6 +58,22 @@ class MinhaContaFragment : BaseFragment() {
 
         alteraSpinnerUF(root)
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                result.text = "" + progress + "KM"
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+        })
     }
 
     private fun alteraSpinnerUF(root: View?) {
@@ -107,10 +123,6 @@ class MinhaContaFragment : BaseFragment() {
 
 
         spinnerCidade?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                Toast.makeText(context!!, R.string.error_localidades, Toast.LENGTH_LONG).show()
-            }
-
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -119,12 +131,12 @@ class MinhaContaFragment : BaseFragment() {
             ) {
                 val cidades = parent?.getItemAtPosition(position).toString()
                 alteraSpinnerCidades(cidades, root)
-                println(cidades)
             }
 
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(context!!, R.string.error_localidades, Toast.LENGTH_LONG).show()
+            }
         }
-
-
     }
 
 

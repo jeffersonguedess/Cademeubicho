@@ -154,21 +154,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDDD" />
 
-    <Button
-        android:id="@+id/btnSalva"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="149dp"
-        android:layout_marginTop="115dp"
-        android:layout_marginEnd="149dp"
-        android:layout_marginBottom="150dp"
-        android:text="@string/salvar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        <Button
+            android:id="@+id/btnSalva"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/salvar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <com.google.android.material.textview.MaterialTextView
+        <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvEmail"
         android:layout_width="378dp"
         android:layout_height="24dp"
@@ -196,17 +195,51 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNome"
         app:layout_constraintVertical_bias="0.0" />
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRaio" />
+       <!-- <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="425dp" />-->
 
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="0 KM"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/seekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtRaio" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/result" />
+       <!-- <Button
+            android:id="@+id/btnRaioBusca"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="@string/define_raio"
+            tools:layout_editor_absoluteX="149dp"
+            tools:layout_editor_absoluteY="392dp" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 

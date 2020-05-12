@@ -35,7 +35,8 @@ class CadastroAnimalActivity : AppCompatActivity() {
         "Gato",
         "Pássaro",
         "Roedor",
-        "Réptil"
+        "Réptil",
+        "Outros"
     )
     private var PICK_IMAGE_MULTIPLE = 1
     private lateinit var imageEncoded: String
