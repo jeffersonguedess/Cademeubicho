@@ -1,43 +1,37 @@
 package br.cademeubicho.ui.cadastroanimal
 
 import android.app.Activity
-import android.content.Context
-import android.content.Context.CAMERA_SERVICE
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.maps.MapsActivity
-import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
 
-
-const val REQUEST_IMAGE_CAPTURE = 100
-
+const val PICK_IMAGE_MULTIPLE = 1
 
 class CadastroAnimalActivity : AppCompatActivity() {
-    val porteAnimal = arrayOf(
+
+    private val porteAnimal = arrayOf(
         "Pequeno",
         "Médio",
         "Grande"
     )
 
-    val tipoAnimal = arrayOf(
+    private val tipoAnimal = arrayOf(
         "Cachorro",
         "Gato",
         "Pássaro",
         "Roedor",
         "Réptil"
     )
-    private var PICK_IMAGE_MULTIPLE = 1
+
     private lateinit var imageEncoded: String
     private lateinit var imagesEncodedList: MutableList<String>
     private var galleryAdapter: GalleryAdapter? = null
@@ -178,12 +172,12 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        fabMaps.setOnClickListener(View.OnClickListener {
+        fabMaps.setOnClickListener {
             val secondActivity = Intent(this, MapsActivity::class.java)
             startActivity(secondActivity)
-        })
-        alteraSpinnerPorteAnimal(spinner_porte_animal)
-        alteraSpinnerTipoAnimal(spinner_tipo_animal)
+        }
+        alteraSpinnerPorteAnimal()
+        alteraSpinnerTipoAnimal()
 
         /* iv_camera_primera.setOnClickListener {
              CropImage.activity()
@@ -204,8 +198,8 @@ class CadastroAnimalActivity : AppCompatActivity() {
          }*/
     }
 
-    private fun alteraSpinnerPorteAnimal(root: View?) {
-        val spinner_porte_animal = findViewById<Spinner>(R.id.spinner_porte_animal)
+    private fun alteraSpinnerPorteAnimal() {
+        val spinnerPorteAnimal = findViewById<Spinner>(R.id.spinner_porte_animal)
 
         let {
             ArrayAdapter(
@@ -216,15 +210,15 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 // Especifique o layout a ser usado quando a lista de opções aparecer
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 // Apply the adapter to the spinner
-                spinner_porte_animal?.adapter = adapter
+                spinnerPorteAnimal?.adapter = adapter
 
             }
         }
 
     }
 
-    private fun alteraSpinnerTipoAnimal(root: View?) {
-        val spinner_tipo_animal = findViewById<Spinner>(R.id.spinner_tipo_animal)
+    private fun alteraSpinnerTipoAnimal() {
+        val spinnerTipoAnimal = findViewById<Spinner>(R.id.spinner_tipo_animal)
 
         let {
             ArrayAdapter(
@@ -235,7 +229,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 // Specify the layout to use when the list of choices appears
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 // Apply the adapter to the spinner
-                spinner_tipo_animal?.adapter = adapter
+                spinnerTipoAnimal?.adapter = adapter
 
             }
         }

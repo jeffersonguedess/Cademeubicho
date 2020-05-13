@@ -18,8 +18,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:numColumns="3"
             android:gravity="center"
+            android:numColumns="3"
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -182,12 +182,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_action_maps"
-            app:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
+            app:backgroundTint="@color/colorAccent"
             app:fabSize="auto"
             app:layout_constraintEnd_toEndOf="@+id/txtLocalPerda"
             app:layout_constraintStart_toStartOf="@+id/txtLocalPerda"
             app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda"
-            app:tint="@android:color/holo_red_dark" />
+            app:tint="@android:color/white" />
 
         <TextView
             android:id="@+id/txtConfirmacaoReconpensa"

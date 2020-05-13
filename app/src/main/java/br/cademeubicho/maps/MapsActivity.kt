@@ -1,133 +1,158 @@
 package br.cademeubicho.maps
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.location.Address
 import android.location.Geocoder
-import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
+import android.provider.Settings
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import br.cademeubicho.R
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.sucho.placepicker.AddressData
-import com.sucho.placepicker.Constants
-import com.sucho.placepicker.MapType
-import com.sucho.placepicker.PlacePicker
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_maps.*
-import java.io.IOException
+import java.util.*
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class MapsActivity() :
+class MapsActivity :
     AppCompatActivity(),
-    OnMapReadyCallback,
+    OnMapReadyCallback {
 
-    GoogleMap.OnMarkerClickListener {
-
-    private lateinit var map: GoogleMap
+    private var map: GoogleMap? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var lastLocation: Location
-
+    private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
-        private const val PICKER_REQUEST_PLACE = 3
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
-        val mapFragment: SupportMapFragment? =
-            supportFragmentManager.findFragmentById(R.id.google_map) as? SupportMapFragment
-        mapFragment?.getMapAsync(this)
+
+        val mapFragment = SupportMapFragment.newInstance()
+        mapFragment.getMapAsync(this)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.google_map, mapFragment)
+            .commit()
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        locationRequest = LocationRequest()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 10 * 1000
+
         locationCallback = object : LocationCallback() {
-            override fun onLocationResult(p0: LocationResult) {
-                super.onLocationResult(p0)
-                lastLocation = p0.lastLocation
-                placeMarkerOnMap(LatLng(lastLocation.latitude, lastLocation.longitude))
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                val location = locationResult.lastLocation
+                val currentLatLng = LatLng(location.latitude, location.longitude)
+                //map?.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 20f))
             }
         }
+    }
 
-        val applicationInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
+    override fun onResume() {
+        super.onResume()
 
-        fab_busca_local.setOnClickListener{
-            val intent = PlacePicker.IntentBuilder()
-                .setLatLong(-13.06877673, -50.44921875)
-                .showLatLong(true)
-                .setMapZoom ( 12.0f )
-                .setMapRawResourceStyle(R.raw.map_style)
-                .setMapType(MapType.HYBRID)
-                .setPlaceSearchBar(true, applicationInfo.metaData.getString("com.google.android.geo.API_KEY"))
-                .build(this)
-            startActivityForResult(intent, PICKER_REQUEST_PLACE)
+        val service: LocationManager =
+            getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val enabled: Boolean = service.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+        // check if enabled and if not send user to the GSP settings
+        // Better solution would be to display a dialog and suggesting to
+        // go to the settings
+
+        // check if enabled and if not send user to the GSP settings
+        // Better solution would be to display a dialog and suggesting to
+        // go to the settings
+        if (!enabled) {
+            val mySnackbar = Snackbar.make(rootView, "GPS destivado", Snackbar.LENGTH_INDEFINITE)
+            mySnackbar.setAction(R.string.activate) {
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+            mySnackbar.show()
+
+            btNext.visibility = GONE
+
+        } else {
+            btNext.visibility = VISIBLE
         }
 
+        if (map != null) {
+            setUpMap()
+
+            startLocationUpdates()
+        }
+    }
+
+    private fun startLocationUpdates() {
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            null /* Looper */
+        )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopLocationUpdates()
+    }
+
+    private fun stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    private fun getLocationBy(markLatLng: LatLng, context: Context) {
+        val geocoder = Geocoder(context, Locale.getDefault())
+        val locationAddress = geocoder.getFromLocation(markLatLng.latitude, markLatLng.longitude, 1)
+
+        val address = locationAddress[0]
+
+        return getLocationBy(address)
+    }
+
+    private fun getLocationBy(address: Address) {
+        var fullAddress = ""
+        for (addressLineIndex in IntRange(0, address.maxAddressLineIndex)) {
+            fullAddress += address.getAddressLine(addressLineIndex)
+        }
+
+        tvAddress.text = fullAddress
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
-        map = googleMap ?: return
-
-        map.uiSettings.isZoomControlsEnabled = true
-        map.setOnMarkerClickListener(this)
-
-        setUpMap()
-
-    }
-
-    override fun onMarkerClick(p0: Marker?) = false
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == PICKER_REQUEST_PLACE) {
-            if (resultCode == Activity.RESULT_OK) {
-                try {
-                    val addressData = data?.getParcelableExtra<AddressData>(Constants.ADDRESS_INTENT)
-                    findViewById<TextView>(R.id.address_data_text_view).text = addressData.toString()
-                } catch (e: Exception) {
-                    Log.e("MapsActivity", e.message)
-                }
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
+        if (googleMap != null) {
+            map = googleMap
         }
-    }
 
-    private fun placeMarkerOnMap(location: LatLng) {
-        val markerOptions = MarkerOptions().position(location)
+        map?.uiSettings?.isZoomControlsEnabled = false
 
-        //Adiciona Alfinete comum do Maps com cor diferente
-         /*markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))*/
-        //Adciona Alfinete personalizado
-        markerOptions.icon(
-            BitmapDescriptorFactory.fromBitmap(
-                BitmapFactory.decodeResource(resources, R.mipmap.ic_user_location_foreground)
-            )
-        )
+        fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+            if (location != null) {
+                val currentLatLng = LatLng(location.latitude, location.longitude)
+                map?.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 18F))
+            }
+        }
 
-        val titleStr = getAddress(location)
-        markerOptions.position(location).title(titleStr).snippet("Local Atual")  //.draggable(true)  Seleciona o Alfinete no maps, e permite a movimentação
+        onResume()
 
-        map.addMarker(markerOptions)
+        map?.setOnCameraIdleListener {
+            val mPosition = map?.cameraPosition?.target
+            mPosition?.let { getLocationBy(it, this) }
+        }
+
     }
 
     private fun setUpMap() {
@@ -144,42 +169,8 @@ class MapsActivity() :
             return
         }
 
-        map.isMyLocationEnabled = true
+        map?.isMyLocationEnabled = false
 
-        fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
-            if (location != null) {
-                lastLocation = location
-                val currentLatLng = LatLng(location.latitude, location.longitude)
-                placeMarkerOnMap(currentLatLng)
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
-            }
-        }
-        //Tipos de Maps
-        map.mapType = GoogleMap.MAP_TYPE_HYBRID
-
-    }
-
-    private fun getAddress(latLng: LatLng): String {
-
-        val geocoder = Geocoder(this)
-        val addresses: List<Address>?
-        val address: Address?
-        var addressText: String = ""
-
-        try {
-            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
-            if (null != addresses && !addresses.isEmpty()) {
-                address = addresses[0]
-                for (i in 0 until address.maxAddressLineIndex) {
-                    addressText += if (i == 0) address.getAddressLine(i) else "\n" +
-                            address.getAddressLine(i)
-                }
-            }
-        } catch (e: IOException) {
-            Log.e("MapsActivity", e.localizedMessage)
-        }
-
-        return addressText
     }
 
 }

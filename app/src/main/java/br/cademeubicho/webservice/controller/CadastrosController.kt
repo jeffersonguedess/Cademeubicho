@@ -15,10 +15,7 @@ class CadastrosController {
 
 
     fun cadastraUsuario(user: Usuario) : Status? {
-        println (user)
-        println (user?.nomeUsuario)
-        println(user?.emailUsuario)
-        val call = service?.cadastraUsuario(user!!)
+        val call = service?.cadastraUsuario(user)
         var status :Status?=null
         call?.enqueue(object : Callback<Status> {
             override fun onResponse(call: Call<Status>, response: Response<Status>) {

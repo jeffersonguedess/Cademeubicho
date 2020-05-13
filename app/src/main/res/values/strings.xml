@@ -52,6 +52,7 @@
     <string name="local_perda">Local da Perda</string>
     <string name="cadastro_animais">Cadastrar</string>
     <string name="select">Selecione Multiplas Imagens</string>
+    <string name="selecionar">Selecionar</string>
 
 
     //mensagens de erro
@@ -73,4 +74,6 @@
     <string name="abrir_maps">Select</string>
     <string name="location">Não foi possível mostrar o local - é necessária permissão</string>
     <string name="title_activity_maps2">Map</string>
+    <string name="tow_map_explanation">Indique a posição correta movendo o pino de localização</string>
+    <string name="activate">Ativar</string>
 </resources>
