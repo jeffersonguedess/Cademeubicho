@@ -29,7 +29,8 @@ class CadastroAnimalActivity : AppCompatActivity() {
         "Gato",
         "Pássaro",
         "Roedor",
-        "Réptil"
+        "Réptil",
+        "Outros"
     )
 
     private lateinit var imageEncoded: String

@@ -70,10 +70,14 @@
     <string name="tilt_less">\u2193</string>
     <string name="tilt_more">\u2191</string>
 
+    // Strings Configurações
+    <string name="define_raio">Configurar Raio de Busca</string>
+
   <!--<string name="google_maps_key">AIzaSyBx-3_O9kRnk67rhwWq7Zf0JAi4eAvQFIc</string>-->
     <string name="abrir_maps">Select</string>
     <string name="location">Não foi possível mostrar o local - é necessária permissão</string>
     <string name="title_activity_maps2">Map</string>
     <string name="tow_map_explanation">Indique a posição correta movendo o pino de localização</string>
     <string name="activate">Ativar</string>
+
 </resources>
