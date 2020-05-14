@@ -170,7 +170,7 @@ class MapsActivity :
         }
 
         map?.isMyLocationEnabled = false
-
+       // map!!.mapType = GoogleMap.MAP_TYPE_NORMAL
     }
 
 }

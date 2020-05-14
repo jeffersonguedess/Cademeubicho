@@ -87,7 +87,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.libraries.places:places:2.2.0'
 
-
+    //Biblioteca de Login com numero de celular
     implementation 'com.google.firebase:firebase-database:19.3.0'
 
     // A biblioteca abaixo é usado para executar a biblioteca easypermissions para gerenciar permissões de localização

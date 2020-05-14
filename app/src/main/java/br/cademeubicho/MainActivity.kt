@@ -18,19 +18,21 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.concurrent.TimeUnit
 
 
 @Suppress("DEPRECATION", "UNREACHABLE_CODE")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-
-    @SuppressLint("PackageManagerGetSignatures")
+    private var verificationInProgress = false
+    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -109,5 +111,16 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+    private fun startPhoneNumberVerification(phoneNumber: String) {
+        // [START start_phone_auth]
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+            phoneNumber, // Phone number to verify
+            60, // Timeout duration
+            TimeUnit.SECONDS, // Unit of timeout
+            this, // Activity (for callback binding)
+            callbacks) // OnVerificationStateChangedCallbacks
+        // [END start_phone_auth]
 
+        verificationInProgress = true
+    }
 }

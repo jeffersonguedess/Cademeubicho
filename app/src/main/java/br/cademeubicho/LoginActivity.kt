@@ -6,8 +6,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.firebase.ui.auth.data.model.PhoneNumber
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.concurrent.TimeUnit
 
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
@@ -35,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
                 .createSignInIntentBuilder()
                 .setIsSmartLockEnabled(false)
                 .setAvailableProviders(providers)
-                .setLogo(R.mipmap.logo_cortado) // Set logo drawable
+                .setLogo(R.mipmap.logo_provisoria1) // Set logo drawable
                 .build(),
             RC_SIGN_IN
         )
@@ -71,5 +74,6 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 
 }
