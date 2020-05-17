@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_meus_pets,
                 R.id.nav_mensagens,
                 R.id.nav_minha_conta,
-                R.id.nav_configuracao,
+                /*R.id.nav_configuracao,*/
                 R.id.nav_cadastro_animal
             ), drawer_layout
         )

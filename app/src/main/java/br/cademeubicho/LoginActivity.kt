@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
                 .createSignInIntentBuilder()
                 .setIsSmartLockEnabled(false)
                 .setAvailableProviders(providers)
-                .setLogo(R.mipmap.logo_provisoria1) // Set logo drawable
+                .setLogo(R.mipmap.logo_procuranimal_gif_1) // Set logo drawable
                 .build(),
             RC_SIGN_IN
         )

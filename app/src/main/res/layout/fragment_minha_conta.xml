@@ -23,31 +23,32 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/txtNome"
-        android:layout_width="112dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/nome"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/tvNome"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvNome"
-        android:layout_width="378dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/nome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/txtNome"
+            android:layout_width="112dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/nome"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvNome"
+            android:layout_width="378dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/nome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtNome" />
+
+        <TextView
         android:id="@+id/txtTelefone"
         android:layout_width="112dp"
         android:layout_height="20dp"
@@ -85,63 +86,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner_estado"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:prompt="@string/estado"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtEstado" />
-
-    <TextView
-        android:id="@+id/txtCidade"
-        android:layout_width="50dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/cidade"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/num_telefone" />
-
-    <TextView
-        android:id="@+id/txtEstado"
-        android:layout_width="50dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/estado"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/num_ddd" />
-
-    <TextView
-        android:id="@+id/txtRaio"
-        android:layout_width="106dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="268dp"
-        android:text="@string/raio"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_cidades" />
-
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner_cidades"
-            android:layout_width="220dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:prompt="@string/estado"
+        <TextView
+            android:id="@+id/txtRaio"
+            android:layout_width="106dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="268dp"
+            android:text="@string/raio"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCidade" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/num_ddd" />
 
-    <EditText
+        <EditText
         android:id="@+id/num_ddd"
         android:layout_width="57dp"
         android:layout_height="40dp"
@@ -233,13 +191,14 @@
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result" />
-       <!-- <Button
-            android:id="@+id/btnRaioBusca"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:text="@string/define_raio"
-            tools:layout_editor_absoluteX="149dp"
-            tools:layout_editor_absoluteY="392dp" />-->
+
+        <!-- <Button
+             android:id="@+id/btnRaioBusca"
+             android:layout_width="wrap_content"
+             android:layout_height="48dp"
+             android:text="@string/define_raio"
+             tools:layout_editor_absoluteX="149dp"
+             tools:layout_editor_absoluteY="392dp" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 

@@ -16,9 +16,9 @@
     <item
         android:id="@+id/nav_minha_conta"
         android:title="@string/menu_minha_conta" />
-    <item
+ <!--   <item
         android:id="@+id/nav_configuracao"
-        android:title="@string/menu_configuracao" />
+        android:title="@string/menu_configuracao" />-->
     <group
         android:id="@+id/fabCadastrar"
         android:visible="true"/>

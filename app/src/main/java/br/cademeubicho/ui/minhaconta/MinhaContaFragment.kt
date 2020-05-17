@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_minha_conta.view.*
 
 class MinhaContaFragment : BaseFragment() {
 
-    val estados = arrayOf(
+  /*  val estados = arrayOf(
         "AC",
         "AL",
         "AM",
@@ -43,7 +43,7 @@ class MinhaContaFragment : BaseFragment() {
         "SE",
         "SP",
         "TO"
-    )
+    )*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +56,7 @@ class MinhaContaFragment : BaseFragment() {
         root.tvNome.text = user?.displayName.toString()
         root.tvEmail.text = user?.email.toString()
 
-        alteraSpinnerUF(root)
+        /*alteraSpinnerUF(root)*/
         return root
     }
 
@@ -76,7 +76,8 @@ class MinhaContaFragment : BaseFragment() {
         })
     }
 
-    private fun alteraSpinnerUF(root: View?) {
+    //Método de preencher spinner
+   /* private fun alteraSpinnerUF(root: View?) {
         val spinner_uf = root?.findViewById<Spinner>(R.id.spinner_estado)
 
         context?.let {
@@ -108,9 +109,9 @@ class MinhaContaFragment : BaseFragment() {
             }
 
         }
-    }
+    }*/
 
-    private fun alteraSpinnerCidades(uf: String, root: View?) {
+    /*private fun alteraSpinnerCidades(uf: String, root: View?) {
         val spinnerCidade = root?.findViewById<Spinner>(R.id.spinner_cidades)
 
         val arrayListCidades = ConsultasController().localidadesServices(uf)
@@ -137,7 +138,7 @@ class MinhaContaFragment : BaseFragment() {
                 Toast.makeText(context!!, R.string.error_localidades, Toast.LENGTH_LONG).show()
             }
         }
-    }
+    }*/
 
 
 }
