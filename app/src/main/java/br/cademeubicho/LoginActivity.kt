@@ -4,6 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import br.cademeubicho.webservice.Sessao
+import br.cademeubicho.webservice.controller.CadastrosController
+import br.cademeubicho.webservice.controller.ConsultasController
+import br.cademeubicho.webservice.model.Usuario
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.firebase.ui.auth.data.model.PhoneNumber
@@ -53,9 +57,31 @@ class LoginActivity : AppCompatActivity() {
 
             when {
                 resultCode == Activity.RESULT_OK -> {
-                    val user = FirebaseAuth.getInstance().currentUser?.displayName
+                    val nome_usuario = FirebaseAuth.getInstance().currentUser?.displayName
+                    val uid = FirebaseAuth.getInstance().currentUser?.uid!!
 
-                    Toast.makeText(this, "Seja bem vindo $user", Toast.LENGTH_LONG).show()
+                    val usuarioLogado = ConsultasController().buscaUsuario(uid)
+                    if (usuarioLogado.uidFirebase == ""){
+
+                        usuarioLogado.uidFirebase = uid
+                        usuarioLogado.nomeUsuario = FirebaseAuth.getInstance().currentUser?.displayName.toString()
+                        usuarioLogado.emailUsuario = FirebaseAuth.getInstance().currentUser?.email.toString()
+
+
+                        val status = CadastrosController().cadastroUsuario(usuarioLogado)
+
+                        if (status.statusMensagem.toLowerCase().equals("true")){
+                                loadUsuario(uid)
+                        }else{
+                            println (status.statusMensagem)
+                            println (status.retorno)
+                            Toast.makeText(this, "Erro no login.", Toast.LENGTH_SHORT).show()
+                        }
+                    }else {
+                          loadUsuario(uid)
+                    }
+
+                    Toast.makeText(this, "Seja bem vindo $nome_usuario", Toast.LENGTH_LONG).show()
 
                     chamaMain()
                 }
@@ -67,6 +93,26 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun loadUsuario(uid:String){
+        val usuario = ConsultasController().buscaUsuario(uid)
+        Sessao().initUser(usuario)
+
+
+        println (Sessao().getUser()?.uidFirebase)
+
+        if (usuario.emailUsuario == ""
+            || usuario.dddCelular == ""
+            || usuario.numeroCelular == ""
+            ||usuario.nomeUsuario == ""
+            || usuario.distanciaFeed == 0
+        ){
+            Toast.makeText(this, "Por favor, finalize seu cadastro.", Toast.LENGTH_SHORT).show()
+//            chama tela de cadastro
+        }
+
+
     }
 
     private fun chamaMain() {

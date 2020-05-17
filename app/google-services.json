@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "172778597123-lvmvecpcul5brq8lsg7k29vmk2rlo28p.apps.googleusercontent.com",
+          "client_id": "172778597123-nsb1gtfgj3v5g84rftgj18sf6nhkguf8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.cademeubicho",
-            "certificate_hash": "e2a7856e6e676566890aed601d8433094c2b655e"
+            "certificate_hash": "ecd372e6d63554dff7ff6ec24687d383c7153b17"
+          }
+        },
+        {
+          "client_id": "172778597123-5vremk5kf700ne2kscvtctf3ejc7kf8m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.cademeubicho",
+            "certificate_hash": "74836332c89d509992d929011f5c1bccdcb62f8e"
           }
         },
         {
@@ -29,7 +37,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBvKke9DF5DLqFhz6sl6UfqmjtvCcUKuYQ"
+          "current_key": "AIzaSyBx-3_O9kRnk67rhwWq7Zf0JAi4eAvQFIc"
         }
       ],
       "services": {
