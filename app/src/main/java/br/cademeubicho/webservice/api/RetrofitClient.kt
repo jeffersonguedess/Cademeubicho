@@ -1,20 +1,17 @@
 package br.cademeubicho.webservice.api
 
+import android.os.StrictMode
 import br.cademeubicho.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-
-//    private val AUTH = "Basic "+ Base64.encodeToString("belalkhan:123456".toByteArray(), Base64.NO_WRAP)
-
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
             val original = chain.request()
 
             val requestBuilder = original.newBuilder()
-//                .addHeader("Authorization", AUTH)
                 .method(original.method(), original.body())
 
             val request = requestBuilder.build()
@@ -25,9 +22,8 @@ object RetrofitClient {
         val retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.API_URL)
             .addConverterFactory(GsonConverterFactory.create())
-//            .client(okHttpClient)
+//           .client(okHttpClient)
             .build()
-
         retrofit.create(Api::class.java)
     }
 

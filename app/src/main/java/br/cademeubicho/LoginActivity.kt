@@ -57,31 +57,15 @@ class LoginActivity : AppCompatActivity() {
 
             when {
                 resultCode == Activity.RESULT_OK -> {
-                    val nome_usuario = FirebaseAuth.getInstance().currentUser?.displayName
-                    val uid = FirebaseAuth.getInstance().currentUser?.uid!!
-
-                    val usuarioLogado = ConsultasController().buscaUsuario(uid)
-                    if (usuarioLogado.uidFirebase == ""){
-
-                        usuarioLogado.uidFirebase = uid
-                        usuarioLogado.nomeUsuario = FirebaseAuth.getInstance().currentUser?.displayName.toString()
-                        usuarioLogado.emailUsuario = FirebaseAuth.getInstance().currentUser?.email.toString()
-
-
-                        val status = CadastrosController().cadastroUsuario(usuarioLogado)
-
-                        if (status.statusMensagem.toLowerCase().equals("true")){
-                                loadUsuario(uid)
-                        }else{
-                            println (status.statusMensagem)
-                            println (status.retorno)
-                            Toast.makeText(this, "Erro no login.", Toast.LENGTH_SHORT).show()
-                        }
-                    }else {
-                          loadUsuario(uid)
+                    val r = Sessao.loadSessao(FirebaseAuth.getInstance().currentUser?.uid!!)
+                    if (r){
+                        println("aaaaaaaaaaaaaaaaaaaa")
+                        println(Sessao.instance.nomeUsuario)
+                        Toast.makeText(this, "Seja bem vindo ${Sessao.instance.nomeUsuario}", Toast.LENGTH_LONG).show()
+                    }else{
+                        Toast.makeText(this, "Erro no login.", Toast.LENGTH_SHORT).show()
                     }
 
-                    Toast.makeText(this, "Seja bem vindo $nome_usuario", Toast.LENGTH_LONG).show()
 
                     chamaMain()
                 }
@@ -95,25 +79,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadUsuario(uid:String){
-        val usuario = ConsultasController().buscaUsuario(uid)
-        Sessao().initUser(usuario)
-
-
-        println (Sessao().getUser()?.uidFirebase)
-
-        if (usuario.emailUsuario == ""
-            || usuario.dddCelular == ""
-            || usuario.numeroCelular == ""
-            ||usuario.nomeUsuario == ""
-            || usuario.distanciaFeed == 0
-        ){
-            Toast.makeText(this, "Por favor, finalize seu cadastro.", Toast.LENGTH_SHORT).show()
-//            chama tela de cadastro
-        }
-
-
-    }
 
     private fun chamaMain() {
         val intent = Intent(this, MainActivity::class.java)
