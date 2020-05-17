@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.*
 import br.cademeubicho.BaseFragment
 import br.cademeubicho.R
-import br.cademeubicho.webservice.controller.ConsultasController
-import com.google.firebase.auth.FirebaseAuth
+import br.cademeubicho.webservice.Sessao
+import br.cademeubicho.webservice.controller.CadastrosController
+import br.cademeubicho.webservice.model.Usuario
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_minha_conta.*
 import kotlinx.android.synthetic.main.fragment_minha_conta.view.*
 
@@ -21,13 +23,23 @@ class MinhaContaFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_minha_conta, container, false)
-        val user = FirebaseAuth.getInstance().currentUser
 
-        root.tvNome.text = user?.displayName.toString()
-        root.tvEmail.text = user?.email.toString()
+        alteraDadosTela(root)
 
-        //alteraSpinnerUF(root)
         return root
+    }
+
+    private fun alteraDadosTela( view : View) {
+
+
+        view.tvNome.text =  Sessao.getUser().nomeUsuario
+        view.tvEmail.text = Sessao.getUser().emailUsuario
+       if (Sessao.getUser().dddCelular.isNotEmpty()) {
+           view.num_ddd.setText(Sessao.getUser().dddCelular)
+           view.num_telefone.setText(Sessao.getUser().numeroCelular)
+        }
+        view.result.setText(Sessao.getUser().distanciaFeed.toString())
+        view.seekBar.setProgress(Sessao.getUser().distanciaFeed)
     }
 
     override fun onResume() {
@@ -45,69 +57,40 @@ class MinhaContaFragment : BaseFragment() {
 
         })
     }
-//
-//    private fun alteraSpinnerUF(root: View?) {
-//        val spinner_uf = root?.findViewById<Spinner>(R.id.spinner_estado)
-//
-//        context?.let {
-//            ArrayAdapter(
-//                it,
-//                R.layout.support_simple_spinner_dropdown_item,
-//                estados
-//            ).also { adapter ->
-//                // Specify the layout to use when the list of choices appears
-//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//                // Apply the adapter to the spinner
-//                spinner_uf?.adapter = adapter
-//
-//            }
-//        }
-//        spinner_uf?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//                Toast.makeText(context!!, R.string.error_localidades, Toast.LENGTH_LONG).show()
-//            }
-//
-//            override fun onItemSelected(
-//                parent: AdapterView<*>?,
-//                view: View?,
-//                position: Int,
-//                id: Long
-//            ) {
-//                val uf = parent?.getItemAtPosition(position).toString()
-//                alteraSpinnerCidades(uf, root)
-//            }
-//
-//        }
-//    }
-//
-//    private fun alteraSpinnerCidades(uf: String, root: View?) {
-//        val spinnerCidade = root?.findViewById<Spinner>(R.id.spinner_cidades)
-//
-//        val arrayListCidades = ConsultasController().localidadesServices(uf)
-//        spinnerCidade?.adapter =
-//            ArrayAdapter(
-//                this.requireContext(),
-//                R.layout.support_simple_spinner_dropdown_item,
-//                arrayListCidades
-//            )
-//
-//
-//        spinnerCidade?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(
-//                parent: AdapterView<*>?,
-//                view: View?,
-//                position: Int,
-//                id: Long
-//            ) {
-//                val cidades = parent?.getItemAtPosition(position).toString()
-//                alteraSpinnerCidades(cidades, root)
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//                Toast.makeText(context!!, R.string.error_localidades, Toast.LENGTH_LONG).show()
-//            }
-//        }
-//    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btnSalva.setOnClickListener {
+
+
+            val usuario =  Usuario(
+                tvNome.text as String,
+                num_telefone.getText().toString(),
+                num_ddd.getText().toString(),
+                tvEmail.text.toString(),
+                seekBar.progress,
+                Sessao.getUser().uidFirebase )
+
+           val response = CadastrosController().atualizaUsuario(usuario)
+
+            Toast.makeText(activity, response.statusMensagem, Toast.LENGTH_LONG).show()
+
+            if (response.retorno.toLowerCase() == "true"){
+                println("recarrega sessao")
+
+                var uid = Sessao.getUser().uidFirebase
+                Sessao.loadSessao(uid)
+                alteraDadosTela(view )
+                //recarrega a sessao com os dados atuais que acabaram de ser cadastrados
+            }
+
+
+        }
+
+    }
 
 
 }
+
+

@@ -16,11 +16,16 @@ object Sessao {
         "", "", 0, "")
 
     fun initUser(user : Usuario?){
+        println("initUser")
+        println(user)
         if (user != null) {
             userSessao = user
         }
     }
 
+    fun getUser(): Usuario {
+        return userSessao
+    }
 
     val instance : Usuario by lazy{
         userSessao

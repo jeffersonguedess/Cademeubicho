@@ -20,6 +20,18 @@ interface Api{
         @Field("dddCelular") dddCelular:String
     ):Call<Status>
 
+    @FormUrlEncoded
+    @POST("AtualizarUsuario")
+    fun atualizaUsuario(
+        @Field("uidFirebase") uidFirebase:String,
+        @Field("nomeUsuario") nomeUsuario:String,
+        @Field("distanciaFeed") distanciaFeed:Int,
+        @Field("emailUsuario") emailUsuario:String,
+        @Field("numeroCelular") numeroCelular:String,
+        @Field("dddCelular") dddCelular:String
+    ):Call<Status>
+
+
 
     @FormUrlEncoded
     @POST("Login")
