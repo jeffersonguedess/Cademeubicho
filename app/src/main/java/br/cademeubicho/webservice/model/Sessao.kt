@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object Sessao {
 
     private var userSessao = Usuario ("","",
-                "", "", 0, "")
+        "", "", 0, "")
 
     fun initUser(user : Usuario?){
         if (user != null) {
@@ -58,7 +58,7 @@ object Sessao {
 
             val statusCadastro = cadastro.cadastroUsuario(user)
 
-            if (statusCadastro.retorno.compareTo("true", ignoreCase = true){
+            if (statusCadastro.retorno.toLowerCase() == "true"){
                 println("USUARIO CADASTRADO COM SUSCESSO NO WEBSERVICE")
 
                 responseWS = consulta.buscaUsuario(uid)

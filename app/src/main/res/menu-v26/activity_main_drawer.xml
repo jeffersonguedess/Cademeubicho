@@ -22,5 +22,4 @@
     <group
         android:id="@+id/fabCadastrar"
         android:visible="true"/>
-
 </menu>

@@ -59,7 +59,6 @@ class LoginActivity : AppCompatActivity() {
                 resultCode == Activity.RESULT_OK -> {
                     val r = Sessao.loadSessao(FirebaseAuth.getInstance().currentUser?.uid!!)
                     if (r){
-                        println("aaaaaaaaaaaaaaaaaaaa")
                         println(Sessao.instance.nomeUsuario)
                         Toast.makeText(this, "Seja bem vindo ${Sessao.instance.nomeUsuario}", Toast.LENGTH_LONG).show()
                     }else{
