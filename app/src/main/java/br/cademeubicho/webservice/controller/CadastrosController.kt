@@ -1,6 +1,7 @@
 package br.cademeubicho.webservice.controller
 
 import br.cademeubicho.webservice.api.RetrofitClient
+import br.cademeubicho.webservice.model.PostCadastro
 import br.cademeubicho.webservice.model.Status
 import br.cademeubicho.webservice.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
@@ -20,11 +21,8 @@ class CadastrosController {
             user.numeroCelular, user.dddCelular
         ).execute();
 
-        if (response.isSuccessful()) {
-            statusResponse.statusMensagem = response.body()!!.statusMensagem
-            statusResponse.retorno = response.body()!!.retorno
-        }
-        return statusResponse
+        return returnStatusResponse(response)
+
     }
 
     fun atualizaUsuario(user : Usuario) : Status{
@@ -35,14 +33,36 @@ class CadastrosController {
             user.numeroCelular, user.dddCelular
         ).execute();
 
+        return returnStatusResponse(response)
+    }
+
+
+    fun cadastrarPost(post : PostCadastro) : Status{
+        var response : Response<Status>
+        response = RetrofitClient.instance.cadastrarPost(
+            post.uidFirebase, post.porteAnimal,
+            post.tipoAnimal, post.nomeAnimal,
+            post.racaAnimal, post.idadeAnimal,
+            post.corAnimal, post.recompensa,
+            post.longitude, post.latitude
+        ).execute();
+
+        return returnStatusResponse(response)
+
+    }
+
+
+    private fun returnStatusResponse(response : Response<Status>) : Status{
         if (response.isSuccessful()) {
             statusResponse.statusMensagem = response.body()!!.statusMensagem
             statusResponse.retorno = response.body()!!.retorno
-
-            FirebaseAuth.getInstance().currentUser?.updateEmail(user.emailUsuario)
-            
         }
         return statusResponse
-    }
 
+    }
 }
+
+
+
+
+

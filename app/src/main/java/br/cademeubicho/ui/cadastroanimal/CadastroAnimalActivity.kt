@@ -12,7 +12,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.maps.MapsActivity
+import br.cademeubicho.webservice.Sessao
+import br.cademeubicho.webservice.controller.CadastrosController
+import br.cademeubicho.webservice.model.PostCadastro
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
+import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
 const val PICK_IMAGE_MULTIPLE = 1
 
@@ -60,33 +64,6 @@ class CadastroAnimalActivity : AppCompatActivity() {
         return root
     }
 
-    /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-         //var dots: Array<ImageView?>? = null
-         @Override
-         if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-             val resultUm = CropImage.getActivityResult(data)
-             if (resultCode === Activity.RESULT_OK) {
-                 val resultUri = resultUm.uri
-                 iv_camera_primera.setImageURI(resultUri)
-             }
-         }
-         @Override
-         if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-             val resultDois = CropImage.getActivityResult(data)
-             if (resultCode === Activity.RESULT_OK) {
-                 val resultUri = resultDois.uri
-                 iv_camera_segunda.setImageURI(resultUri)
-             }
-         }
-         @Override
-         if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-             val resultTres = CropImage.getActivityResult(data)
-             if (resultCode === Activity.RESULT_OK) {
-                 val resultUri = resultTres.uri
-                 iv_camera_terceira.setImageURI(resultUri)
-             }
-         }
-     }*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
             //  Quando uma imagem é selecionada
@@ -174,29 +151,34 @@ class CadastroAnimalActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         fabMaps.setOnClickListener {
-            val secondActivity = Intent(this, MapsActivity::class.java)
+            var secondActivity = Intent(this, MapsActivity::class.java)
             startActivity(secondActivity)
         }
+
+
+        btnCadastroAnimais.setOnClickListener{
+
+//            val post = PostCadastro(
+//                Sessao.getUser().uidFirebase,
+//                spinner_porte_animal.selectedItem.toString(),
+//                spinner_tipo_animal.selectedItem.toString(),
+//                etNomeAnimal.toString(), etracaAnimal.toString(),
+//                etIdadeAnimal.toString(), etcorAnimal.toString(),
+//                etrecompensa.toString(), "",""
+//            )
+//            val status = CadastrosController().cadastrarPost(post);
+
+            var insere = true
+            if (imagesEncodedList.size < 1){
+                Toast.makeText(this, "Selecione pelo menos uma foto", Toast.LENGTH_LONG).show()
+                insere = false
+            }
+
+        }
+
+
         alteraSpinnerPorteAnimal()
         alteraSpinnerTipoAnimal()
-
-        /* iv_camera_primera.setOnClickListener {
-             CropImage.activity()
-                 .setGuidelines(CropImageView.Guidelines.ON)
-                 .start(this)
-         }
-
-         iv_camera_segunda.setOnClickListener {
-             CropImage.activity()
-                 .setGuidelines(CropImageView.Guidelines.ON)
-                 .start(this)
-         }
-
-         iv_camera_terceira.setOnClickListener {
-             CropImage.activity()
-                 .setGuidelines(CropImageView.Guidelines.ON)
-                 .start(this)
-         }*/
     }
 
     private fun alteraSpinnerPorteAnimal() {
