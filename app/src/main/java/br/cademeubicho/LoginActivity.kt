@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
 class LoginActivity : AppCompatActivity() {
 
     companion object {
-        const val RC_SIGN_IN = 1
+         const val RC_SIGN_IN = 1
     }
 
     private val providers = arrayListOf(
@@ -84,6 +84,4 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
-
 }

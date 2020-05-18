@@ -16,6 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import br.cademeubicho.webservice.Sessao
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthProvider
@@ -68,7 +69,6 @@ class MainActivity : AppCompatActivity() {
         } catch (e: NoSuchAlgorithmException) {
         }
 
-
     }
 
 
@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         val view: View = nav_view.getHeaderView(0)
         val user = FirebaseAuth.getInstance().currentUser
-
         if (user != null) {
             view.ivSair.visibility = VISIBLE
             view.tvEmail.visibility = VISIBLE
@@ -123,4 +122,5 @@ class MainActivity : AppCompatActivity() {
 
         verificationInProgress = true
     }
+
 }
