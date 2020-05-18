@@ -1,6 +1,5 @@
 package br.cademeubicho.webservice.controller
 
-import android.os.StrictMode
 import br.cademeubicho.webservice.api.RetrofitClient
 import br.cademeubicho.webservice.model.Status
 import br.cademeubicho.webservice.model.Usuario

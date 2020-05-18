@@ -10,7 +10,6 @@ import br.cademeubicho.R
 import br.cademeubicho.webservice.Sessao
 import br.cademeubicho.webservice.controller.CadastrosController
 import br.cademeubicho.webservice.model.Usuario
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_minha_conta.*
 import kotlinx.android.synthetic.main.fragment_minha_conta.view.*
 

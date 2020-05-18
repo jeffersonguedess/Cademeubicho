@@ -5,16 +5,9 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.webservice.Sessao
-import br.cademeubicho.webservice.controller.CadastrosController
-import br.cademeubicho.webservice.controller.ConsultasController
-import br.cademeubicho.webservice.model.Usuario
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.firebase.ui.auth.data.model.PhoneNumber
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.PhoneAuthProvider
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.concurrent.TimeUnit
 
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
