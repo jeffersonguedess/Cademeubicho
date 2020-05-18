@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
             AuthUI.getInstance()
                 .signOut(this)
                 .addOnCompleteListener {
-                    Toast.makeText(this, R.string.saiu, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, R.string.saiu, Toast.LENGTH_SHORT).show()
                     onResume()
                     drawer_layout.closeDrawer(Gravity.LEFT)
                 }

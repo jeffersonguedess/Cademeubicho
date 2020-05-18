@@ -54,12 +54,10 @@ android {
 
 dependencies {
 
-    //Bibliotecas do CHAT
+    //Bibliotecas CHAT
     implementation 'com.github.GetStream:stream-chat-android:4.0.13'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.13'
@@ -112,9 +110,11 @@ dependencies {
 
     //Bibliotecas usadas para a API/ Webservice
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.1'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+
 
 }
 
