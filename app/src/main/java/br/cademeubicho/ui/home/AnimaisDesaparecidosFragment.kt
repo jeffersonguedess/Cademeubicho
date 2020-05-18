@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.cademeubicho.LoginActivity
-import br.cademeubicho.MainActivity
 import br.cademeubicho.R
 import br.cademeubicho.model.AnimaisDesaparecidos
 import br.cademeubicho.ui.cadastroanimal.CadastroAnimalActivity
 import br.cademeubicho.ui.home.adapter.AnimaisDesaparecidosAdapter
-import br.cademeubicho.ui.minhaconta.MinhaContaFragment
 import br.cademeubicho.webservice.Sessao
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*

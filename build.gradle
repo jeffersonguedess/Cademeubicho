@@ -21,9 +21,9 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
-        mavenCentral()
-        maven {url ' https://jitpack.io ' }
+        jcenter()//O JCenter é um repositório hospedado pela Bintray
+        mavenCentral()//O Maven Central é um repositório hospedado pela Sonatype
+        maven {url "https://jitpack.io" }
     }
 }
 

@@ -60,11 +60,10 @@ class LoginActivity : AppCompatActivity() {
                     val r = Sessao.loadSessao(FirebaseAuth.getInstance().currentUser?.uid!!)
                     if (r){
                         println(Sessao.instance.nomeUsuario)
-                        Toast.makeText(this, "Seja bem vindo ${Sessao.instance.nomeUsuario}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Seja bem vindo ${Sessao.instance.nomeUsuario}", Toast.LENGTH_SHORT).show()
                     }else{
                         Toast.makeText(this, "Erro no login.", Toast.LENGTH_SHORT).show()
                     }
-
 
                     chamaMain()
                 }
