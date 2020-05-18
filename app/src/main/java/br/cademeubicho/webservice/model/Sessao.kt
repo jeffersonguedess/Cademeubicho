@@ -1,19 +1,18 @@
 package br.cademeubicho.webservice
 
 import android.os.StrictMode
-import android.widget.Toast
-import br.cademeubicho.BuildConfig
 import br.cademeubicho.webservice.controller.CadastrosController
 import br.cademeubicho.webservice.controller.ConsultasController
 import br.cademeubicho.webservice.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 object Sessao {
 
     private var userSessao = Usuario ("","",
         "", "", 0, "")
+
+    private lateinit var latitude : String
+    private lateinit var longitude : String
 
     fun initUser(user : Usuario?){
         println("initUser")
@@ -25,6 +24,14 @@ object Sessao {
 
     fun getUser(): Usuario {
         return userSessao
+    }
+
+    fun getLatitude():String{
+        return latitude
+    }
+
+    fun getLongitude():String{
+        return longitude
     }
 
     val instance : Usuario by lazy{
@@ -77,5 +84,6 @@ object Sessao {
             }
         }
     }
+
 
 }

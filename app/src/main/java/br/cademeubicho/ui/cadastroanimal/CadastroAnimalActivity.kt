@@ -158,6 +158,10 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
         btnCadastroAnimais.setOnClickListener{
 
+            val lat = "-18.910680"
+            val log = "-50.653200"
+
+
 //            val post = PostCadastro(
 //                Sessao.getUser().uidFirebase,
 //                spinner_porte_animal.selectedItem.toString(),
