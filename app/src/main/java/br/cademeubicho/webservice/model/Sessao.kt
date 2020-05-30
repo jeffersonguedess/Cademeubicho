@@ -4,13 +4,8 @@ import android.os.StrictMode
 import br.cademeubicho.webservice.controller.CadastrosController
 import br.cademeubicho.webservice.controller.ConsultasController
 import br.cademeubicho.webservice.model.Usuario
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.LocationSettingsRequest
-import com.google.android.gms.location.LocationSettingsResponse
-import com.google.android.gms.tasks.Task
+import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
-
 
 object Sessao {
 
@@ -18,7 +13,6 @@ object Sessao {
         "", "",
         "", "", 0, ""
     )
-
 
     private lateinit var latitude: String
     private lateinit var longitude: String
@@ -29,9 +23,7 @@ object Sessao {
         if (user != null) {
             userSessao = user
         }
-        //createLocationRequest()
-
-
+//        var l = createLocationRequest()
     }
 
     fun getUser(): Usuario {
@@ -96,13 +88,7 @@ object Sessao {
         }
     }
 
-    private fun createLocationRequest() {
-       val mLocationRequest = LocationRequest()
-        mLocationRequest.interval = 10000
-        mLocationRequest.fastestInterval = 5000
-        mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY;
-    }
-   /* fun createLocationRequest(): LocationSettingsRequest.Builder? {
+    private fun createLocationRequest(): LocationSettingsRequest.Builder? {
         val locationRequest = LocationRequest.create()?.apply {
             interval = 10000
             fastestInterval = 10000
@@ -111,7 +97,7 @@ object Sessao {
         return locationRequest?.let {
             LocationSettingsRequest.Builder()
                 .addLocationRequest(it)
-        }*/
+        }
+    }
+
 }
-
-
