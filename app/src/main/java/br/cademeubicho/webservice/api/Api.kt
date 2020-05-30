@@ -20,7 +20,8 @@ interface Api{
         @Field("distanciaFeed") distanciaFeed:Int,
         @Field("emailUsuario") emailUsuario:String,
         @Field("numeroCelular") numeroCelular:String,
-        @Field("dddCelular") dddCelular:String
+        @Field("dddCelular") dddCelular:String,
+        @Field("idFacebook") idFacebook:String
     ):Call<Status>
 
     @FormUrlEncoded
@@ -54,7 +55,8 @@ interface Api{
         @Field("corAnimal") corAnimal:String,
         @Field("recompensa") recompensa:String,
         @Field("longitude") longitude:String,
-        @Field("latitude") latitude:String
+        @Field("latitude") latitude:String,
+        @Field("imagens") imagens:List<String>
     ):Call<Status>
 
 

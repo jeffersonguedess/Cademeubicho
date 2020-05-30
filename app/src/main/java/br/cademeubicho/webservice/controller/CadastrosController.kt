@@ -18,7 +18,8 @@ class CadastrosController {
         response = RetrofitClient.instance.cadastrarUsuario(
             user.uidFirebase, user.nomeUsuario,
             user.distanciaFeed, user.emailUsuario,
-            user.numeroCelular, user.dddCelular
+            user.numeroCelular, user.dddCelular,
+            user.idFacebook
         ).execute();
 
         return returnStatusResponse(response)
@@ -44,7 +45,8 @@ class CadastrosController {
             post.tipoAnimal, post.nomeAnimal,
             post.racaAnimal, post.idadeAnimal,
             post.corAnimal, post.recompensa,
-            post.longitude, post.latitude
+            post.longitude, post.latitude,
+            post.imagens
         ).execute();
 
         return returnStatusResponse(response)

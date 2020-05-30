@@ -6,12 +6,14 @@ import br.cademeubicho.webservice.controller.ConsultasController
 import br.cademeubicho.webservice.model.Usuario
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.FirebaseUserMetadata
 
 object Sessao {
 
     private var userSessao = Usuario(
         "", "",
-        "", "", 0, ""
+        "", "", 0, "", ""
     )
 
     private lateinit var latitude: String
@@ -23,7 +25,9 @@ object Sessao {
         if (user != null) {
             userSessao = user
         }
-//        var l = createLocationRequest()
+        var l = createLocationRequest()
+        print("LOCAAAAAAAAAAAATION")
+        print(l.toString())
     }
 
     fun getUser(): Usuario {
@@ -68,7 +72,7 @@ object Sessao {
                 FirebaseAuth.getInstance().currentUser?.displayName.toString(),
                 "", "",
                 FirebaseAuth.getInstance().currentUser?.email.toString(),
-                0, uid
+                0, uid, ""
             )
 
             val statusCadastro = cadastro.cadastroUsuario(user)

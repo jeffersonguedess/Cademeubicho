@@ -11,7 +11,8 @@ data class PostCadastro (
     var corAnimal: String,
     var recompensa: String,
     var longitude: String,
-    var latitude: String
+    var latitude: String,
+    var imagens : List<String>
 ){
 
 

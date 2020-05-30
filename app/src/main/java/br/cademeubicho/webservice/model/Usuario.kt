@@ -9,7 +9,8 @@ data class Usuario (
     var dddCelular: String,
     var emailUsuario: String,
     var distanciaFeed: Int,
-    var uidFirebase: String
+    var uidFirebase: String,
+    var idFacebook : String
 ){
 
 

@@ -158,25 +158,43 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
         btnCadastroAnimais.setOnClickListener{
 
+
+            /*
+            *           TODO
+            *   PEGAR LATITUDE E LONGITUDE
+            *   DA SELEÇÃO NO MAPA
+            * */
             val lat = "-18.910680"
             val log = "-50.653200"
 
+            val imagens = listOf("IMAGEM 1 BASE64", "IMAGEM 2 BASE64", "IMAGEM 3 BASE 64")
 
-//            val post = PostCadastro(
-//                Sessao.getUser().uidFirebase,
-//                spinner_porte_animal.selectedItem.toString(),
-//                spinner_tipo_animal.selectedItem.toString(),
-//                etNomeAnimal.toString(), etracaAnimal.toString(),
-//                etIdadeAnimal.toString(), etcorAnimal.toString(),
-//                etrecompensa.toString(), "",""
-//            )
-//            val status = CadastrosController().cadastrarPost(post);
+            val post = PostCadastro(
+                Sessao.getUser().uidFirebase,
+                spinner_porte_animal.selectedItem.toString(),
+                spinner_tipo_animal.selectedItem.toString(),
+                etNomeAnimal.toString(), etracaAnimal.toString(),
+                etIdadeAnimal.toString(), etcorAnimal.toString(),
+                etrecompensa.toString(), "","",
+                imagens
+            )
 
-            var insere = true
+
             if (imagesEncodedList.size < 1){
                 Toast.makeText(this, "Selecione pelo menos uma foto", Toast.LENGTH_LONG).show()
-                insere = false
+            }else {
+                val status = CadastrosController().cadastrarPost(post);
+
+                if (status.statusMensagem.equals("true")){
+                    Toast.makeText(this, "Post cadastrado com sucesso", Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(this, status.retorno, Toast.LENGTH_LONG).show()
+                }
+
             }
+
+
+
 
         }
 
