@@ -10,7 +10,8 @@ import retrofit2.Response
 class ConsultasController {
     val statusResponse = Status("", "")
     val userResponse = Usuario("","","",
-                                "",0,"")
+                                "",0,"","")
+
     fun buscaUsuario(uid: String) : Usuario {
 
 
@@ -24,6 +25,7 @@ class ConsultasController {
             userResponse.numeroCelular = response.body()!!.numeroCelular
             userResponse.dddCelular = response.body()!!.dddCelular
             userResponse.distanciaFeed = response.body()!!.distanciaFeed
+            userResponse.idFacebook = response.body()!!.idFacebook
         }
         return userResponse
     }

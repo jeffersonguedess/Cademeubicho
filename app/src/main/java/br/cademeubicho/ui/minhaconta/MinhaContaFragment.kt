@@ -69,7 +69,8 @@ class MinhaContaFragment : BaseFragment() {
                 num_ddd.getText().toString(),
                 tvEmail.text.toString(),
                 seekBar.progress,
-                Sessao.getUser().uidFirebase )
+                Sessao.getUser().uidFirebase,
+                Sessao.getUser().idFacebook)
 
            val response = CadastrosController().atualizaUsuario(usuario)
 

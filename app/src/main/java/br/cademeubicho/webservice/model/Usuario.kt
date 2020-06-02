@@ -11,7 +11,4 @@ data class Usuario (
     var distanciaFeed: Int,
     var uidFirebase: String,
     var idFacebook : String
-){
-
-
-}
+)

@@ -12,7 +12,9 @@ import br.cademeubicho.model.AnimaisDesaparecidos
 import br.cademeubicho.ui.cadastroanimal.CadastroAnimalActivity
 import br.cademeubicho.ui.home.adapter.AnimaisDesaparecidosAdapter
 import br.cademeubicho.webservice.Sessao
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.adapter_animais_desaparecidos.*
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
 
@@ -27,13 +29,14 @@ class AnimaisDesaparecidosFragment : Fragment() {
         AnimaisDesaparecidos("snoop", "viralata", 12, "marelo"),
         AnimaisDesaparecidos("snoop", "viralata", 12, "marelo")
     )
-
+    val position : LatLng? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_animais_desaparecidos, container, false)
+
 
         return root
     }
@@ -60,7 +63,6 @@ class AnimaisDesaparecidosFragment : Fragment() {
 
     override fun onStart() {
         validaLogin()
-
         super.onStart()
     }
 
@@ -75,8 +77,8 @@ class AnimaisDesaparecidosFragment : Fragment() {
                 //conseguiu preencher a variavel de sessao
                 if (Sessao.getUser().distanciaFeed == 0
                     || Sessao.getUser().nomeUsuario == ""
-                    || Sessao.getUser().dddCelular.length <= 0
-                    || Sessao.getUser().numeroCelular.length <= 0
+                    || Sessao.getUser().dddCelular.isEmpty()
+                    || Sessao.getUser().numeroCelular.isEmpty()
                     || Sessao.getUser().emailUsuario == ""
                 ){
                     Toast.makeText(requireContext(), "Por favor, finalize seu cadastro!", Toast.LENGTH_LONG).show()

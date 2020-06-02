@@ -2,11 +2,16 @@ package br.cademeubicho.ui.cadastroanimal
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,9 +21,10 @@ import br.cademeubicho.webservice.Sessao
 import br.cademeubicho.webservice.controller.CadastrosController
 import br.cademeubicho.webservice.model.PostCadastro
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
-import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
+import java.io.ByteArrayOutputStream
 
-const val PICK_IMAGE_MULTIPLE = 1
+
+const val PICK_IMAGE_MULTIPLE = 1000
 
 class CadastroAnimalActivity : AppCompatActivity() {
 
@@ -47,19 +53,39 @@ class CadastroAnimalActivity : AppCompatActivity() {
         val root = setContentView(R.layout.activity_cadastro_animal)
         //val user = FirebaseAuth.getInstance().currentUser
 
+
         btn.setOnClickListener {
-                val intent = Intent()
-                intent.type = "image/*"
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                intent.action = Intent.ACTION_GET_CONTENT
-                startActivityForResult(
-                    Intent.createChooser(intent, "Selecionar imagem"),
-                    PICK_IMAGE_MULTIPLE
-                )
+            val intent = Intent(Intent.ACTION_PICK)
+/*
+            val image = findViewById<View>(R.id.ivGallery)
+*/
 
-                Toast.makeText(this, "selecione no maximo 3 fotos ", Toast.LENGTH_LONG).show()
+            intent.type = "image/*"
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(
+                Intent.createChooser(intent, "Selecionar imagem"),
+                PICK_IMAGE_MULTIPLE
+            )
 
+        /*    //encode image to base64 string
+            val baos = ByteArrayOutputStream()
+            val bitmap = BitmapFactory.decodeResource(resources, R.id.ivGallery)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            var imageBytes = baos.toByteArray()
+            val imageString =
+                Base64.encodeToString(imageBytes, Base64.DEFAULT)
 
+            print("image string")
+            print(imageString)
+
+            //decode base64 string to image
+
+            imageBytes = Base64.decode(imageString, Base64.DEFAULT)
+            val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+            image.setImageBitmap(decodedImage)*/
+
+            Toast.makeText(this, "selecione no maximo 3 fotos ", Toast.LENGTH_LONG).show()
         }
         return root
     }
@@ -72,25 +98,11 @@ class CadastroAnimalActivity : AppCompatActivity() {
             ) {
                 //  Obtém a imagem dos dados
 
-                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+                val filePathColumn = arrayOf(MediaStore.Images.Media.DATE_ADDED)
                 imagesEncodedList = ArrayList(3)
                 if (data.data != null) {
 
                     val mImageUri = data.data
-
-                    // Pega o cursor
-                    val cursor = mImageUri?.let {
-                        contentResolver.query(
-                            it,
-                            filePathColumn, null, null, null
-                        )
-                    }
-                    // Move para o cursor da primeira linha
-                    cursor?.moveToFirst()
-
-                    val columnIndex = cursor?.getColumnIndex(filePathColumn[0])
-                    imageEncoded = columnIndex?.let { cursor.getString(it) }.toString()
-                    cursor?.close()
 
                     val mArrayUri = ArrayList<Uri>()
                     mImageUri?.let { mArrayUri.add(it) }
@@ -123,6 +135,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
                             val columnIndex = cursor?.getColumnIndex(filePathColumn[0])
                             imageEncoded = columnIndex?.let { cursor.getString(it) }.toString()
+                            println(imageEncoded)
                             imagesEncodedList.add(imageEncoded)
                             cursor?.close()
 
@@ -156,18 +169,33 @@ class CadastroAnimalActivity : AppCompatActivity() {
         }
 
 
-        btnCadastroAnimais.setOnClickListener{
-
-
-            /*
-            *           TODO
-            *   PEGAR LATITUDE E LONGITUDE
-            *   DA SELEÇÃO NO MAPA
-            * */
+        btnCadastroAnimais.setOnClickListener {
+            // *           TODO
+            // *   PEGAR LATITUDE E LONGITUDE
+            // *   DA SELEÇÃO NO MAPA
+            // *
             val lat = "-18.910680"
             val log = "-50.653200"
 
             val imagens = listOf("IMAGEM 1 BASE64", "IMAGEM 2 BASE64", "IMAGEM 3 BASE 64")
+
+     /*       val baos = ByteArrayOutputStream()
+            val bitmap = BitmapFactory.decodeResource(resources, R.id.ivGallery)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            var imageBytes = baos.toByteArray()
+            val imageString =
+                Base64.encodeToString(imageBytes, Base64.DEFAULT)
+*/
+            println("image string")
+            println(imagesEncodedList.size)
+            //print(imagesEncodedList.size)
+
+            for(index in 0..imagesEncodedList.size-1){
+                println(imagesEncodedList[index])
+            }
+            println(imagesEncodedList.get(0))
+                println(imagesEncodedList[0])
+
 
             val post = PostCadastro(
                 Sessao.getUser().uidFirebase,
@@ -175,25 +203,22 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 spinner_tipo_animal.selectedItem.toString(),
                 etNomeAnimal.toString(), etracaAnimal.toString(),
                 etIdadeAnimal.toString(), etcorAnimal.toString(),
-                etrecompensa.toString(), "","",
+                etrecompensa.toString(), "", "",
                 imagens
             )
 
-
-            if (imagesEncodedList.size < 1){
+            if (imagesEncodedList.size < 1) {
                 Toast.makeText(this, "Selecione pelo menos uma foto", Toast.LENGTH_LONG).show()
-            }else {
+            } else {
                 val status = CadastrosController().cadastrarPost(post);
 
-                if (status.statusMensagem.equals("true")){
+                if (status.retorno.equals("true")) {
                     Toast.makeText(this, "Post cadastrado com sucesso", Toast.LENGTH_LONG).show()
-                }else{
-                    Toast.makeText(this, status.retorno, Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this, status.statusMensagem, Toast.LENGTH_LONG).show()
                 }
 
             }
-
-
 
 
         }
@@ -240,4 +265,5 @@ class CadastroAnimalActivity : AppCompatActivity() {
         }
 
     }
+
 }

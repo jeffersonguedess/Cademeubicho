@@ -21,5 +21,6 @@
         android:title="@string/menu_configuracao" />-->
     <group
         android:id="@+id/fabCadastrar"
-        android:visible="true"/>
+        android:visible="true"
+        android:title="@string/menu_cadastroanimal"/>
 </menu>

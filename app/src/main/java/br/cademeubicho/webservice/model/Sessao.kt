@@ -25,9 +25,9 @@ object Sessao {
         if (user != null) {
             userSessao = user
         }
-        var l = createLocationRequest()
+      //  var l = createLocationRequest()
         print("LOCAAAAAAAAAAAATION")
-        print(l.toString())
+       // print(l.toString())
     }
 
     fun getUser(): Usuario {

@@ -2,13 +2,17 @@ package br.cademeubicho.ui.cadastroanimal
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import br.cademeubicho.R
+import java.io.ByteArrayOutputStream
 
 class GalleryAdapter(private val context: Context, private var mArrayUris: ArrayList<Uri>) :
     BaseAdapter() {
@@ -44,4 +48,5 @@ class GalleryAdapter(private val context: Context, private var mArrayUris: Array
 
         return itemView
     }
+
 }
