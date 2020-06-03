@@ -197,7 +197,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
                         spinner_porte_animal.selectedItem.toString(),
                         spinner_tipo_animal.selectedItem.toString(),
                         etNomeAnimal.toString(), etracaAnimal.toString(),
-                        etIdadeAnimal.toString(), etcorAnimal.toString(),
+                        editTextNumber.toString(), etcorAnimal.toString(),
                         etrecompensa.toString(), longitude, latitude,
                         imagens
                     )

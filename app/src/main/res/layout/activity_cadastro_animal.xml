@@ -150,20 +150,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etIdadeAnimal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/idadeAnimal"
-            android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etNomeAnimal" />
-
-        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etcorAnimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -175,7 +161,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etIdadeAnimal" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabMaps"
@@ -210,6 +196,18 @@
             app:layout_constraintEnd_toEndOf="@+id/spinner_porte_animal"
             app:layout_constraintStart_toStartOf="@+id/spinner_porte_animal"
             app:layout_constraintTop_toBottomOf="@+id/btn" />
+
+        <EditText
+            android:id="@+id/editTextNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/idadeAnimal"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/etNomeAnimal"
+            app:layout_constraintStart_toStartOf="@+id/etNomeAnimal"
+            app:layout_constraintTop_toBottomOf="@+id/etNomeAnimal" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

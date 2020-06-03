@@ -58,8 +58,10 @@ class MapsActivity :
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
+/*
                 val location = locationResult.lastLocation
-                val currentLatLng = LatLng(location.latitude, location.longitude)
+*/
+                /*val currentLatLng = LatLng(location.latitude, location.longitude)*/
                 //map?.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 20f))
             }
         }
