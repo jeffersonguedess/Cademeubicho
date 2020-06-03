@@ -174,59 +174,46 @@ class CadastroAnimalActivity : AppCompatActivity() {
             val secondActivity = Intent(this, MapsActivity::class.java)
             startActivityForResult(secondActivity, PICK_LTG_LOG)
         }
-
-
+        alteraSpinnerTipoAnimal()
+        alteraSpinnerPorteAnimal()
         btnCadastroAnimais.setOnClickListener {
 
             val imagens = listOf("IMAGEM 1 BASE64", "IMAGEM 2 BASE64", "IMAGEM 3 BASE 64")
-
-            /*       val baos = ByteArrayOutputStream()
-                   val bitmap = BitmapFactory.decodeResource(resources, R.id.ivGallery)
-                   bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                   var imageBytes = baos.toByteArray()
-                   val imageString =
-                       Base64.encodeToString(imageBytes, Base64.DEFAULT)
-
-            println("image string")
-            println(imagesEncodedList.size)
-            //print(imagesEncodedList.size)
-
-            for (index in 0..imagesEncodedList.size - 1) {
-                println(imagesEncodedList[index])
+            if (!this::imagesEncodedList.isInitialized) {
+                imagesEncodedList = ArrayList()
             }
-            println(imagesEncodedList.get(0))
-            println(imagesEncodedList[0])*/
-
-
-            val post = PostCadastro(
-                Sessao.getUser().uidFirebase,
-                spinner_porte_animal.selectedItem.toString(),
-                spinner_tipo_animal.selectedItem.toString(),
-                etNomeAnimal.toString(), etracaAnimal.toString(),
-                etIdadeAnimal.toString(), etcorAnimal.toString(),
-                etrecompensa.toString(), longitude, latitude,
-                imagens
-            )
-
             if (imagesEncodedList.size < 1) {
                 Toast.makeText(this, "Selecione pelo menos uma foto", Toast.LENGTH_LONG).show()
             } else {
-                val status = CadastrosController().cadastrarPost(post);
+                if (
+                    etNomeAnimal.toString().length == 0 ||
+                    etracaAnimal.toString().length == 0 ||
+                    etcorAnimal.toString().length == 0) {
+                        Toast.makeText(this, "Insira todos os campos!", Toast.LENGTH_LONG).show()
+                    }else {
 
-                if (status.retorno.equals("true")) {
-                    Toast.makeText(this, "Post cadastrado com sucesso", Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(this, status.statusMensagem, Toast.LENGTH_LONG).show()
+                    val post = PostCadastro(
+                        Sessao.getUser().uidFirebase,
+                        spinner_porte_animal.selectedItem.toString(),
+                        spinner_tipo_animal.selectedItem.toString(),
+                        etNomeAnimal.toString(), etracaAnimal.toString(),
+                        etIdadeAnimal.toString(), etcorAnimal.toString(),
+                        etrecompensa.toString(), longitude, latitude,
+                        imagens
+                    )
+                    val status = CadastrosController().cadastrarPost(post);
+                    println(status.statusMensagem)
+
+                    if (status.retorno.equals("true")) {
+                        Toast.makeText(this, "Post cadastrado com sucesso", Toast.LENGTH_LONG)
+                            .show()
+                    } else {
+                        Toast.makeText(this, status.statusMensagem, Toast.LENGTH_LONG).show()
+                    }
                 }
-
             }
-
-
         }
 
-
-        alteraSpinnerPorteAnimal()
-        alteraSpinnerTipoAnimal()
     }
 
     private fun alteraSpinnerPorteAnimal() {
