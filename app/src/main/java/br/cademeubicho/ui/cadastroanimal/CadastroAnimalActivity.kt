@@ -143,13 +143,13 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
                         }
                         Log.v("LOG_TAG", "Imagens selecionadas" + mArrayUri.size)
+                    } else {
+                        Toast.makeText(
+                            this, "Você não escolheu a imagem",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
-            } else {
-                Toast.makeText(
-                    this, "Você não escolheu a imagem",
-                    Toast.LENGTH_LONG
-                ).show()
             }
         } catch (e: Exception) {
             Toast.makeText(this, "Algo deu errado", Toast.LENGTH_LONG)
