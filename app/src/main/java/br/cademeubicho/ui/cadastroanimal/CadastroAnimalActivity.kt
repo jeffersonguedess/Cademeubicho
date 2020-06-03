@@ -2,16 +2,11 @@ package br.cademeubicho.ui.cadastroanimal
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
 import android.util.Log
-import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,10 +16,10 @@ import br.cademeubicho.webservice.Sessao
 import br.cademeubicho.webservice.controller.CadastrosController
 import br.cademeubicho.webservice.model.PostCadastro
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
-import java.io.ByteArrayOutputStream
 
 
 const val PICK_IMAGE_MULTIPLE = 1000
+const val PICK_LTG_LOG = 350
 
 class CadastroAnimalActivity : AppCompatActivity() {
 
@@ -47,6 +42,9 @@ class CadastroAnimalActivity : AppCompatActivity() {
     private lateinit var imagesEncodedList: MutableList<String>
     private var galleryAdapter: GalleryAdapter? = null
 
+    var latitude=""
+    var longitude=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -68,22 +66,22 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 PICK_IMAGE_MULTIPLE
             )
 
-        /*    //encode image to base64 string
-            val baos = ByteArrayOutputStream()
-            val bitmap = BitmapFactory.decodeResource(resources, R.id.ivGallery)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            var imageBytes = baos.toByteArray()
-            val imageString =
-                Base64.encodeToString(imageBytes, Base64.DEFAULT)
+            /*    //encode image to base64 string
+                val baos = ByteArrayOutputStream()
+                val bitmap = BitmapFactory.decodeResource(resources, R.id.ivGallery)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                var imageBytes = baos.toByteArray()
+                val imageString =
+                    Base64.encodeToString(imageBytes, Base64.DEFAULT)
 
-            print("image string")
-            print(imageString)
+                print("image string")
+                print(imageString)
 
-            //decode base64 string to image
+                //decode base64 string to image
 
-            imageBytes = Base64.decode(imageString, Base64.DEFAULT)
-            val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-            image.setImageBitmap(decodedImage)*/
+                imageBytes = Base64.decode(imageString, Base64.DEFAULT)
+                val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                image.setImageBitmap(decodedImage)*/
 
             Toast.makeText(this, "selecione no maximo 3 fotos ", Toast.LENGTH_LONG).show()
         }
@@ -158,43 +156,46 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 .show()
         }
 
+        if (requestCode == PICK_LTG_LOG && resultCode == Activity.RESULT_OK
+            && null != data
+        ) {
+            //  Obtém a localização
+             latitude = data.extras?.get("latitude").toString()
+             longitude = data.extras?.get("longitude").toString()
+
+        }
+
         super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onResume() {
         super.onResume()
         fabMaps.setOnClickListener {
-            var secondActivity = Intent(this, MapsActivity::class.java)
-            startActivity(secondActivity)
+            val secondActivity = Intent(this, MapsActivity::class.java)
+            startActivityForResult(secondActivity, PICK_LTG_LOG)
         }
 
 
         btnCadastroAnimais.setOnClickListener {
-            // *           TODO
-            // *   PEGAR LATITUDE E LONGITUDE
-            // *   DA SELEÇÃO NO MAPA
-            // *
-            val lat = "-18.910680"
-            val log = "-50.653200"
 
             val imagens = listOf("IMAGEM 1 BASE64", "IMAGEM 2 BASE64", "IMAGEM 3 BASE 64")
 
-     /*       val baos = ByteArrayOutputStream()
-            val bitmap = BitmapFactory.decodeResource(resources, R.id.ivGallery)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            var imageBytes = baos.toByteArray()
-            val imageString =
-                Base64.encodeToString(imageBytes, Base64.DEFAULT)
-*/
+            /*       val baos = ByteArrayOutputStream()
+                   val bitmap = BitmapFactory.decodeResource(resources, R.id.ivGallery)
+                   bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                   var imageBytes = baos.toByteArray()
+                   val imageString =
+                       Base64.encodeToString(imageBytes, Base64.DEFAULT)
+
             println("image string")
             println(imagesEncodedList.size)
             //print(imagesEncodedList.size)
 
-            for(index in 0..imagesEncodedList.size-1){
+            for (index in 0..imagesEncodedList.size - 1) {
                 println(imagesEncodedList[index])
             }
             println(imagesEncodedList.get(0))
-                println(imagesEncodedList[0])
+            println(imagesEncodedList[0])*/
 
 
             val post = PostCadastro(
@@ -203,7 +204,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 spinner_tipo_animal.selectedItem.toString(),
                 etNomeAnimal.toString(), etracaAnimal.toString(),
                 etIdadeAnimal.toString(), etcorAnimal.toString(),
-                etrecompensa.toString(), "", "",
+                etrecompensa.toString(), longitude, latitude,
                 imagens
             )
 
@@ -265,5 +266,6 @@ class CadastroAnimalActivity : AppCompatActivity() {
         }
 
     }
+
 
 }

@@ -1,6 +1,7 @@
 package br.cademeubicho.maps
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_maps.*
 import java.util.*
+
 
 class MapsActivity :
     AppCompatActivity(),
@@ -96,6 +98,7 @@ class MapsActivity :
 
             startLocationUpdates()
         }
+
     }
 
     private fun startLocationUpdates() {
@@ -148,6 +151,17 @@ class MapsActivity :
         }
 
         tvAddress.text = fullAddress
+        getLocationByLatLng(address.latitude, address.longitude)
+    }
+
+    private fun getLocationByLatLng(latitude: Double, longitude: Double) {
+        btNext.setOnClickListener {
+            val returnIntent = Intent()
+            returnIntent.putExtra("latitude", latitude)
+            returnIntent.putExtra("longitude", longitude)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
@@ -205,7 +219,7 @@ class MapsActivity :
         }
 
         map?.isMyLocationEnabled = false
-       // map!!.mapType = GoogleMap.MAP_TYPE_NORMAL
+        // map!!.mapType = GoogleMap.MAP_TYPE_NORMAL
     }
 
 }
