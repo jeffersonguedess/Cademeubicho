@@ -197,8 +197,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/permitir_recompensa"
             android:textColor="@color/colorAccent"
-            app:layout_constraintEnd_toEndOf="@+id/editText"
-            app:layout_constraintStart_toStartOf="@+id/editText"
+            app:layout_constraintStart_toStartOf="@+id/etrecompensa"
             app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
 
         <TextView

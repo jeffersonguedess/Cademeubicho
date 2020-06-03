@@ -9,9 +9,11 @@ android {
     viewBinding.enabled = true
 
     buildFeatures {
-        dataBinding = true
+        dataBinding {
+            enabled = true
+        }
         // for view binding :
-         viewBinding = true
+         //viewBinding = true
     }
 
     defaultConfig {
@@ -38,11 +40,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    //Chat
-    dataBinding {
-        enabled = true
-    }
-
 // To inline the bytecode built with JVM target 1.8 into
 // bytecode that is being built with JVM target 1.6. (e.g. navArgs)
 
