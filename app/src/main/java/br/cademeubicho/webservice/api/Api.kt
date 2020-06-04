@@ -56,7 +56,7 @@ interface Api{
         @Field("recompensa") recompensa:String,
         @Field("longitude") longitude:String,
         @Field("latitude") latitude:String,
-        @Field("imagens") imagens:List<String>
+        @Field("imagens") imagens:String
     ):Call<Status>
 
 

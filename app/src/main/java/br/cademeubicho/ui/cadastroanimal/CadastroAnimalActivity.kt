@@ -178,11 +178,21 @@ class CadastroAnimalActivity : AppCompatActivity() {
         alteraSpinnerPorteAnimal()
         btnCadastroAnimais.setOnClickListener {
 
-            val imagens = listOf("IMAGEM 1 BASE64", "IMAGEM 2 BASE64", "IMAGEM 3 BASE 64")
+            val imagens = ArrayList<String>()
+            imagens.add("IMAGEM 01")
+            imagens.add("IMAGEM 02")
+            imagens.add("IMAGEM 03")
+
+            var gambiarra = "";
+
+            for (i in imagens){
+                gambiarra += i + "***ROGER_LIMA_GAMBIARRA***"
+            }
+
             if (!this::imagesEncodedList.isInitialized) {
                 imagesEncodedList = ArrayList()
             }
-            if (imagesEncodedList.size < 1) {
+            if (imagesEncodedList.size < 0) {
                 Toast.makeText(this, "Selecione pelo menos uma foto", Toast.LENGTH_LONG).show()
             } else {
                 if (
@@ -190,16 +200,18 @@ class CadastroAnimalActivity : AppCompatActivity() {
                     etracaAnimal.toString().length == 0 ||
                     etcorAnimal.toString().length == 0) {
                         Toast.makeText(this, "Insira todos os campos!", Toast.LENGTH_LONG).show()
-                    }else {
+                    }else if (longitude == "" || latitude == ""){
+                        Toast.makeText(this, "Escolha uma localização!", Toast.LENGTH_LONG).show()
 
+                    }else {
                     val post = PostCadastro(
                         Sessao.getUser().uidFirebase,
                         spinner_porte_animal.selectedItem.toString(),
                         spinner_tipo_animal.selectedItem.toString(),
-                        etNomeAnimal.toString(), etracaAnimal.toString(),
-                        editTextNumber.toString(), etcorAnimal.toString(),
-                        etrecompensa.toString(), longitude, latitude,
-                        imagens
+                        etNomeAnimal.getText().toString(), etracaAnimal.getText().toString(),
+                        editTextNumber.getText().toString(), etcorAnimal.getText().toString(),
+                        etrecompensa.getText().toString(), longitude, latitude,
+                        gambiarra
                     )
                     val status = CadastrosController().cadastrarPost(post);
                     println(status.statusMensagem)

@@ -12,7 +12,7 @@ data class PostCadastro (
     var recompensa: String,
     var longitude: String,
     var latitude: String,
-    var imagens : List<String>
+    var imagens : String
 ){
 
 
