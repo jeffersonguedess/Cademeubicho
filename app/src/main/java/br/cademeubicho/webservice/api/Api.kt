@@ -1,5 +1,6 @@
 package br.cademeubicho.webservice.api
 
+import br.cademeubicho.webservice.model.Posts
 import br.cademeubicho.webservice.model.Status
 import br.cademeubicho.webservice.model.Usuario
 import retrofit2.Call
@@ -58,6 +59,22 @@ interface Api{
         @Field("latitude") latitude:String,
         @Field("imagens") imagens:String
     ):Call<Status>
+
+
+    @FormUrlEncoded
+    @POST("PostsProximos")
+    fun getPosts(
+        @Field("uidFirebase") uidFirebase:String,
+        @Field("longitude") longitude:String,
+        @Field("latitude") latitude:String
+    ):Call<Posts>
+
+    @FormUrlEncoded
+    @POST("MeusPosts")
+    fun getMeusPosts(
+        @Field("uidFirebase") uidFirebase:String
+    ):Call<Posts>
+
 
 
 }

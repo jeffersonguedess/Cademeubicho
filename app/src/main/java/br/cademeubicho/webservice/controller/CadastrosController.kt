@@ -1,13 +1,12 @@
 package br.cademeubicho.webservice.controller
 
 import br.cademeubicho.webservice.api.RetrofitClient
-import br.cademeubicho.webservice.model.PostCadastro
-import br.cademeubicho.webservice.model.Status
-import br.cademeubicho.webservice.model.Usuario
+import br.cademeubicho.webservice.model.*
 import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Field
 
 
 class CadastrosController {
@@ -52,6 +51,36 @@ class CadastrosController {
         return returnStatusResponse(response)
 
     }
+
+    fun buscarPosts(user: Usuario, longitude : String, latitude : String) : List<PostConsulta>? {
+        var response : Response<Posts>
+        var p : Posts
+
+        response = RetrofitClient.instance.getPosts(
+            user.uidFirebase, longitude, latitude
+        ).execute();
+        if (response.isSuccessful()) {
+            return response.body()!!.Posts
+        }
+        return null
+
+    }
+
+    fun buscarMeusPosts(uid : String) : List<PostConsulta>? {
+        var response : Response<Posts>
+        var p : Posts
+
+        response = RetrofitClient.instance.getMeusPosts (uid ).execute();
+        if (response.isSuccessful()) {
+            return response.body()!!.Posts
+        }
+        return null
+
+    }
+
+
+
+
 
 
     private fun returnStatusResponse(response : Response<Status>) : Status{

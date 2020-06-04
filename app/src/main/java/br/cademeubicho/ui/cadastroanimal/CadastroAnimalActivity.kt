@@ -58,14 +58,9 @@ class CadastroAnimalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val root = setContentView(R.layout.activity_cadastro_animal)
-        //val user = FirebaseAuth.getInstance().currentUser
-
 
         btn.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
-/*
-            val image = findViewById<View>(R.id.ivGallery)
-*/
 
             intent.type = "image/*"
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
@@ -75,23 +70,6 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 PICK_IMAGE_MULTIPLE
             )
 
-            /*    //encode image to base64 string
-                val baos = ByteArrayOutputStream()
-                val bitmap = BitmapFactory.decodeResource(resources, R.id.ivGallery)
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                var imageBytes = baos.toByteArray()
-                val imageString =
-                    Base64.encodeToString(imageBytes, Base64.DEFAULT)
-
-                print("image string")
-                print(imageString)
-
-                //decode base64 string to image
-
-                imageBytes = Base64.decode(imageString, Base64.DEFAULT)
-                val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-                image.setImageBitmap(decodedImage)*/
-
             Toast.makeText(this, "selecione no maximo 3 fotos ", Toast.LENGTH_LONG).show()
         }
         return root
@@ -99,12 +77,13 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
+
             //  Quando uma imagem é selecionada
             if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == Activity.RESULT_OK
                 && null != data
             ) {
-                //  Obtém a imagem dos dados
 
+                //  Obtém a imagem dos dados
                 val filePathColumn = arrayOf(MediaStore.Images.Media.DATE_ADDED)
                 imagesEncodedList = ArrayList(3)
                 if (data.data != null) {
@@ -115,7 +94,6 @@ class CadastroAnimalActivity : AppCompatActivity() {
                     mImageUri?.let { mArrayUri.add(it) }
                     galleryAdapter = GalleryAdapter(applicationContext, mArrayUri)
                     gv.adapter = galleryAdapter
-
 
                 } else {
                     if (data.clipData != null) {
@@ -189,7 +167,6 @@ class CadastroAnimalActivity : AppCompatActivity() {
             val imagens = ArrayList<String>()
 
             var gambiarra = "";
-
             for (i in imagens){
                 gambiarra += i + "***ROGER_LIMA_GAMBIARRA***"
             }
@@ -215,12 +192,11 @@ class CadastroAnimalActivity : AppCompatActivity() {
                         spinner_tipo_animal.selectedItem.toString(),
                         etNomeAnimal.getText().toString(), etracaAnimal.getText().toString(),
                         editTextNumber.getText().toString(), etcorAnimal.getText().toString(),
-                        etrecompensa.getText().toString(), longitude, latitude,
-                        gambiarra
+                        etrecompensa.getText().toString(), longitude, latitude, gambiarra
                     )
                     val status = CadastrosController().cadastrarPost(post);
-                    println(status.statusMensagem)
 
+                    println(status.statusMensagem)
                     if (status.retorno == "true") {
                         Toast.makeText(this, "Post cadastrado com sucesso", Toast.LENGTH_LONG)
                             .show()
