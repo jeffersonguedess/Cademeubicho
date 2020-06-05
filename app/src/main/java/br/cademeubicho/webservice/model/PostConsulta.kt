@@ -17,6 +17,7 @@ data class PostConsulta (
     var celularWhatsApp : String,
     var idFacebook : String,
     var distanciaKM : String,
+    var idadeAnimal : String,
     var imagens : List<String>
     ){
 
