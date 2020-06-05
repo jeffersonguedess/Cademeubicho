@@ -1,6 +1,8 @@
 package br.cademeubicho.webservice.controller
 
 import br.cademeubicho.webservice.api.RetrofitClient
+import br.cademeubicho.webservice.model.PostConsulta
+import br.cademeubicho.webservice.model.Posts
 import br.cademeubicho.webservice.model.Status
 import br.cademeubicho.webservice.model.Usuario
 import retrofit2.Call
@@ -29,4 +31,34 @@ class ConsultasController {
         }
         return userResponse
     }
+
+
+    fun buscarPosts(uid : String, longitude : String, latitude : String) : List<PostConsulta>? {
+        var response : Response<Posts>
+        var p : List<PostConsulta>
+
+        response = RetrofitClient.instance.getPosts(
+            uid, longitude, latitude
+        ).execute();
+        if (response.isSuccessful()) {
+            return response.body()!!.Posts
+        }
+        return null
+
+    }
+
+    fun buscarMeusPosts(uid : String) : List<PostConsulta>? {
+        var response : Response<Posts>
+        var p : Posts
+
+        response = RetrofitClient.instance.getMeusPosts (uid ).execute();
+        if (response.isSuccessful()) {
+            return response.body()!!.Posts
+        }
+        return null
+
+    }
+
+
+
 }

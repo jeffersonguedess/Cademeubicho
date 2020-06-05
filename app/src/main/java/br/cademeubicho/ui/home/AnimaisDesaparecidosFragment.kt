@@ -12,6 +12,9 @@ import br.cademeubicho.model.AnimaisDesaparecidos
 import br.cademeubicho.ui.cadastroanimal.CadastroAnimalActivity
 import br.cademeubicho.ui.home.adapter.AnimaisDesaparecidosAdapter
 import br.cademeubicho.webservice.Sessao
+import br.cademeubicho.webservice.controller.ConsultasController
+import br.cademeubicho.webservice.model.PostConsulta
+import br.cademeubicho.webservice.model.Posts
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.adapter_animais_desaparecidos.*
@@ -19,6 +22,8 @@ import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
 
 class AnimaisDesaparecidosFragment : Fragment() {
+    private lateinit var  listaPosts : List<PostConsulta>
+
 
     val listAnimais = mutableListOf(
         AnimaisDesaparecidos("snoop", "viralata", 12, "marelo"),
@@ -63,6 +68,11 @@ class AnimaisDesaparecidosFragment : Fragment() {
 
     override fun onStart() {
         validaLogin()
+
+        listaPosts = ConsultasController().buscarPosts(Sessao.getUser().uidFirebase, "", "")!!
+
+        println(listaPosts.size)
+        println(listaPosts)
         super.onStart()
     }
 

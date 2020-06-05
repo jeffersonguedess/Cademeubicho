@@ -52,37 +52,6 @@ class CadastrosController {
 
     }
 
-    fun buscarPosts(user: Usuario, longitude : String, latitude : String) : List<PostConsulta>? {
-        var response : Response<Posts>
-        var p : Posts
-
-        response = RetrofitClient.instance.getPosts(
-            user.uidFirebase, longitude, latitude
-        ).execute();
-        if (response.isSuccessful()) {
-            return response.body()!!.Posts
-        }
-        return null
-
-    }
-
-    fun buscarMeusPosts(uid : String) : List<PostConsulta>? {
-        var response : Response<Posts>
-        var p : Posts
-
-        response = RetrofitClient.instance.getMeusPosts (uid ).execute();
-        if (response.isSuccessful()) {
-            return response.body()!!.Posts
-        }
-        return null
-
-    }
-
-
-
-
-
-
     private fun returnStatusResponse(response : Response<Status>) : Status{
         if (response.isSuccessful()) {
             statusResponse.statusMensagem = response.body()!!.statusMensagem
