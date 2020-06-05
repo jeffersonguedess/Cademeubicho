@@ -17,7 +17,7 @@ import br.cademeubicho.webservice.model.PostConsulta
 import br.cademeubicho.webservice.model.Posts
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.adapter_animais_desaparecidos.*
+import kotlinx.android.synthetic.main.adapter_animais.*
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
 
@@ -61,7 +61,7 @@ class AnimaisDesaparecidosFragment : Fragment() {
             }
             startActivity(intent)
         }
-        rec_desaparecidos.adapter = context?.let { AnimaisDesaparecidosAdapter(listAnimais, it) }
+        rec_desaparecidos.adapter = context?.let { AnimaisDesaparecidosAdapter(listaPosts, it) }
         //Toast.makeText(activity, "foi", Toast.LENGTH_SHORT).show()
     }
 

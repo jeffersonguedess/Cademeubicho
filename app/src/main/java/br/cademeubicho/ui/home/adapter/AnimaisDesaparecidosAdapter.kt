@@ -7,17 +7,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.cademeubicho.R
 import br.cademeubicho.model.AnimaisDesaparecidos
-import kotlinx.android.synthetic.main.adapter_animais_desaparecidos.view.*
+import br.cademeubicho.webservice.model.PostConsulta
+import kotlinx.android.synthetic.main.adapter_animais.view.*
 
 
-class AnimaisDesaparecidosAdapter(private val animaisDesaparecidos: MutableList<AnimaisDesaparecidos>, private val context: Context) :
+class AnimaisDesaparecidosAdapter(private val animaisDesaparecidos: List<PostConsulta>, private val context: Context) :
     RecyclerView.Adapter<AnimaisDesaparecidosAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.adapter_animais_desaparecidos, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.adapter_animais, parent, false)
         return ViewHolder(view)
 
     }
@@ -28,7 +29,7 @@ class AnimaisDesaparecidosAdapter(private val animaisDesaparecidos: MutableList<
         val animal = animaisDesaparecidos[position]
         holder.nomeAnimal.text = animal.nomeAnimal
         holder.racaAnimal.text = animal.racaAnimal
-        holder.idadeAnimal.text = animal.idadeAnimal.toString()
+        //holder.idadeAnimal.text = animal..toString()
         holder.corAnimal.text = animal.corAnimal
 
     }

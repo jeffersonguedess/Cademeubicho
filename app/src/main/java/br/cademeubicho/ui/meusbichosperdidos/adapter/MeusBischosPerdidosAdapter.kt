@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.cademeubicho.R
 import br.cademeubicho.model.MeusBichosPerdidos
-import kotlinx.android.synthetic.main.adapter_meus_bichos_perdidos.view.*
+import kotlinx.android.synthetic.main.adapter_animais.view.*
 
 
 class MeusBischosPerdidosAdapter(private val meusBichosPerdidos: MutableList<MeusBichosPerdidos>, private val context: Context) :
@@ -17,7 +17,7 @@ class MeusBischosPerdidosAdapter(private val meusBichosPerdidos: MutableList<Meu
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.adapter_meus_bichos_perdidos, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.adapter_animais, parent, false)
         return ViewHolder(view)
 
     }
