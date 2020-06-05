@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.cademeubicho.R
-import br.cademeubicho.model.MeusBichosPerdidos
+import br.cademeubicho.webservice.model.PostConsulta
 import kotlinx.android.synthetic.main.adapter_animais.view.*
 
 
-class MeusBischosPerdidosAdapter(private val meusBichosPerdidos: MutableList<MeusBichosPerdidos>, private val context: Context) :
+class MeusBischosPerdidosAdapter(private val meusBichosPerdidos: List<PostConsulta>, private val context: Context) :
     RecyclerView.Adapter<MeusBischosPerdidosAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(

@@ -1,4 +1,5 @@
 package br.cademeubicho.ui.home
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
 
 class AnimaisDesaparecidosFragment : Fragment() {
-    private lateinit var  listaPosts : List<PostConsulta>
+    private lateinit var listaPosts: List<PostConsulta>
 
 
     val listAnimais = mutableListOf(
@@ -34,14 +35,13 @@ class AnimaisDesaparecidosFragment : Fragment() {
         AnimaisDesaparecidos("snoop", "viralata", 12, "marelo"),
         AnimaisDesaparecidos("snoop", "viralata", 12, "marelo")
     )
-    val position : LatLng? = null
+    val position: LatLng? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_animais_desaparecidos, container, false)
-
 
         return root
     }
@@ -61,7 +61,6 @@ class AnimaisDesaparecidosFragment : Fragment() {
             }
             startActivity(intent)
         }
-        rec_desaparecidos.adapter = context?.let { AnimaisDesaparecidosAdapter(listaPosts, it) }
         //Toast.makeText(activity, "foi", Toast.LENGTH_SHORT).show()
     }
 
@@ -71,15 +70,17 @@ class AnimaisDesaparecidosFragment : Fragment() {
 
         listaPosts = ConsultasController().buscarPosts(Sessao.getUser().uidFirebase, "", "")!!
 
+        rec_desaparecidos.adapter = context?.let { AnimaisDesaparecidosAdapter(listaPosts, it) }
+
         println(listaPosts.size)
         println(listaPosts)
         super.onStart()
     }
 
-    private fun validaLogin(){
-        println ("VALIDA LOGIN")
+    private fun validaLogin() {
+        println("VALIDA LOGIN")
         val user = FirebaseAuth.getInstance().currentUser
-        if (user != null && Sessao.getUser().uidFirebase == ""){
+        if (user != null && Sessao.getUser().uidFirebase == "") {
             //CARA ENTÁ LOGADO (NÃO TEM COMO SABER SE ELE
             // VEIO DIRETO DA PAGINA DE LOGIN OU SE REABRIU O APP
             //POR VIA DAS DUVIDAS, RECARREGO A VARIAVEL DE SESSAO
@@ -90,8 +91,12 @@ class AnimaisDesaparecidosFragment : Fragment() {
                     || Sessao.getUser().dddCelular.isEmpty()
                     || Sessao.getUser().numeroCelular.isEmpty()
                     || Sessao.getUser().emailUsuario == ""
-                ){
-                    Toast.makeText(requireContext(), "Por favor, finalize seu cadastro!", Toast.LENGTH_LONG).show()
+                ) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Por favor, finalize seu cadastro!",
+                        Toast.LENGTH_LONG
+                    ).show()
                     //TODO("IMPLEMENTAR CHAMADA PARA MINHA CONTA FRAGMENT")
 /*                   val intent: Intent?
                     intent = Intent(activity, FRAGMENT_MINHACONTA::class.java)
@@ -102,8 +107,6 @@ class AnimaisDesaparecidosFragment : Fragment() {
             }
         }
     }
-
-
 
 
 }

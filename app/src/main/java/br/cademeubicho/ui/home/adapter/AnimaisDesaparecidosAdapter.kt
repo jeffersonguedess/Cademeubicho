@@ -29,7 +29,7 @@ class AnimaisDesaparecidosAdapter(private val animaisDesaparecidos: List<PostCon
         val animal = animaisDesaparecidos[position]
         holder.nomeAnimal.text = animal.nomeAnimal
         holder.racaAnimal.text = animal.racaAnimal
-        //holder.idadeAnimal.text = animal..toString()
+        holder.idadeAnimal.text = animal.idadeAnimal.toString()
         holder.corAnimal.text = animal.corAnimal
 
     }

@@ -8,9 +8,13 @@ import br.cademeubicho.BaseFragment
 import br.cademeubicho.R
 import br.cademeubicho.model.MeusBichosPerdidos
 import br.cademeubicho.ui.meusbichosperdidos.adapter.MeusBischosPerdidosAdapter
+import br.cademeubicho.webservice.Sessao
+import br.cademeubicho.webservice.controller.ConsultasController
+import br.cademeubicho.webservice.model.PostConsulta
 import kotlinx.android.synthetic.main.fragment_meus_bichos_perdidos.*
 
 class MeusBichosPerdidosFragment : BaseFragment() {
+    private lateinit var listaPosts: List<PostConsulta>
 
     val listAnimais = mutableListOf(
         MeusBichosPerdidos("snoop", "viralata", 12, "marelo"),
@@ -35,7 +39,17 @@ class MeusBichosPerdidosFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rec_meus_bichos_perdidos.adapter = context?.let { MeusBischosPerdidosAdapter(listAnimais, it) }
         //Toast.makeText(activity, "foi", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStart() {
+
+        listaPosts = ConsultasController().buscarPosts(Sessao.getUser().uidFirebase, "", "")!!
+
+        rec_meus_bichos_perdidos.adapter = context?.let { MeusBischosPerdidosAdapter(listaPosts, it) }
+
+        println(listaPosts.size)
+        println(listaPosts)
+        super.onStart()
     }
 }

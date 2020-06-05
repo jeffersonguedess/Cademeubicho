@@ -80,4 +80,7 @@
     <string name="tow_map_explanation">Indique a posição correta movendo o pino de localização</string>
     <string name="activate">Ativar</string>
 
+    //Strings Cards
+    <string name="porteAnimalCard">Porte do Animal</string>
+    <string name="tipoAnimalCard">Tipo do Animal</string>
 </resources>
