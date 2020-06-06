@@ -1,4 +1,4 @@
-package br.cademeubicho.webservice.model
+package br.cademeubicho.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

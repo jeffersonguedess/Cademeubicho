@@ -9,7 +9,7 @@ import br.cademeubicho.BaseFragment
 import br.cademeubicho.R
 import br.cademeubicho.webservice.Sessao
 import br.cademeubicho.webservice.controller.CadastrosController
-import br.cademeubicho.webservice.model.Usuario
+import br.cademeubicho.model.Usuario
 import kotlinx.android.synthetic.main.fragment_minha_conta.*
 import kotlinx.android.synthetic.main.fragment_minha_conta.view.*
 
@@ -63,21 +63,21 @@ class MinhaContaFragment : BaseFragment() {
         btnSalva.setOnClickListener {
 
 
-            val usuario =  Usuario(
+            val usuario = Usuario(
                 tvNome.text as String,
                 num_telefone.getText().toString(),
                 num_ddd.getText().toString(),
                 tvEmail.text.toString(),
                 seekBar.progress,
                 Sessao.getUser().uidFirebase,
-                Sessao.getUser().idFacebook)
+                Sessao.getUser().idFacebook
+            )
 
            val response = CadastrosController().atualizaUsuario(usuario)
 
             Toast.makeText(activity, response.statusMensagem, Toast.LENGTH_LONG).show()
 
             if (response.retorno.toLowerCase() == "true"){
-                println("recarrega sessao")
 
                 var uid = Sessao.getUser().uidFirebase
                 Sessao.loadSessao(uid)

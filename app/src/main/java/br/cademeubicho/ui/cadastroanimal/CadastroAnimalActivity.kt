@@ -17,7 +17,7 @@ import br.cademeubicho.R
 import br.cademeubicho.maps.MapsActivity
 import br.cademeubicho.webservice.Sessao
 import br.cademeubicho.webservice.controller.CadastrosController
-import br.cademeubicho.webservice.model.PostCadastro
+import br.cademeubicho.model.PostCadastro
 import io.reactivex.Single
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
 import java.io.ByteArrayOutputStream

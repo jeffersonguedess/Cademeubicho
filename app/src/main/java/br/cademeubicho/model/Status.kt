@@ -1,4 +1,4 @@
-package br.cademeubicho.webservice.model
+package br.cademeubicho.model
 
 data class Status (var statusMensagem: String, var retorno: String){
 

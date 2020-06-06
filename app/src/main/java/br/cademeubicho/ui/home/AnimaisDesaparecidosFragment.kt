@@ -14,7 +14,7 @@ import br.cademeubicho.ui.detalhes.AnimaisDetalhesActivity
 import br.cademeubicho.ui.adapter.AnimaisAdapter
 import br.cademeubicho.webservice.Sessao
 import br.cademeubicho.webservice.controller.ConsultasController
-import br.cademeubicho.webservice.model.PostConsulta
+import br.cademeubicho.model.PostConsulta
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
@@ -54,6 +54,8 @@ class AnimaisDesaparecidosFragment : Fragment() {
 
     override fun onStart() {
         validaLogin()
+
+
 
         listaPosts = ConsultasController().buscarPosts(Sessao.getUser().uidFirebase, "", "")!!
 

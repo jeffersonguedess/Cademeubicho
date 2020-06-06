@@ -1,4 +1,4 @@
-package br.cademeubicho.webservice.model
+package br.cademeubicho.model
 
 import com.google.gson.annotations.SerializedName
 

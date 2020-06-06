@@ -2,18 +2,20 @@ package br.cademeubicho.webservice.controller
 
 import android.os.StrictMode
 import br.cademeubicho.webservice.api.RetrofitClient
-import br.cademeubicho.webservice.model.PostConsulta
-import br.cademeubicho.webservice.model.Posts
-import br.cademeubicho.webservice.model.Status
-import br.cademeubicho.webservice.model.Usuario
+import br.cademeubicho.model.PostConsulta
+import br.cademeubicho.model.Posts
+import br.cademeubicho.model.Status
+import br.cademeubicho.model.Usuario
 import retrofit2.Call
 import retrofit2.Response
 
 
 class ConsultasController {
     val statusResponse = Status("", "")
-    val userResponse = Usuario("","","",
-                                "",0,"","")
+    val userResponse = Usuario(
+        "", "", "",
+        "", 0, "", ""
+    )
 
     fun buscaUsuario(uid: String) : Usuario {
 

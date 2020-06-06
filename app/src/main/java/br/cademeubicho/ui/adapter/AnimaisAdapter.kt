@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.cademeubicho.R
-import br.cademeubicho.webservice.model.PostConsulta
+import br.cademeubicho.model.PostConsulta
 import kotlinx.android.synthetic.main.adapter_animais.view.*
 
 

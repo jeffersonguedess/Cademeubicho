@@ -4,11 +4,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
-import br.cademeubicho.webservice.model.PostConsulta
+import br.cademeubicho.model.PostConsulta
 import kotlinx.android.synthetic.main.activity_animais_detalhes.*
-import java.net.URLEncoder
 
 
 class AnimaisDetalhesActivity : AppCompatActivity() {
@@ -17,8 +17,6 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
         const val EXTRA_POST = "EXTRA_POST"
         const val EXTRA_MEU_BICHO = "EXTRA_MEU_BICHO"
     }
-        val phone = String()
-        val message = String()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,15 +35,18 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
         etcorAnimal.setText(post?.corAnimal)
         etracaAnimal.setText(post?.racaAnimal)
         etrecompensa.setText(post?.recompensa)
+
+        if (post?.celularWhatsApp?.length == 0){
+
+            btnWhatsApp.setVisibility(View.GONE);
+        }
+
         btnWhatsApp.setOnClickListener {
             val packageManager: PackageManager = packageManager
             val i = Intent(Intent.ACTION_VIEW)
 
             try {
-                val url = post?.celularWhatsApp + "&text=" + URLEncoder.encode(
-                        message,
-                        "UTF-8"
-                    )
+                val url = post?.celularWhatsApp
                 i.setPackage("com.whatsapp")
                 i.data = Uri.parse(url)
                 if (i.resolveActivity(packageManager) != null) {
@@ -57,10 +58,6 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
         }
 
         fabMaps.setOnClickListener{
-            val packageManager: PackageManager = packageManager
-            val i = Intent(Intent.ACTION_VIEW)
-
-            startActivity(intent)
             try {
 
                 val myLatitude = post?.latitude
@@ -71,7 +68,6 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
                     Uri.parse("geo:<$myLatitude>,<$myLongitude>?q=<$myLatitude>,<$myLongitude>($labelLocation)")
                 )
                 startActivity(intent)
-
 
             } catch (e: Exception) {
                 e.printStackTrace()

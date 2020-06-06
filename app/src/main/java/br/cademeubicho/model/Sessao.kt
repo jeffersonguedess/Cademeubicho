@@ -3,11 +3,9 @@ package br.cademeubicho.webservice
 import android.os.StrictMode
 import br.cademeubicho.webservice.controller.CadastrosController
 import br.cademeubicho.webservice.controller.ConsultasController
-import br.cademeubicho.webservice.model.Usuario
+import br.cademeubicho.model.Usuario
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.FirebaseUserMetadata
 
 object Sessao {
 
@@ -25,21 +23,17 @@ object Sessao {
         if (user != null) {
             userSessao = user
         }
-      //  var l = createLocationRequest()
-        print("LOCAAAAAAAAAAAATION")
-       // print(l.toString())
+
+        println(createLocationRequest().toString());
+
+//    latitude = data.extras?.get("latitude").toString()
+//      longitude = data.extras?.get("longitude").toString()
+
+
     }
 
     fun getUser(): Usuario {
         return userSessao
-    }
-
-    fun getLatitude(): String {
-        return latitude
-    }
-
-    fun getLongitude(): String {
-        return longitude
     }
 
     val instance: Usuario by lazy {

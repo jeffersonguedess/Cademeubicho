@@ -1,8 +1,8 @@
 package br.cademeubicho.webservice.api
 
-import br.cademeubicho.webservice.model.Posts
-import br.cademeubicho.webservice.model.Status
-import br.cademeubicho.webservice.model.Usuario
+import br.cademeubicho.model.Posts
+import br.cademeubicho.model.Status
+import br.cademeubicho.model.Usuario
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
