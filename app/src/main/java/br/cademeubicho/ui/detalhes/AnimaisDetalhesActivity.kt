@@ -7,10 +7,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.webservice.model.PostConsulta
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
-import com.otaliastudios.cameraview.markers.MarkerLayout
-import com.otaliastudios.cameraview.markers.MarkerParser
 import kotlinx.android.synthetic.main.activity_animais_detalhes.*
 import java.net.URLEncoder
 
@@ -66,15 +62,17 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
 
             startActivity(intent)
             try {
+
+                val myLatitude = post?.latitude
+                val myLongitude = post?.longitude
+                val labelLocation = "Local Perda!"
                 val intent = Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("geo:"+post?.latitude+","+post?.longitude+"?z=18")
-
+                    Uri.parse("geo:<$myLatitude>,<$myLongitude>?q=<$myLatitude>,<$myLongitude>($labelLocation)")
                 )
-                //intent.data = Uri.parse(intent.toString())
-                if (intent.resolveActivity(packageManager) != null) {
-                    startActivity(intent)
-                }
+                startActivity(intent)
+
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }

@@ -1,5 +1,6 @@
 package br.cademeubicho.webservice.controller
 
+import android.os.StrictMode
 import br.cademeubicho.webservice.api.RetrofitClient
 import br.cademeubicho.webservice.model.PostConsulta
 import br.cademeubicho.webservice.model.Posts
@@ -34,6 +35,10 @@ class ConsultasController {
 
 
     fun buscarPosts(uid : String, longitude : String, latitude : String) : List<PostConsulta>? {
+        val policy =
+            StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+
         var response : Response<Posts>
         var p : List<PostConsulta>
 
