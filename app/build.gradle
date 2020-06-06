@@ -91,6 +91,10 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:4.0.0'
     implementation 'com.facebook.android:facebook-login:5.15.3'
     implementation 'com.google.firebase:firebase-auth:19.3.1'
+    implementation 'com.google.firebase:firebase-core:17.4.2'
+    implementation 'com.google.firebase:firebase-auth:19.3.1'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-database:19.3.0'
 
     //Biblioteca de Geolocalização do Maps
     implementation 'com.firebase:geofire-android:2.1.2'
@@ -115,6 +119,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.1'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    //Chat
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
 }
 

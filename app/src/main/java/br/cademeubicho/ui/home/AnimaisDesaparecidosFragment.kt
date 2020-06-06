@@ -9,33 +9,20 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.cademeubicho.LoginActivity
 import br.cademeubicho.R
-import br.cademeubicho.model.AnimaisDesaparecidos
 import br.cademeubicho.ui.cadastroanimal.CadastroAnimalActivity
-import br.cademeubicho.ui.home.adapter.AnimaisDesaparecidosAdapter
+import br.cademeubicho.ui.detalhes.AnimaisDetalhesActivity
+import br.cademeubicho.ui.adapter.AnimaisAdapter
 import br.cademeubicho.webservice.Sessao
 import br.cademeubicho.webservice.controller.ConsultasController
 import br.cademeubicho.webservice.model.PostConsulta
-import br.cademeubicho.webservice.model.Posts
-import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.adapter_animais.*
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
 
 class AnimaisDesaparecidosFragment : Fragment() {
+
     private lateinit var listaPosts: List<PostConsulta>
 
-
-    val listAnimais = mutableListOf(
-        AnimaisDesaparecidos("snoop", "viralata", 12, "marelo"),
-        AnimaisDesaparecidos("snoop", "viralata", 12, "marelo"),
-        AnimaisDesaparecidos("snoop", "viralata", 12, "marelo"),
-        AnimaisDesaparecidos("snoop", "viralata", 12, "marelo"),
-        AnimaisDesaparecidos("snoop", "viralata", 12, "marelo"),
-        AnimaisDesaparecidos("snoop", "viralata", 12, "marelo"),
-        AnimaisDesaparecidos("snoop", "viralata", 12, "marelo")
-    )
-    val position: LatLng? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -70,11 +57,23 @@ class AnimaisDesaparecidosFragment : Fragment() {
 
         listaPosts = ConsultasController().buscarPosts(Sessao.getUser().uidFirebase, "", "")!!
 
-        rec_desaparecidos.adapter = context?.let { AnimaisDesaparecidosAdapter(listaPosts, it) }
+        val adapter = AnimaisAdapter(listaPosts)
+        rec_desaparecidos.adapter = adapter
 
-        println(listaPosts.size)
-        println(listaPosts)
+        adapter.listener = object : AnimaisAdapter.Listener {
+            override fun onCardClicked(postConsultas: PostConsulta) {
+                chamaDetalhes(postConsultas)
+            }
+        }
+
         super.onStart()
+    }
+
+    private fun chamaDetalhes(postConsultas: PostConsulta) {
+        val intent = Intent(context, AnimaisDetalhesActivity::class.java)
+        intent.putExtra(AnimaisDetalhesActivity.EXTRA_POST, postConsultas)
+        intent.putExtra(AnimaisDetalhesActivity.EXTRA_MEU_BICHO, false)
+        startActivity(intent)
     }
 
     private fun validaLogin() {

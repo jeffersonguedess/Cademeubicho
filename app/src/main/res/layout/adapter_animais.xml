@@ -10,7 +10,8 @@
     android:clickable="true"
     android:focusable="true"
     app:cardCornerRadius="16dp"
-    app:rippleColor="@color/colorAccent">
+    app:rippleColor="@color/colorAccent"
+    android:id="@+id/cardsPost">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
