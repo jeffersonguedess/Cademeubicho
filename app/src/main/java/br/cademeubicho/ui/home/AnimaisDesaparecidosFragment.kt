@@ -56,7 +56,6 @@ class AnimaisDesaparecidosFragment : Fragment() {
         validaLogin()
 
         listaPosts = ConsultasController().buscarPosts(Sessao.getUser().uidFirebase, "", "")!!
-        println(listaPosts)
         val adapter = AnimaisAdapter(listaPosts)
         rec_desaparecidos.adapter = adapter
 

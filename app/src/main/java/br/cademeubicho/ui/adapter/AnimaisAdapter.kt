@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import android.widget.Switch
 import androidx.recyclerview.widget.RecyclerView
 import br.cademeubicho.R
-import br.cademeubicho.model.MeusBichosPerdidos
 import br.cademeubicho.model.PostConsulta
-import br.cademeubicho.webservice.model.PostConsulta
 import kotlinx.android.synthetic.main.adapter_animais.view.*
 
 

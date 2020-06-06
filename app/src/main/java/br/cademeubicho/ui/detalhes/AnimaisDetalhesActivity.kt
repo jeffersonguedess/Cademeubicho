@@ -8,7 +8,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.model.PostConsulta
-import br.cademeubicho.webservice.model.PostConsulta
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_animais_detalhes.*
 import kotlinx.android.synthetic.main.activity_maps.*
