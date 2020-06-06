@@ -7,6 +7,7 @@ import android.widget.Switch
 import androidx.recyclerview.widget.RecyclerView
 import br.cademeubicho.R
 import br.cademeubicho.model.MeusBichosPerdidos
+import br.cademeubicho.model.PostConsulta
 import br.cademeubicho.webservice.model.PostConsulta
 import kotlinx.android.synthetic.main.adapter_animais.view.*
 
@@ -46,7 +47,6 @@ class AnimaisAdapter(
             holder.idadeAnimal.text = animal.idadeAnimal + " anos"
         }
         holder.corAnimal.text = animal.corAnimal
-
     }
 
 
@@ -66,5 +66,6 @@ class AnimaisAdapter(
         }
 
     }
+
 
 }

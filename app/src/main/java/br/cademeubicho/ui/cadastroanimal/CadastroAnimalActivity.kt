@@ -17,7 +17,7 @@ import br.cademeubicho.R
 import br.cademeubicho.maps.MapsActivity
 import br.cademeubicho.webservice.Sessao
 import br.cademeubicho.webservice.controller.CadastrosController
-import br.cademeubicho.webservice.model.PostCadastro
+import br.cademeubicho.model.PostCadastro
 import io.reactivex.Single
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
 import java.io.ByteArrayOutputStream
@@ -166,9 +166,9 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
             val imagens = ArrayList<String>()
 
-            var gambiarra = "";
+            var ajusteTecnico = "";
             for (i in imagens){
-                gambiarra += i + "***ROGER_LIMA_GAMBIARRA***"
+                ajusteTecnico += i + "***ROGER_LIMA_GAMBIARRA***"
             }
 
             if (!this::imagesEncodedList.isInitialized) {
@@ -192,7 +192,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
                         spinner_tipo_animal.selectedItem.toString(),
                         etNomeAnimal.getText().toString(), etracaAnimal.getText().toString(),
                         editTextNumber.getText().toString(), etcorAnimal.getText().toString(),
-                        etrecompensa.getText().toString(), longitude, latitude, gambiarra
+                        etrecompensa.getText().toString(), longitude, latitude, ajusteTecnico
                     )
                     val status = CadastrosController().cadastrarPost(post);
 

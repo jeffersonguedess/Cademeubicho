@@ -4,8 +4,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
+import br.cademeubicho.model.PostConsulta
 import br.cademeubicho.webservice.model.PostConsulta
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_animais_detalhes.*
@@ -17,10 +19,8 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_POST = "EXTRA_POST"
-    }
 
-    val phone = String()
-    val message = String()
+    }
     private var post: PostConsulta? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,15 +36,18 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
         etcorAnimal.setText(post?.corAnimal)
         etracaAnimal.setText(post?.racaAnimal)
         etrecompensa.setText(post?.recompensa)
+
+        if (post?.celularWhatsApp?.length == 0){
+            textView.setVisibility(View.GONE);
+            btnWhatsApp.setVisibility(View.GONE);
+        }
+
         btnWhatsApp.setOnClickListener {
             val packageManager: PackageManager = packageManager
             val i = Intent(Intent.ACTION_VIEW)
 
             try {
-                val url = post?.celularWhatsApp + "&text=" + URLEncoder.encode(
-                    message,
-                    "UTF-8"
-                )
+                val url = post?.celularWhatsApp
                 i.setPackage("com.whatsapp")
                 i.data = Uri.parse(url)
                 if (i.resolveActivity(packageManager) != null) {

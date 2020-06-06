@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import br.cademeubicho.BaseFragment
 import br.cademeubicho.R
-import br.cademeubicho.model.MeusBichosPerdidos
 import br.cademeubicho.ui.adapter.AnimaisAdapter
 import br.cademeubicho.ui.detalhes.AnimaisDetalhesActivity
 import br.cademeubicho.webservice.Sessao
 import br.cademeubicho.webservice.controller.ConsultasController
-import br.cademeubicho.webservice.model.PostConsulta
+import br.cademeubicho.model.PostConsulta
 import kotlinx.android.synthetic.main.fragment_meus_bichos_perdidos.*
 
 class MeusBichosPerdidosFragment : BaseFragment() {
