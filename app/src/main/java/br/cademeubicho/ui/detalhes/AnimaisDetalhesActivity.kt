@@ -5,10 +5,12 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.model.PostConsulta
 import br.cademeubicho.model.Sessao
+import br.cademeubicho.webservice.controller.CadastrosController
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_animais_detalhes.*
 
@@ -35,10 +37,38 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
         etracaAnimal.setText(post?.racaAnimal)
         etrecompensa.setText(post?.recompensa)
 
-        if (post?.celularWhatsApp?.length == 0 ||
-            post?.idFirebaseUsu == Sessao.getUser().uidFirebase){
-            textView.setVisibility(View.GONE);
-            btnWhatsApp.setVisibility(View.GONE);
+
+        /*  RETIRA O BOTAO DE ENTRAR EM CONTATO - CASO O USUARIO LOGADO
+        * SEJA O MESMO USUARIO QUE FEZ O POST*/
+//        if (post?.celularWhatsApp?.length == 0 ||
+//            post?.idFirebaseUsu == Sessao.getUser().uidFirebase){
+//            textView.setVisibility(View.GONE);
+//            //textView.setText("");
+//            btnWhatsApp.setVisibility(View.GONE);
+//        }
+
+        /** MOSTRA BOTAO DE ATUALIZAR POST E DE INATIVAR POST,
+            * SOMENTE SE USUARIO LOGADO SEJA O  USUARIO QUE FEZ O POST
+         * E O POST ESTEJA COM STATUS ATIVO = 'S*/
+
+        if (!( post?.idFirebaseUsu == Sessao.getUser().uidFirebase
+            && post?.postAtivo == "S"
+        )){
+            btnEditaPost.setVisibility(View.GONE);
+            btnDesativaPost.setVisibility(View.GONE);
+
+            // btnEditaPost.setVisibility(View.VISIBLE);
+           // btnDesativaPost.setVisibility(View.VISIBLE);
+        }
+
+
+        btnDesativaPost.setOnClickListener {
+            val status = CadastrosController().desativaPost(Sessao.getUser().uidFirebase);
+            Toast.makeText(this, status.statusMensagem, Toast.LENGTH_LONG).show()
+            if (status.retorno.toLowerCase() == "true"){
+                btnEditaPost.setVisibility(View.GONE);
+                btnDesativaPost.setVisibility(View.GONE);
+            }
         }
 
         btnWhatsApp.setOnClickListener {
