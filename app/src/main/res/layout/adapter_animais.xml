@@ -15,7 +15,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="201dp"
         android:padding="16dp">
 
         <ImageView
@@ -24,7 +24,6 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:layout_marginStart="16dp"
             android:scaleType="centerInside"
             android:src="@mipmap/logo_camera_round"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,40 +32,59 @@
 
         <TextView
             android:id="@+id/txtnomeAnimal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/ivGallery"
             app:layout_constraintTop_toTopOf="@+id/ivGallery"
-            tools:text="cachorro" />
+            tools:text="cachorro do nome gigante da porra para testar a quebra de linha" />
 
         <TextView
             android:id="@+id/txtracaAnimal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintBottom_toBottomOf="@+id/txtnomeAnimal"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtnomeAnimal"
+            app:layout_constraintStart_toEndOf="@+id/ivGallery"
+            app:layout_constraintTop_toBottomOf="@+id/txtnomeAnimal"
             tools:text="viralata" />
 
         <TextView
             android:id="@+id/txtidadeAnimal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/txtcorAnimal"
-            app:layout_constraintEnd_toEndOf="@+id/txtracaAnimal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txtcorAnimal"
-            tools:text="10" />
+            tools:text="100 anos" />
 
         <TextView
             android:id="@+id/txtcorAnimal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/ivGallery"
-            app:layout_constraintStart_toStartOf="@+id/txtnomeAnimal"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/txtidadeAnimal"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivGallery"
+            app:layout_constraintTop_toBottomOf="@+id/txtracaAnimal"
             tools:text="marelo" />
 
+        <Switch
+            android:id="@+id/simpleSwitch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:checked="true"
+            android:textColor="@color/colorAccent"
+            android:text="@string/estatusPost"
+            android:textOff="@string/desactive"
+            android:textOn="@string/activate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtcorAnimal" /><!-- text to be displayed whenever current state is checked-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

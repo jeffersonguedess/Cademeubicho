@@ -16,6 +16,7 @@ import br.cademeubicho.webservice.Sessao
 import br.cademeubicho.webservice.controller.ConsultasController
 import br.cademeubicho.webservice.model.PostConsulta
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
 
@@ -28,14 +29,11 @@ class AnimaisDesaparecidosFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_animais_desaparecidos, container, false)
-
-        return root
+        return inflater.inflate(R.layout.fragment_animais_desaparecidos, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         fabCadastrar.setOnClickListener {
             val user = FirebaseAuth.getInstance().currentUser
@@ -72,7 +70,6 @@ class AnimaisDesaparecidosFragment : Fragment() {
     private fun chamaDetalhes(postConsultas: PostConsulta) {
         val intent = Intent(context, AnimaisDetalhesActivity::class.java)
         intent.putExtra(AnimaisDetalhesActivity.EXTRA_POST, postConsultas)
-        intent.putExtra(AnimaisDetalhesActivity.EXTRA_MEU_BICHO, false)
         startActivity(intent)
     }
 

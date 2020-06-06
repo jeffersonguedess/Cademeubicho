@@ -29,20 +29,9 @@ class MeusBichosPerdidosFragment : BaseFragment() {
         return root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    private fun chamaDetalhes(postConsultas: PostConsulta) {
-        val intent = Intent(context, AnimaisDetalhesActivity::class.java)
-        intent.putExtra(AnimaisDetalhesActivity.EXTRA_POST, postConsultas)
-        intent.putExtra(AnimaisDetalhesActivity.EXTRA_MEU_BICHO, true)
-        startActivity(intent)
-    }
-
     override fun onStart() {
 
-        listaPosts = ConsultasController().buscarMeusPosts (Sessao.getUser().uidFirebase )!!
+        listaPosts = ConsultasController().buscarMeusPosts(Sessao.getUser().uidFirebase)!!
 
         val adapter = AnimaisAdapter(listaPosts)
         rec_meus_bichos_perdidos.adapter = adapter
@@ -54,5 +43,12 @@ class MeusBichosPerdidosFragment : BaseFragment() {
         }
 
         super.onStart()
+    }
+
+    //TODO mudar activity
+    private fun chamaDetalhes(postConsultas: PostConsulta) {
+        val intent = Intent(context, AnimaisDetalhesActivity::class.java)
+        intent.putExtra(AnimaisDetalhesActivity.EXTRA_POST, postConsultas)
+        startActivity(intent)
     }
 }

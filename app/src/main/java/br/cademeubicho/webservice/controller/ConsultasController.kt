@@ -56,7 +56,7 @@ class ConsultasController {
         var response : Response<Posts>
         var p : Posts
 
-        response = RetrofitClient.instance.getMeusPosts (uid ).execute();
+        response = RetrofitClient.instance.getMeusPosts (uid).execute();
         if (response.isSuccessful()) {
             return response.body()!!.Posts
         }

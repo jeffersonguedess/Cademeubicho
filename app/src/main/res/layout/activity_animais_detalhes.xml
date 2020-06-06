@@ -59,9 +59,9 @@
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:longClickable="false"
             android:hint="@string/nomeAnimal"
             android:inputType="textEmailAddress"
+            android:longClickable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,29 +83,31 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="@string/idadeAnimal"
-            android:inputType="number"
             android:clickable="false"
+            android:ems="10"
             android:focusable="false"
             android:focusableInTouchMode="false"
+            android:hint="@string/idadeAnimal"
+            android:inputType="number"
             android:longClickable="false"
             app:layout_constraintEnd_toEndOf="@+id/etNomeAnimal"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/etNomeAnimal"
             app:layout_constraintTop_toBottomOf="@+id/etNomeAnimal"
-            tools:text="@string/idadeAnimal"/>
+            tools:text="@string/idadeAnimal" />
 
         <TextView
             android:id="@+id/txtLocalPerda"
             android:layout_width="0dp"
             android:layout_height="19dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@string/local_perda"
+            android:textAlignment="center"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
+            app:layout_constraintStart_toStartOf="@+id/etrecompensa"
+            app:layout_constraintTop_toBottomOf="@+id/etrecompensa" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etcorAnimal"
@@ -114,17 +116,17 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:hint="@string/corAnimal"
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:longClickable="false"
+            android:hint="@string/corAnimal"
             android:inputType="textEmailAddress"
+            android:longClickable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
-            tools:text="@string/corAnimal"/>
+            tools:text="@string/corAnimal" />
 
         <EditText
             android:id="@+id/etrecompensa"
@@ -133,16 +135,16 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:autofillHints="no"
-            android:ems="10"
-            android:hint="@string/recompensa"
             android:clickable="false"
+            android:ems="10"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:longClickable="false"
+            android:hint="@string/recompensa"
             android:inputType="number"
+            android:longClickable="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtConfirmacaoReconpensa"
-            tools:text="@string/recompensa"/>
+            tools:text="@string/recompensa" />
 
         <TextView
             android:id="@+id/textTipo"
@@ -161,31 +163,29 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:hint="@string/racaAnimal"
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:longClickable="false"
+            android:hint="@string/racaAnimal"
             android:inputType="textEmailAddress"
+            android:longClickable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etcorAnimal"
-            tools:text="@string/racaAnimal"/>
+            tools:text="@string/racaAnimal" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabMaps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/ic_action_maps"
-            app:backgroundTint="@color/colorAccent"
-            app:fabSize="auto"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgMostraLocal"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/txtLocalPerda"
-            app:layout_constraintHorizontal_bias="0.513"
             app:layout_constraintStart_toStartOf="@+id/txtLocalPerda"
             app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda"
-            app:tint="@android:color/white" />
+            tools:background="@mipmap/logo_camera_round"
+             />
 
         <TextView
             android:id="@+id/porteAnimal"
@@ -218,7 +218,7 @@
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="@+id/txtLocalPerda"
             app:layout_constraintStart_toStartOf="@+id/etrecompensa"
-            app:layout_constraintTop_toBottomOf="@+id/fabMaps" />
+            app:layout_constraintTop_toBottomOf="@+id/imgMostraLocal" />
 
         <Button
             android:id="@+id/btnWhatsApp"

@@ -3,8 +3,10 @@ package br.cademeubicho.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import androidx.recyclerview.widget.RecyclerView
 import br.cademeubicho.R
+import br.cademeubicho.model.MeusBichosPerdidos
 import br.cademeubicho.webservice.model.PostConsulta
 import kotlinx.android.synthetic.main.adapter_animais.view.*
 
@@ -38,8 +40,13 @@ class AnimaisAdapter(
 
         holder.nomeAnimal.text = animal.nomeAnimal
         holder.racaAnimal.text = animal.racaAnimal
-        holder.idadeAnimal.text = animal.idadeAnimal
+        if (animal.idadeAnimal.equals("1")) {
+            holder.idadeAnimal.text = animal.idadeAnimal + " ano"
+        }else{
+            holder.idadeAnimal.text = animal.idadeAnimal + " anos"
+        }
         holder.corAnimal.text = animal.corAnimal
+
     }
 
 
@@ -59,6 +66,5 @@ class AnimaisAdapter(
         }
 
     }
-
 
 }
