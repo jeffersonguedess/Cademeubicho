@@ -166,9 +166,9 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
             val imagens = ArrayList<String>()
 
-            var gambiarra = "";
+            var ajusteTecnico = "";
             for (i in imagens){
-                gambiarra += i + "***ROGER_LIMA_GAMBIARRA***"
+                ajusteTecnico += i + "***ROGER_LIMA_GAMBIARRA***"
             }
 
             if (!this::imagesEncodedList.isInitialized) {
@@ -192,7 +192,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
                         spinner_tipo_animal.selectedItem.toString(),
                         etNomeAnimal.getText().toString(), etracaAnimal.getText().toString(),
                         editTextNumber.getText().toString(), etcorAnimal.getText().toString(),
-                        etrecompensa.getText().toString(), longitude, latitude, gambiarra
+                        etrecompensa.getText().toString(), longitude, latitude, ajusteTecnico
                     )
                     val status = CadastrosController().cadastrarPost(post);
 

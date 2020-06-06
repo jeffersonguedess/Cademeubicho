@@ -77,6 +77,14 @@ interface Api{
 
 
 
+    @FormUrlEncoded
+    @POST("DesativarPost")
+    fun desativarPost(
+        @Field("uidFirebase") uidFirebase:String
+    ):Call<Status>
+
+
+
 }
 
 

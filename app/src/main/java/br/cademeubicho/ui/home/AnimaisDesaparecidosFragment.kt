@@ -1,6 +1,7 @@
 package br.cademeubicho.ui.home
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import br.cademeubicho.ui.adapter.AnimaisAdapter
 import br.cademeubicho.webservice.Sessao
 import br.cademeubicho.webservice.controller.ConsultasController
 import br.cademeubicho.model.PostConsulta
+import br.cademeubicho.ui.minhaconta.MinhaContaFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
@@ -55,10 +57,8 @@ class AnimaisDesaparecidosFragment : Fragment() {
     override fun onStart() {
         validaLogin()
 
-
-
         listaPosts = ConsultasController().buscarPosts(Sessao.getUser().uidFirebase, "", "")!!
-
+        println(listaPosts)
         val adapter = AnimaisAdapter(listaPosts)
         rec_desaparecidos.adapter = adapter
 
@@ -98,12 +98,8 @@ class AnimaisDesaparecidosFragment : Fragment() {
                         "Por favor, finalize seu cadastro!",
                         Toast.LENGTH_LONG
                     ).show()
-                    //TODO("IMPLEMENTAR CHAMADA PARA MINHA CONTA FRAGMENT")
-/*                   val intent: Intent?
-                    intent = Intent(activity, FRAGMENT_MINHACONTA::class.java)
-                    startActivity(intent)
 
- */
+
                 }
             }
         }

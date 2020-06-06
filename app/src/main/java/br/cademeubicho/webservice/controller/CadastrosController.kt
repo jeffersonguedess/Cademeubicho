@@ -50,6 +50,16 @@ class CadastrosController {
 
     }
 
+
+    fun desativaPost(uidFirebase : String) : Status {
+        var response : Response<Status>
+        response = RetrofitClient.instance.desativarPost( uidFirebase ).execute();
+
+        return returnStatusResponse(response)
+    }
+
+
+
     private fun returnStatusResponse(response : Response<Status>) : Status {
         if (response.isSuccessful()) {
             statusResponse.statusMensagem = response.body()!!.statusMensagem
