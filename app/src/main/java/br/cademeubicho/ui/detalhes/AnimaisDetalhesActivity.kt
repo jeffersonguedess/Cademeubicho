@@ -37,7 +37,7 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
         etrecompensa.setText(post?.recompensa)
 
         if (post?.celularWhatsApp?.length == 0){
-
+            textView.setVisibility(View.GONE);
             btnWhatsApp.setVisibility(View.GONE);
         }
 
