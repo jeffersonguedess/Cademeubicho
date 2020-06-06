@@ -10,6 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btnEditaPost"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:text="Editar Post"
+            app:layout_constraintEnd_toEndOf="@+id/btnWhatsApp"
+            app:layout_constraintStart_toStartOf="@+id/btnWhatsApp"
+            app:layout_constraintTop_toBottomOf="@+id/btnWhatsApp" />
+
         <GridView
             android:id="@+id/gv"
             android:layout_width="match_parent"
@@ -179,13 +189,12 @@
             android:id="@+id/imgMostraLocal"
             android:layout_width="0dp"
             android:layout_height="160dp"
-            android:scaleType="centerCrop"
             android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="@+id/txtLocalPerda"
             app:layout_constraintStart_toStartOf="@+id/txtLocalPerda"
             app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda"
-            tools:background="@mipmap/logo_camera_round"
-             />
+            tools:background="@mipmap/logo_camera_round" />
 
         <TextView
             android:id="@+id/porteAnimal"
@@ -224,14 +233,25 @@
             android:id="@+id/btnWhatsApp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
             android:text="WhatsApp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/txtLocalPerda"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+        <Button
+            android:id="@+id/btnDesativaPost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Desativar Post"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/btnEditaPost"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/btnEditaPost"
+            app:layout_constraintTop_toBottomOf="@+id/btnEditaPost" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
