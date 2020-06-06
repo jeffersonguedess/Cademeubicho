@@ -15,7 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.maps.MapsActivity
-import br.cademeubicho.webservice.Sessao
+import br.cademeubicho.model.Sessao
 import br.cademeubicho.webservice.controller.CadastrosController
 import br.cademeubicho.model.PostCadastro
 import io.reactivex.Single

@@ -1,4 +1,4 @@
-package br.cademeubicho.webservice
+package br.cademeubicho.model
 
 import android.os.StrictMode
 import br.cademeubicho.webservice.controller.CadastrosController

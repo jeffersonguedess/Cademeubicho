@@ -13,10 +13,9 @@ import br.cademeubicho.R
 import br.cademeubicho.ui.cadastroanimal.CadastroAnimalActivity
 import br.cademeubicho.ui.detalhes.AnimaisDetalhesActivity
 import br.cademeubicho.ui.adapter.AnimaisAdapter
-import br.cademeubicho.webservice.Sessao
+import br.cademeubicho.model.Sessao
 import br.cademeubicho.webservice.controller.ConsultasController
 import br.cademeubicho.model.PostConsulta
-import br.cademeubicho.ui.minhaconta.MinhaContaFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*

@@ -8,10 +8,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.model.PostConsulta
+import br.cademeubicho.model.Sessao
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_animais_detalhes.*
-import kotlinx.android.synthetic.main.activity_maps.*
-import java.net.URLEncoder
 
 
 class AnimaisDetalhesActivity : AppCompatActivity() {
@@ -36,7 +35,8 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
         etracaAnimal.setText(post?.racaAnimal)
         etrecompensa.setText(post?.recompensa)
 
-        if (post?.celularWhatsApp?.length == 0){
+        if (post?.celularWhatsApp?.length == 0 ||
+            post?.idFirebaseUsu == Sessao.getUser().uidFirebase){
             textView.setVisibility(View.GONE);
             btnWhatsApp.setVisibility(View.GONE);
         }

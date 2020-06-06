@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.*
 import br.cademeubicho.BaseFragment
 import br.cademeubicho.R
-import br.cademeubicho.webservice.Sessao
+import br.cademeubicho.model.Sessao
 import br.cademeubicho.webservice.controller.CadastrosController
 import br.cademeubicho.model.Usuario
 import kotlinx.android.synthetic.main.fragment_minha_conta.*
