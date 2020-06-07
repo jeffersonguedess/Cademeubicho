@@ -26,7 +26,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         //LEMBRAR DE COLOCAR COM httpS
-        def serverUrl = '\"' + (System.getenv("API_URL") ?: "https://4144ef81f4ae.ngrok.io") + '\"'
+        //https://cade-meu-bicho-ws.herokuapp.com
+        def serverUrl = '\"' + (System.getenv("API_URL") ?: "https://65f54f032d6e.ngrok.io") + '\"'
         buildConfigField "String", "API_URL", serverUrl
 
 1
@@ -59,9 +60,9 @@ dependencies {
     //Bibliotecas CHAT
     implementation 'com.github.GetStream:stream-chat-android:4.0.13'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -123,6 +124,10 @@ dependencies {
     //Chat
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'com.xwray:groupie:2.1.0'
+    implementation "androidx.appcompat:appcompat:1.1.0"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+
 
     //Imagens
     implementation 'com.squareup.picasso:picasso:2.71828'

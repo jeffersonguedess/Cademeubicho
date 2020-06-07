@@ -53,7 +53,7 @@
     <string name="cadastro_animais">Cadastrar</string>
     <string name="select">Selecione Multiplas Imagens</string>
     <string name="selecionar">Selecionar</string>
-
+    <string name="chat">Chat</string>
 
     //mensagens de erro
     <string name="error_localidades">Erro ao Buscar Localidades</string>
@@ -86,4 +86,11 @@
     <string name="activate">Ativado</string>
     <string name="desactive">Desativado</string>
     <string name="estatusPost">Estatus Post</string>
+
+    //Chat
+    <!--<string name="app_name">Messsaga</string>-->
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="registration">Registration</string>
 </resources>
