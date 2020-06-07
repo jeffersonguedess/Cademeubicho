@@ -11,6 +11,7 @@ import br.cademeubicho.R
 import br.cademeubicho.model.PostConsulta
 import br.cademeubicho.model.Sessao
 import br.cademeubicho.webservice.controller.CadastrosController
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_animais_detalhes.*
 
@@ -38,27 +39,37 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
         etrecompensa.setText(post?.recompensa)
 
 
-        /*  RETIRA O BOTAO DE ENTRAR EM CONTATO - CASO O USUARIO LOGADO
-        * SEJA O MESMO USUARIO QUE FEZ O POST*/
-//        if (post?.celularWhatsApp?.length == 0 ||
-//            post?.idFirebaseUsu == Sessao.getUser().uidFirebase){
-//            textView.setVisibility(View.GONE);
-//            //textView.setText("");
-//            btnWhatsApp.setVisibility(View.GONE);
-//        }
+        if (post?.idFirebaseUsu == Sessao.getUser().uidFirebase){
+            /* SE FOR O CARA QUE TA ACESSANDO
+            * "SIMPLESMENTE" BLOQUEIA O CAMPO PARA OS OUTROS CAMPOS
+            * INTERLIGADOS A ELE NAO DESAPARECEREM (EDITAR E DESATIVAR) */
+            textView.setText("")
+            btnWhatsApp.isEnabled = false
+            btnWhatsApp.isClickable = false
+            btnChat.isEnabled = false
+            btnChat.isClickable = false
+        }
+
+        /* SE FOR UM TELEFONE INVALIDO, OU O USUARIO NAO ESTIVER LOGADO,
+        DESAPARECER COM OS BOTOES*/
+        if ( (post?.celularWhatsApp?.length == 0 &&
+            post?.idFirebaseUsu != Sessao.getUser().uidFirebase)
+            ||  FirebaseAuth.getInstance().currentUser == null ){
+            textView.setText("")
+            btnWhatsApp.setVisibility(View.GONE);
+            btnChat.setVisibility(View.GONE);
+        }
 
         /** MOSTRA BOTAO DE ATUALIZAR POST E DE INATIVAR POST,
             * SOMENTE SE USUARIO LOGADO SEJA O  USUARIO QUE FEZ O POST
          * E O POST ESTEJA COM STATUS ATIVO = 'S*/
-
-        if (!( post?.idFirebaseUsu == Sessao.getUser().uidFirebase
+        btnEditaPost.setVisibility(View.GONE);
+        btnDesativaPost.setVisibility(View.GONE);
+        if ( ( post?.idFirebaseUsu == Sessao.getUser().uidFirebase
             && post?.postAtivo == "S"
         )){
-            btnEditaPost.setVisibility(View.GONE);
-            btnDesativaPost.setVisibility(View.GONE);
-
-            // btnEditaPost.setVisibility(View.VISIBLE);
-           // btnDesativaPost.setVisibility(View.VISIBLE);
+            btnEditaPost.setVisibility(View.VISIBLE);
+            btnDesativaPost.setVisibility(View.VISIBLE);
         }
 
 
