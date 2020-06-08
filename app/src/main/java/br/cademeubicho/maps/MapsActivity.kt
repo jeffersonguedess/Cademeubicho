@@ -134,13 +134,13 @@ class MapsActivity :
 
     private fun getLocationBy(markLatLng: LatLng, context: Context) {
         val geocoder = Geocoder(context, Locale.getDefault())
-        val locationAddress = geocoder.getFromLocation(markLatLng.latitude, markLatLng.longitude, 1)
+
         var address : Address
         try {
+            val locationAddress  = geocoder.getFromLocation(markLatLng.latitude, markLatLng.longitude, 1)
             address = locationAddress [0]
         }catch (e : Exception){
             address = Address(Locale.ENGLISH)
-            println("EXCESSSSSSSSSSSSAO NO MAPAAAAAAAAAAAAAAAAA CORRIGIDA")
         }
 
         return getLocationBy(address)

@@ -93,4 +93,9 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="registration">Registration</string>
+    <string name="adicionar_foto">Adicionar Foto</string>
+    <string name="salva_imagens">Salvar Fotos</string>
+    <string name="selecionar_imagens">Selecionar Imagens</string>
+    <string name="imagem_do_animal_desaparecido">Imagem do Animal desaparecido</string>
+    <string name="webview">Webview</string>
 </resources>

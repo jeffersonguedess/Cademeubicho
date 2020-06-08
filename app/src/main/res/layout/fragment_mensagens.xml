@@ -29,23 +29,39 @@
             app:streamShowReadState="true"
             tools:layout_editor_absoluteX="0dp" />
 
-      <!--  <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:isGone="@{!safeUnbox(viewModel.loading)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <ProgressBar
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="16dp"
-            app:isGone="@{!safeUnbox(viewModel.loadingMore)}"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <!--  <ProgressBar
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:isGone="@{!safeUnbox(viewModel.loading)}"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
+
+          <ProgressBar
+              android:layout_width="25dp"
+              android:layout_height="25dp"
+              android:layout_marginBottom="16dp"
+              app:isGone="@{!safeUnbox(viewModel.loadingMore)}"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent" />-->
+
+        <Button
+            android:id="@+id/btnWebview"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/webview"
+            app:layout_constraintBottom_toBottomOf="@+id/channelList"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />-->
+            app:layout_constraintHorizontal_bias="0.485"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.983" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
