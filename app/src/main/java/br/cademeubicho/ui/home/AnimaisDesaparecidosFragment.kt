@@ -32,6 +32,9 @@ class AnimaisDesaparecidosFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        listaPosts = ConsultasController().buscarPosts(Sessao.getUser().uidFirebase, "", "")!!
+
         return inflater.inflate(R.layout.fragment_animais_desaparecidos, container, false)
     }
 
@@ -56,7 +59,6 @@ class AnimaisDesaparecidosFragment : Fragment() {
     override fun onStart() {
         validaLogin()
 
-        listaPosts = ConsultasController().buscarPosts(Sessao.getUser().uidFirebase, "", "")!!
         val adapter = AnimaisAdapter(listaPosts)
         rec_desaparecidos.adapter = adapter
 
