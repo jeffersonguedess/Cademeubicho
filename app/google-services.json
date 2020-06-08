@@ -15,15 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "172778597123-nsb1gtfgj3v5g84rftgj18sf6nhkguf8.apps.googleusercontent.com",
+          "client_id": "172778597123-tg65frgu7e0ait27g3evs8lnngn8tj82.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.cademeubicho",
-            "certificate_hash": "ecd372e6d63554dff7ff6ec24687d383c7153b17"
+            "certificate_hash": "2ef444a87c98dbc311c92dc4221ecea28ebf3d70"
           }
         },
         {
-          "client_id": "172778597123-5vremk5kf700ne2kscvtctf3ejc7kf8m.apps.googleusercontent.com",
+          "client_id": "172778597123-61r0f8arss5r1mums6h5t69651iegg5r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.cademeubicho",

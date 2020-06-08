@@ -1,10 +1,7 @@
 package br.cademeubicho.ui.cadastroanimal
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,15 +12,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.maps.MapsActivity
+import br.cademeubicho.model.PostCadastro
 import br.cademeubicho.model.Sessao
 import br.cademeubicho.webservice.controller.CadastrosController
-import br.cademeubicho.model.PostCadastro
-import io.reactivex.Single
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 const val PICK_IMAGE_MULTIPLE = 1000
@@ -51,6 +47,9 @@ class CadastroAnimalActivity : AppCompatActivity() {
     private lateinit var imagesEncodedList: MutableList<String>
     private var galleryAdapter: GalleryAdapter? = null
 
+
+    private lateinit var minhasImagens : ArrayList<Uri>
+
     var latitude = ""
     var longitude = ""
 
@@ -61,6 +60,11 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
         btn.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
+            minhasImagens = ArrayList<Uri>()
+            imagesEncodedList = ArrayList()
+            imagesEncodedList.clear()
+            minhasImagens.clear()
+
 
             intent.type = "image/*"
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
@@ -77,7 +81,6 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
-
             //  Quando uma imagem é selecionada
             if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == Activity.RESULT_OK
                 && null != data
@@ -87,6 +90,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 val filePathColumn = arrayOf(MediaStore.Images.Media.DATE_ADDED)
                 imagesEncodedList = ArrayList(3)
                 if (data.data != null) {
+                    minhasImagens.add(data.data!!)
 
                     val mImageUri = data.data
 
@@ -102,6 +106,9 @@ class CadastroAnimalActivity : AppCompatActivity() {
                         for (i in 0 until mClipData?.itemCount!!) {
 
                             val item = mClipData.getItemAt(i)
+                            minhasImagens.add(item.uri)
+
+
                             val uri = item?.uri
                             uri?.let { mArrayUri.add(it) }
                             // Pega o cursor
@@ -154,6 +161,26 @@ class CadastroAnimalActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    lateinit var storageReference:StorageReference
+
+    private fun post(imagens: String) {
+        val post = PostCadastro(
+            Sessao.getUser().uidFirebase,
+            spinner_porte_animal.selectedItem.toString(),
+            spinner_tipo_animal.selectedItem.toString(),
+            etNomeAnimal.getText().toString(), etracaAnimal.getText().toString(),
+            editTextNumber.getText().toString(), etcorAnimal.getText().toString(),
+            etrecompensa.getText().toString(), longitude, latitude, imagens
+        )
+        val status = CadastrosController().cadastrarPost(post);
+
+        if (status.retorno == "true") {
+            Toast.makeText(this, "Post cadastrado com sucesso", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(this, status.statusMensagem, Toast.LENGTH_LONG).show()
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         fabMaps.setOnClickListener {
@@ -164,50 +191,56 @@ class CadastroAnimalActivity : AppCompatActivity() {
         alteraSpinnerPorteAnimal()
         btnCadastroAnimais.setOnClickListener {
 
-            val imagens = ArrayList<String>()
+            var linksImagens : String = ""
+            val storage = FirebaseStorage.getInstance("gs://cade-meu-bicho.appspot.com")
+            var controle = 0
+            var cadastro = true
 
-            var ajusteTecnico = "";
-            for (i in imagens){
-                ajusteTecnico += i + "***ROGER_LIMA_GAMBIARRA***"
-            }
-
-            if (!this::imagesEncodedList.isInitialized) {
-                imagesEncodedList = ArrayList()
-            }
-            if (imagesEncodedList.size < 0) {
+            if (minhasImagens.size-1 <= 0) {
                 Toast.makeText(this, "Selecione pelo menos uma foto", Toast.LENGTH_LONG).show()
-            } else {
-                if (
-                    etNomeAnimal.toString().length == 0 ||
+                cadastro = false
+            } /*else if ( etNomeAnimal.toString().length == 0 ||
                     etracaAnimal.toString().length == 0 ||
-                    etcorAnimal.toString().length == 0) {
-                        Toast.makeText(this, "Insira todos os campos!", Toast.LENGTH_LONG).show()
-                    }else if (longitude == "" || latitude == ""){
-                        Toast.makeText(this, "Escolha uma localização!", Toast.LENGTH_LONG).show()
-
-                    }else {
-                    val post = PostCadastro(
-                        Sessao.getUser().uidFirebase,
-                        spinner_porte_animal.selectedItem.toString(),
-                        spinner_tipo_animal.selectedItem.toString(),
-                        etNomeAnimal.getText().toString(), etracaAnimal.getText().toString(),
-                        editTextNumber.getText().toString(), etcorAnimal.getText().toString(),
-                        etrecompensa.getText().toString(), longitude, latitude, ajusteTecnico
-                    )
-                    val status = CadastrosController().cadastrarPost(post);
-
-                    println(status.statusMensagem)
-                    if (status.retorno == "true") {
-                        Toast.makeText(this, "Post cadastrado com sucesso", Toast.LENGTH_LONG)
-                            .show()
-                    } else {
-                        Toast.makeText(this, status.statusMensagem, Toast.LENGTH_LONG).show()
-                    }
-                }
+                    etcorAnimal.toString().length == 0
+            ) {
+                Toast.makeText(this, "Insira todos os campos!", Toast.LENGTH_LONG).show()
+                cadastro = false
+            }*/ else if (longitude == "" || latitude == ""){
+                Toast.makeText(this, "Escolha uma localização!", Toast.LENGTH_LONG).show()
+                cadastro = false
             }
-        }
 
-    }
+            if (cadastro) {
+                for (i in minhasImagens) {
+                    val url = UUID.randomUUID().toString()
+                    storageReference = storage.getReference(url)
+                    println(storageReference)
+                    val uploadTask = storageReference.putFile(i)
+                    val task = uploadTask.continueWithTask { task ->
+                        if (!task.isSuccessful) {
+
+                        }
+                        storageReference.downloadUrl
+                    }.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val downloadUri = task.result
+                            val url = downloadUri!!.toString()
+                            linksImagens += url + "***ROGER_LIMA_GAMBIARRA***"
+                            println("Tamanho Minha Imagem -> " +minhasImagens.size+" <-> Tamanho Controle -> "+controle)
+
+                            if (controle == minhasImagens.size-1) {
+                                println("imagens")
+                                println(linksImagens)
+                                post(linksImagens)
+
+                            } // IF - MINHAS IMAGENS == CONTROLE
+                            controle++;
+                        } // imagem inserida com sucesso
+                    }
+                }  // ENF FOR
+            }
+        } // END BUTTON
+    } // END CLASS
 
     private fun alteraSpinnerPorteAnimal() {
         val spinnerPorteAnimal = findViewById<Spinner>(R.id.spinner_porte_animal)
@@ -246,108 +279,4 @@ class CadastroAnimalActivity : AppCompatActivity() {
         }
 
     }
-
-    /**
-     * Método que verifica se o arquivo esta dentro do tamanho necessario para o envio, caso nao esteja
-     * Ele diminui o arquivo até ficar no tamannho permitido
-     * Com o arquivo do tamanho necessário ele é convertido em base64 e devolvido
-     */
-    fun convertImageFileToBase64(file: File, mContext: Context): Single<String> {
-        return Single.create {
-            if (file.exists() && file.length() > 0) {
-                try {
-                    val fileWithAllowedSize = generateFileWithAllowedSize(file, mContext)
-                    val buffer = ByteArray(fileWithAllowedSize.length().toInt() + 100)
-                    val length = FileInputStream(fileWithAllowedSize).read(buffer)
-                    it.onSuccess(
-                        android.util.Base64.encodeToString(
-                            buffer, 0, length,
-                            android.util.Base64.DEFAULT
-                        )
-                    )
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
-                    it.onError(Exception(ex.message))
-                }
-            } else {
-                it.onError(Exception())
-            }
-        }
-    }
-
-    /**
-     * Método que verifica se a foto esta dentro do tamanho permitido pela requisição, enquanto nao estiver,
-     * ele chama o método para diminuir a qualidade da foto gradativamente, até ficar do tamanho ideal
-     */
-    private fun generateFileWithAllowedSize(file: File, mContext: Context): File {
-        var compressedAnImage: Boolean
-        var finalFile = file
-
-        do {
-            if (getSizeInMbFromFile(finalFile) > SIZE_IN_MB_TO_COMPRESS) {
-                compressedAnImage = true
-                finalFile = compressFile(file, mContext)
-            } else {
-                compressedAnImage = false
-            }
-        } while (compressedAnImage)
-
-        return finalFile
-    }
-
-    /**
-     * Método alterado para diminuir a qualidade da foto em 10%, sem alterar o seu tamanho
-     * Original: https://coderwall.com/p/wzinww/resize-an-image-in-android-to-a-given-width
-     */
-    private fun compressFile(file: File, mContext: Context): File {
-        // we'll start with the original picture already open to a file
-        val b = BitmapFactory.decodeFile(file.absolutePath)
-        // original measurements
-        val origWidth = b.width
-        val origHeight = b.height
-
-        // val destWidth = 600//or the width you need
-
-        // we create an scaled bitmap so it reduces the image, not just trim it
-        val b2 = Bitmap.createScaledBitmap(b, origWidth, origHeight, false)
-        val outStream = ByteArrayOutputStream()
-        // compress to the format you want, JPEG, PNG...
-        // 70 is the 0-100 quality percentage
-        b2.compress(Bitmap.CompressFormat.JPEG, 90, outStream)
-        // generate a new name
-        val lastName = file.name.toString().replace(".jpg", "")
-        val newName = lastName + "2.jpg"
-        // we save the file, at least until we have made use of it
-        val finalFile = File(
-            mContext.filesDir,
-            newName
-        )
-        // if it is of the allowed size saves a new file
-        if (getSizeInMbFromFile(finalFile) <= SIZE_IN_MB_TO_COMPRESS) {
-            finalFile.createNewFile()
-            //write the bytes in file
-            val fo = FileOutputStream(finalFile)
-            fo.write(outStream.toByteArray())
-            // remember close de FileOutput
-            fo.close()
-        }
-        return finalFile
-
-    }
-
-    /**
-     * Método capas de pegar o tamanho do arquivo em mega byte, somando o tamanho aproximado da request (1mb)
-     */
-    private fun getSizeInMbFromFile(file: File): Double {
-        // Get length of file in bytes
-        val fileSizeInBytes = file.length()
-        // Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
-        val fileSizeInKB: Double = (fileSizeInBytes / 1024).toDouble()
-        // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
-        var fileSizeInMB: Double = fileSizeInKB / 1024
-        val approximateSizeOfRequest = 1
-        fileSizeInMB += approximateSizeOfRequest
-        return fileSizeInMB
-    }
-
 }

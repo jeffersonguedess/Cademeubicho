@@ -23,7 +23,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_maps.*
+import java.lang.Exception
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MapsActivity :
@@ -133,8 +135,13 @@ class MapsActivity :
     private fun getLocationBy(markLatLng: LatLng, context: Context) {
         val geocoder = Geocoder(context, Locale.getDefault())
         val locationAddress = geocoder.getFromLocation(markLatLng.latitude, markLatLng.longitude, 1)
-
-        val address = locationAddress[0]
+        var address : Address
+        try {
+            address = locationAddress [0]
+        }catch (e : Exception){
+            address = Address(Locale.ENGLISH)
+            println("EXCESSSSSSSSSSSSAO NO MAPAAAAAAAAAAAAAAAAA CORRIGIDA")
+        }
 
         return getLocationBy(address)
     }
@@ -146,7 +153,11 @@ class MapsActivity :
         }
 
         tvAddress.text = fullAddress
-        getLocationByLatLng(address.latitude, address.longitude)
+        try{
+            getLocationByLatLng(address.latitude, address.longitude)
+        }catch (e : Exception){
+            getLocationByLatLng(-17.797713, -50.934774)
+        }
     }
 
     private fun getLocationByLatLng(latitude: Double, longitude: Double) {

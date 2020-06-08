@@ -46,18 +46,26 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
             textView.setText("")
             btnWhatsApp.isEnabled = false
             btnWhatsApp.isClickable = false
+
             btnChat.isEnabled = false
             btnChat.isClickable = false
+            btnChat.setVisibility(View.GONE);
         }
 
         /* SE FOR UM TELEFONE INVALIDO, OU O USUARIO NAO ESTIVER LOGADO,
         DESAPARECER COM OS BOTOES*/
-        if ( (post?.celularWhatsApp?.length == 0 &&
-            post?.idFirebaseUsu != Sessao.getUser().uidFirebase)
+        if ( post?.idFirebaseUsu != Sessao.getUser().uidFirebase
             ||  FirebaseAuth.getInstance().currentUser == null ){
             textView.setText("")
-            btnWhatsApp.setVisibility(View.GONE);
+            btnWhatsApp.isEnabled = false
+            btnWhatsApp.isClickable = false
+
             btnChat.setVisibility(View.GONE);
+        }
+
+        if (post?.celularWhatsApp?.length == 0){
+            textView.setText("")
+            btnWhatsApp.setVisibility(View.GONE);
         }
 
         /** MOSTRA BOTAO DE ATUALIZAR POST E DE INATIVAR POST,
