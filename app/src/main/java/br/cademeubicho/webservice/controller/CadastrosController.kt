@@ -50,6 +50,23 @@ class CadastrosController {
 
     }
 
+    fun atualizarPost(post : PostCadastro) : Status {
+        var response : Response<Status>
+        response = RetrofitClient.instance.atualizaPost(
+            post.uidFirebase, post.porteAnimal,
+            post.tipoAnimal, post.nomeAnimal,
+            post.racaAnimal, post.idadeAnimal,
+            post.corAnimal, post.recompensa,
+            post.longitude, post.latitude,
+            post.imagens
+        ).execute();
+
+        return returnStatusResponse(response)
+
+    }
+
+
+
 
     fun desativaPost(uidFirebase : String) : Status {
         var response : Response<Status>

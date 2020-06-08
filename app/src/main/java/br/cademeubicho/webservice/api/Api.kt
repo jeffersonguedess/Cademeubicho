@@ -62,6 +62,23 @@ interface Api{
 
 
     @FormUrlEncoded
+    @POST("AtualizarPost")
+    fun atualizaPost(
+        @Field("uidFirebase") uidFirebase:String,
+        @Field("porteAnimal") porteAnimal:String,
+        @Field("tipoAnimal") tipoAnimal:String,
+        @Field("nomeAnimal") nomeAnimal:String,
+        @Field("racaAnimal") racaAnimal:String,
+        @Field("idadeAnimal") idadeAnimal:String,
+        @Field("corAnimal") corAnimal:String,
+        @Field("recompensa") recompensa:String,
+        @Field("longitude") longitude:String,
+        @Field("latitude") latitude:String,
+        @Field("imagens") imagens:String
+    ):Call<Status>
+
+
+    @FormUrlEncoded
     @POST("PostsProximos")
     fun getPosts(
         @Field("uidFirebase") uidFirebase:String,
