@@ -39,56 +39,48 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
         etrecompensa.setText(post?.recompensa)
 
 
-        if (post?.idFirebaseUsu == Sessao.getUser().uidFirebase){
-            /* SE FOR O CARA QUE TA ACESSANDO
-            * "SIMPLESMENTE" BLOQUEIA O CAMPO PARA OS OUTROS CAMPOS
-            * INTERLIGADOS A ELE NAO DESAPARECEREM (EDITAR E DESATIVAR) */
-            textView.setText("")
-            btnWhatsApp.isEnabled = false
-            btnWhatsApp.isClickable = false
+//        if (post?.idFirebaseUsu == Sessao.getUser().uidFirebase){
+//            /* SE FOR O CARA QUE TA ACESSANDO
+//            * "SIMPLESMENTE" BLOQUEIA O CAMPO PARA OS OUTROS CAMPOS
+//            * INTERLIGADOS A ELE NAO DESAPARECEREM (EDITAR E DESATIVAR) */
+//            textView.setText("")
+//            btnWhatsApp.isEnabled = false
+//            btnWhatsApp.isClickable = false
+//
+//            btnChat.isEnabled = false
+//            btnChat.isClickable = false
+//            btnChat.setVisibility(View.GONE);
+//        }
+//
+//        /* SE FOR UM TELEFONE INVALIDO, OU O USUARIO NAO ESTIVER LOGADO,
+//        DESAPARECER COM OS BOTOES*/
+//        if ( post?.idFirebaseUsu != Sessao.getUser().uidFirebase
+//            ||  FirebaseAuth.getInstance().currentUser == null ){
+//            textView.setText("")
+//            btnWhatsApp.isEnabled = false
+//            btnWhatsApp.isClickable = false
+//
+//            btnChat.setVisibility(View.GONE);
+//        }
+//
+//        if (post?.celularWhatsApp?.length == 0){
+//            textView.setText("")
+//            btnWhatsApp.setVisibility(View.GONE);
+//        }
 
-            btnChat.isEnabled = false
-            btnChat.isClickable = false
-            btnChat.setVisibility(View.GONE);
-        }
+//        /** MOSTRA BOTAO DE ATUALIZAR POST E DE INATIVAR POST,
+//            * SOMENTE SE USUARIO LOGADO SEJA O  USUARIO QUE FEZ O POST
+//         * E O POST ESTEJA COM STATUS ATIVO = 'S*/
+//        btnEditaPost.setVisibility(View.GONE);
+//        btnDesativaPost.setVisibility(View.GONE);
+//        if ( ( post?.idFirebaseUsu == Sessao.getUser().uidFirebase
+//            && post?.postAtivo == "S"
+//        )){
+//            btnEditaPost.setVisibility(View.VISIBLE);
+//            btnDesativaPost.setVisibility(View.VISIBLE);
+//        }
+//
 
-        /* SE FOR UM TELEFONE INVALIDO, OU O USUARIO NAO ESTIVER LOGADO,
-        DESAPARECER COM OS BOTOES*/
-        if ( post?.idFirebaseUsu != Sessao.getUser().uidFirebase
-            ||  FirebaseAuth.getInstance().currentUser == null ){
-            textView.setText("")
-            btnWhatsApp.isEnabled = false
-            btnWhatsApp.isClickable = false
-
-            btnChat.setVisibility(View.GONE);
-        }
-
-        if (post?.celularWhatsApp?.length == 0){
-            textView.setText("")
-            btnWhatsApp.setVisibility(View.GONE);
-        }
-
-        /** MOSTRA BOTAO DE ATUALIZAR POST E DE INATIVAR POST,
-            * SOMENTE SE USUARIO LOGADO SEJA O  USUARIO QUE FEZ O POST
-         * E O POST ESTEJA COM STATUS ATIVO = 'S*/
-        btnEditaPost.setVisibility(View.GONE);
-        btnDesativaPost.setVisibility(View.GONE);
-        if ( ( post?.idFirebaseUsu == Sessao.getUser().uidFirebase
-            && post?.postAtivo == "S"
-        )){
-            btnEditaPost.setVisibility(View.VISIBLE);
-            btnDesativaPost.setVisibility(View.VISIBLE);
-        }
-
-
-        btnDesativaPost.setOnClickListener {
-            val status = CadastrosController().desativaPost(Sessao.getUser().uidFirebase);
-            Toast.makeText(this, status.statusMensagem, Toast.LENGTH_LONG).show()
-            if (status.retorno.toLowerCase() == "true"){
-                btnEditaPost.setVisibility(View.GONE);
-                btnDesativaPost.setVisibility(View.GONE);
-            }
-        }
 
         btnWhatsApp.setOnClickListener {
             val packageManager: PackageManager = packageManager
