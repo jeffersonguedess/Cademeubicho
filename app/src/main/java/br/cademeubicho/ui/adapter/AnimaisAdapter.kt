@@ -49,21 +49,7 @@ class AnimaisAdapter(
             holder.idadeAnimal.text = animal.idadeAnimal + " anos"
         }
         holder.corAnimal.text = animal.corAnimal
-        holder.imageView.toString()
-        println(animal.imagens)
-        println(animal.imagens?.get(0))
 
-        val storageReference = FirebaseStorage.getInstance("gs://cade-meu-bicho.appspot.com")
-        var url =
-            "https://firebasestorage.googleapis.com/v0/b/cade-meu-bicho.appspot.com/o/file-20200309-118956-1cqvm6j.jpg?alt=media&token=a895c217-7ac5-4325-baa6-e7e38c73abde"
-        Glide.with(holder.imageView).load(storageReference.getReferenceFromUrl(url))
-            .into(holder.imageView)
-        /*try {
-            //var url = animal.imagens?.get(0)
-
-        } catch (e: Exception) {
-            println(e)
-        }*/
     }
 
 
@@ -72,7 +58,6 @@ class AnimaisAdapter(
         val racaAnimal = itemView.txtracaAnimal
         val idadeAnimal = itemView.txtidadeAnimal
         val corAnimal = itemView.txtcorAnimal
-        val imageView= itemView.ivGallery
 
         init {
             itemView.cardsPost.setOnClickListener {
