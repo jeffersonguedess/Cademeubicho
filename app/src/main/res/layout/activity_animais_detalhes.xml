@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Editar Post"
-            app:layout_constraintEnd_toEndOf="@+id/btnWhatsApp"
             app:layout_constraintStart_toStartOf="@+id/btnWhatsApp"
             app:layout_constraintTop_toBottomOf="@+id/btnWhatsApp" />
 
@@ -270,13 +269,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
             android:text="Desativar Post"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/btnEditaPost"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/btnEditaPost"
-            app:layout_constraintTop_toBottomOf="@+id/btnEditaPost" />
+            app:layout_constraintEnd_toEndOf="@+id/btnWhatsApp"
+            app:layout_constraintTop_toBottomOf="@+id/btnWhatsApp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

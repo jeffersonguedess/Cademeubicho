@@ -164,6 +164,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
     lateinit var storageReference:StorageReference
 
     private fun post(imagens: String) {
+
         val post = PostCadastro(
             Sessao.getUser().uidFirebase,
             spinner_porte_animal.selectedItem.toString(),
@@ -209,15 +210,24 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 Toast.makeText(this, "Escolha uma localização!", Toast.LENGTH_LONG).show()
                 cadastro = false
             }
-
             if (cadastro) {
-                for (i in minhasImagens) {
+                println(minhasImagens.size)
+                for (i in 0 until minhasImagens.size) {
+                    println("valor do interator ->"+i)
+
                     val url = UUID.randomUUID().toString()
+
+
                     storageReference = storage.getReference(url)
-                    println(storageReference)
-                    val uploadTask = storageReference.putFile(i)
+                    val uploadTask = storageReference.putFile(minhasImagens.get(i))
                     val task = uploadTask.continueWithTask { task ->
                         if (!task.isSuccessful) {
+                            if (controle == minhasImagens.size-1) {
+                                println("imagens")
+                                println(linksImagens)
+                                post(linksImagens)
+
+                            } // IF - MINHAS IMAGENS == CONTROLE
 
                         }
                         storageReference.downloadUrl

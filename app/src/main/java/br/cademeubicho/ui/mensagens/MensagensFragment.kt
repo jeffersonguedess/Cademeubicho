@@ -16,5 +16,7 @@ class MensagensFragment : BaseFragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_mensagens, container, false)
         return root
+
     }
+
 }

@@ -55,7 +55,6 @@ class AnimaisDesaparecidosFragment : Fragment() {
         //Toast.makeText(activity, "foi", Toast.LENGTH_SHORT).show()
     }
 
-
     override fun onStart() {
         validaLogin()
 
