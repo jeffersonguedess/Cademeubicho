@@ -17,6 +17,8 @@ import br.cademeubicho.model.Sessao
 import br.cademeubicho.webservice.controller.ConsultasController
 import br.cademeubicho.model.PostConsulta
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
