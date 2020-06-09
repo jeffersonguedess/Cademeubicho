@@ -34,6 +34,13 @@ class MeusBichosPerdidosFragment : BaseFragment() {
         }
         listaPosts = ConsultasController().buscarMeusPosts(uid)!!
 
+        var uid = ""
+        if (FirebaseAuth.getInstance().currentUser != null){
+            uid = FirebaseAuth.getInstance().currentUser!!.uid
+        }
+
+        listaPosts = ConsultasController().buscarMeusPosts(FirebaseAuth.getInstance().currentUser?.uid!!)!!
+
         val adapter = AnimaisAdapter(listaPosts)
         rec_meus_bichos_perdidos.adapter = adapter
 
