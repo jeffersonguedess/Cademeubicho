@@ -255,6 +255,15 @@ class CadastroAnimalActivity : AppCompatActivity() {
     } // END CLASS
 
     private fun alteraCadastra(tipoInteracao: String) {
+        //caso o usuario clique em cadastrar sem selecionar foto
+        // ira crashar, pois a variavel nao foi inicializada
+        if (!::minhasImagens.isInitialized) {
+            minhasImagens = ArrayList<Uri>()
+        }
+        if (!::imagesEncodedList.isInitialized) {
+            minhasImagens = ArrayList()
+        }
+
         var cadastro = true
 
         if (tipoInteracao == "CADASTRAR"){
