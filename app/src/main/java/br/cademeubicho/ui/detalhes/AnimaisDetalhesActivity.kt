@@ -51,14 +51,19 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
             etrecompensa.text = post?.recompensa
         }
 
-        /*  OCULTAR BOTAO DE CONTATO CASO O CARA NAO ESTEJA LOGADO*/
-        if (FirebaseAuth.getInstance().currentUser == null){
+        /*  OCULTAR BOTAO DE CONTATO CASO O CARA NAO ESTEJA LOGADO
+        *   OU SEJA O MESMO USUARIO QUE FEZ O POST
+        * */
+        if (FirebaseAuth.getInstance().currentUser == null
+            || FirebaseAuth.getInstance().currentUser?.uid == post?.idFirebaseUsu
+        ){
             textView.setText("")
             textView2.setText("")
             textView3.setText("")
             btnWhatsApp.visibility = View.GONE
             btnChat.visibility = View.GONE
         }
+
 
 
 

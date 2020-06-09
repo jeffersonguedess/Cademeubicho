@@ -62,6 +62,7 @@ class AnimaisDesaparecidosFragment : Fragment() {
         val adapter = AnimaisAdapter(listaPosts)
         rec_desaparecidos.adapter = adapter
 
+
         adapter.listener = object : AnimaisAdapter.Listener {
             override fun onCardClicked(postConsultas: PostConsulta) {
                 chamaDetalhes(postConsultas)
