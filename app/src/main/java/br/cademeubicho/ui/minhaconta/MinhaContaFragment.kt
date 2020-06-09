@@ -10,6 +10,7 @@ import br.cademeubicho.R
 import br.cademeubicho.model.Sessao
 import br.cademeubicho.webservice.controller.CadastrosController
 import br.cademeubicho.model.Usuario
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_minha_conta.*
 import kotlinx.android.synthetic.main.fragment_minha_conta.view.*
 
@@ -69,7 +70,7 @@ class MinhaContaFragment : BaseFragment() {
                 num_ddd.getText().toString(),
                 tvEmail.text.toString(),
                 seekBar.progress,
-                Sessao.getUser().uidFirebase,
+                FirebaseAuth.getInstance().currentUser?.uid!!,
                 Sessao.getUser().idFacebook
             )
 

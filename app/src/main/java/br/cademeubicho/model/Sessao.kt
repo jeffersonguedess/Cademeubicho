@@ -55,7 +55,7 @@ object Sessao {
             return false
         }
 
-        var responseWS = consulta.buscaUsuario(uid)
+        var responseWS = consulta.buscaUsuario(FirebaseAuth.getInstance().currentUser?.uid!!)
 
         if (responseWS.uidFirebase != "") { //USUARIO CADASTRADO NO WS
             initUser(responseWS)
@@ -63,7 +63,7 @@ object Sessao {
         } else {
             println("USUARIO NÃO ENCONTRADO NO WEBSERVICE. FAZER CADASTRO")
             val user = Usuario(
-                FirebaseAuth.getInstance().currentUser?.displayName.toString(),
+                FirebaseAuth.getInstance().currentUser?. displayName.toString(),
                 "", "",
                 FirebaseAuth.getInstance().currentUser?.email.toString(),
                 0, uid, ""

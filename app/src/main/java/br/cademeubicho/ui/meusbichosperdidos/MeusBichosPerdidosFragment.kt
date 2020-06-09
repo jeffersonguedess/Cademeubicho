@@ -14,6 +14,7 @@ import br.cademeubicho.webservice.controller.ConsultasController
 import br.cademeubicho.model.PostConsulta
 import br.cademeubicho.ui.cadastroanimal.CadastroAnimalActivity
 import br.cademeubicho.ui.detalhes.AnimaisDetalhesActivity.Companion.EXTRA_POST
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_meus_bichos_perdidos.*
 
 class MeusBichosPerdidosFragment : BaseFragment() {
@@ -31,7 +32,7 @@ class MeusBichosPerdidosFragment : BaseFragment() {
 
     override fun onStart() {
 
-        listaPosts = ConsultasController().buscarMeusPosts(Sessao.getUser().uidFirebase)!!
+        listaPosts = ConsultasController().buscarMeusPosts(FirebaseAuth.getInstance().currentUser?.uid!!)!!
 
         val adapter = AnimaisAdapter(listaPosts)
         rec_meus_bichos_perdidos.adapter = adapter

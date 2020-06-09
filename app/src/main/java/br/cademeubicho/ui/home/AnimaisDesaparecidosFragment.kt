@@ -34,7 +34,7 @@ class AnimaisDesaparecidosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        listaPosts = ConsultasController().buscarPosts(Sessao.getUser().uidFirebase, "", "")!!
+        listaPosts = ConsultasController().buscarPosts(FirebaseAuth.getInstance().currentUser?.uid!!, "", "")!!
 
         return inflater.inflate(R.layout.fragment_animais_desaparecidos, container, false)
     }
