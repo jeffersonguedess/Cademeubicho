@@ -249,11 +249,16 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
         btnCadastroAnimais.setOnClickListener {
             alteraCadastra("CADASTRAR")
+            btnCadastroAnimais.isClickable = false
+            btnCadastroAnimais.isEnabled = false
         }
 
 
         btnEditaPost.setOnClickListener {
             alteraCadastra("EDITAR")
+            btnEditaPost.isClickable = false
+            btnEditaPost.isEnabled = false
+
         }
 
     }
