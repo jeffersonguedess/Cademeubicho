@@ -16,12 +16,13 @@ import br.cademeubicho.ui.adapter.AnimaisAdapter
 import br.cademeubicho.model.Sessao
 import br.cademeubicho.webservice.controller.ConsultasController
 import br.cademeubicho.model.PostConsulta
+import br.cademeubicho.ui.cadastroanimal.GalleryAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_cadastro_animal.*
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
-
 
 class AnimaisDesaparecidosFragment : Fragment() {
 

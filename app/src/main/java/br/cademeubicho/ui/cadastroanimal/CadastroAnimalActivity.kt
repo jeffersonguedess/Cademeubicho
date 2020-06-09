@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -14,19 +15,14 @@ import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.maps.MapsActivity
 import br.cademeubicho.model.PostCadastro
+import br.cademeubicho.model.PostConsulta
 import br.cademeubicho.model.Sessao
 import br.cademeubicho.model.Status
 import br.cademeubicho.webservice.controller.CadastrosController
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import kotlinx.android.synthetic.main.activity_animais_detalhes.*
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
-import kotlinx.android.synthetic.main.activity_cadastro_animal.editTextNumber
-import kotlinx.android.synthetic.main.activity_cadastro_animal.etNomeAnimal
-import kotlinx.android.synthetic.main.activity_cadastro_animal.etcorAnimal
-import kotlinx.android.synthetic.main.activity_cadastro_animal.etracaAnimal
-import kotlinx.android.synthetic.main.activity_cadastro_animal.etrecompensa
-import kotlinx.android.synthetic.main.activity_cadastro_animal.gv
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -36,6 +32,10 @@ const val PICK_LTG_LOG = 350
 private const val SIZE_IN_MB_TO_COMPRESS = 3.7
 
 class CadastroAnimalActivity : AppCompatActivity() {
+
+    companion object {
+        const val EXTRA_POST = "EXTRA_POST"
+    }
 
     private val porteAnimal = arrayOf(
         "Pequeno",
@@ -55,16 +55,44 @@ class CadastroAnimalActivity : AppCompatActivity() {
     private lateinit var imageEncoded: String
     private lateinit var imagesEncodedList: MutableList<String>
     private var galleryAdapter: GalleryAdapter? = null
-    private lateinit var minhasImagens : ArrayList<Uri>
+    private lateinit var minhasImagens: ArrayList<Uri>
 
+    private var post: PostConsulta? = null
 
     var latitude = ""
     var longitude = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val root = setContentView(R.layout.activity_cadastro_animal)
+
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
+
+        post = intent.getParcelableExtra(EXTRA_POST)
+
+        if (post != null) {
+
+            btnCadastroAnimais.visibility = View.GONE
+            btnEditaPost.visibility = View.VISIBLE
+            btnDesativaPost.visibility = View.VISIBLE
+
+
+            etNomeAnimal.setText(post?.nomeAnimal)
+            if (post?.idadeAnimal.equals("1")) {
+                etIdadeAnimal.setText(post?.idadeAnimal + " ano")
+            } else {
+                etIdadeAnimal.setText(post?.idadeAnimal + " anos")
+            }
+            etcorAnimal.setText(post?.corAnimal)
+            etRacaAnimal.setText(post?.racaAnimal)
+            etrecompensa.setText(post?.recompensa)
+        } else {
+            btnCadastroAnimais.visibility = View.VISIBLE
+            btnEditaPost.visibility = View.GONE
+            btnDesativaPost.visibility = View.GONE
+        }
 
         btn.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
@@ -170,7 +198,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    lateinit var storageReference:StorageReference
+    lateinit var storageReference: StorageReference
 
     override fun onResume() {
         super.onResume()
@@ -181,13 +209,12 @@ class CadastroAnimalActivity : AppCompatActivity() {
         alteraSpinnerTipoAnimal()
         alteraSpinnerPorteAnimal()
 
-
         btnDesativaPost.setOnClickListener {
             val status = CadastrosController().desativaPost(Sessao.getUser().uidFirebase);
             Toast.makeText(this, status.statusMensagem, Toast.LENGTH_LONG).show()
-            if (status.retorno.toLowerCase() == "true"){
-                btnEditaPost.setVisibility(View.GONE);
-                btnDesativaPost.setVisibility(View.GONE);
+            if (status.retorno == "true") {
+                btnEditaPost.visibility = View.GONE
+                btnDesativaPost.visibility = View.GONE
             }
         }
 
@@ -202,24 +229,22 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
     } // END CLASS
 
-
-
-    private fun alteraCadastra(tipoInteracao : String){
-        var linksImagens : String = ""
+    private fun alteraCadastra(tipoInteracao: String) {
+        var linksImagens: String = ""
         val storage = FirebaseStorage.getInstance("gs://cade-meu-bicho.appspot.com")
         var controle = 0
         var cadastro = true
 
-        if (minhasImagens.size-1 <= 0) {
+        if (minhasImagens.isEmpty()) {
             Toast.makeText(this, "Selecione pelo menos uma foto", Toast.LENGTH_LONG).show()
             cadastro = false
-        }else if ( etNomeAnimal.toString().length == 0 ||
-            etracaAnimal.toString().length == 0 ||
-            etcorAnimal.toString().length == 0
+        } else if (etNomeAnimal.toString().isEmpty() ||
+            etRacaAnimal.toString().isEmpty() ||
+            etcorAnimal.toString().isEmpty()
         ) {
             Toast.makeText(this, "Insira todos os campos!", Toast.LENGTH_LONG).show()
             cadastro = false
-        } else if (longitude == "" || latitude == ""){
+        } else if (longitude == "" || latitude == "") {
             Toast.makeText(this, "Escolha uma localização!", Toast.LENGTH_LONG).show()
             cadastro = false
         }
@@ -229,14 +254,15 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 storageReference = storage.getReference(url)
                 val uploadTask = storageReference.putFile(minhasImagens.get(i))
                 val task = uploadTask.continueWithTask { task ->
-                    if (!task.isSuccessful) {}
+                    if (!task.isSuccessful) {
+                    }
                     storageReference.downloadUrl
                 }.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val downloadUri = task.result
                         val url = downloadUri!!.toString()
-                        linksImagens += url + "***ROGER_LIMA_GAMBIARRA***"
-                        if (controle == minhasImagens.size-1) {
+                        linksImagens += "$url***ROGER_LIMA_GAMBIARRA***"
+                        if (controle == minhasImagens.size - 1) {
 
                             //FAZER O POST QUANDO TODAS AS FOTOS SUBIREM PARA O GOOGLE CLOUD
                             //VARIAVEL CONTROLE == TAMANHO DO ARRAY DE FOTOS
@@ -250,28 +276,40 @@ class CadastroAnimalActivity : AppCompatActivity() {
         }
     }
 
-    private fun post(imagens: String, tipoAlteracao : String) {
+    private fun post(imagens: String, tipoAlteracao: String) {
         val post = PostCadastro(
-            Sessao.getUser().uidFirebase,
+            FirebaseAuth.getInstance().currentUser?.uid.toString(),
             spinner_porte_animal.selectedItem.toString(),
             spinner_tipo_animal.selectedItem.toString(),
-            etNomeAnimal.getText().toString(), etracaAnimal.getText().toString(),
-            editTextNumber.getText().toString(), etcorAnimal.getText().toString(),
-            etrecompensa.getText().toString(), longitude, latitude, imagens
+            etNomeAnimal.text.toString(), etRacaAnimal.text.toString(),
+            etIdadeAnimal.text.toString(), etcorAnimal.text.toString(),
+            etrecompensa.text.toString(), longitude, latitude, imagens
         )
-        val status : Status
+        val status: Status
 
-        if (tipoAlteracao == "CADASTRAR"){
-            status = CadastrosController().cadastrarPost(post);
-        }else{
-            status = CadastrosController().atualizarPost(post);
+        status = if (tipoAlteracao == "CADASTRAR") {
+            CadastrosController().cadastrarPost(post);
+        } else {
+            CadastrosController().atualizarPost(post);
         }
         Toast.makeText(this, status.statusMensagem, Toast.LENGTH_LONG).show()
 
+        if (status.retorno == "true") {
+            finish()
+        }
+
+
     }
 
-
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun alteraSpinnerPorteAnimal() {
         val spinnerPorteAnimal = findViewById<Spinner>(R.id.spinner_porte_animal)
@@ -286,6 +324,11 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 // Apply the adapter to the spinner
                 spinnerPorteAnimal?.adapter = adapter
+
+                if (post != null) {
+                    val spinnerPosition: Int = adapter.getPosition(post?.descricaoPorte?.toLowerCase()?.capitalize())
+                    spinnerPorteAnimal.setSelection(spinnerPosition)
+                }
 
             }
         }
@@ -306,6 +349,10 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 // Apply the adapter to the spinner
                 spinnerTipoAnimal?.adapter = adapter
 
+                if (post != null) {
+                    val spinnerPosition: Int = adapter.getPosition(post?.descricaoTipo?.toLowerCase()?.capitalize())
+                    spinnerTipoAnimal.setSelection(spinnerPosition)
+                }
             }
         }
 

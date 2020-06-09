@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardsPost"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
@@ -10,12 +11,11 @@
     android:clickable="true"
     android:focusable="true"
     app:cardCornerRadius="16dp"
-    app:rippleColor="@color/colorAccent"
-    android:id="@+id/cardsPost">
+    app:rippleColor="@color/colorAccent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="201dp"
+        android:layout_height="wrap_content"
         android:padding="16dp">
 
         <ImageView
@@ -26,12 +26,20 @@
             android:layout_margin="8dp"
             android:layout_marginStart="16dp"
             android:scaleType="centerInside"
-            android:usesCleartextTraffic="true"
             android:src="@mipmap/logo_camera_round"
+            android:usesCleartextTraffic="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.504" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/ivGallery"
+            app:layout_constraintEnd_toEndOf="@+id/ivGallery"
+            app:layout_constraintStart_toStartOf="@+id/ivGallery"
+            app:layout_constraintTop_toTopOf="@+id/ivGallery" />
 
 
         <TextView

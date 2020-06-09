@@ -7,15 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import br.cademeubicho.BaseFragment
 import br.cademeubicho.R
-import br.cademeubicho.maps.MapsActivity
 import br.cademeubicho.ui.adapter.AnimaisAdapter
 import br.cademeubicho.ui.detalhes.AnimaisDetalhesActivity
 import br.cademeubicho.model.Sessao
 import br.cademeubicho.webservice.controller.ConsultasController
 import br.cademeubicho.model.PostConsulta
 import br.cademeubicho.ui.cadastroanimal.CadastroAnimalActivity
-import br.cademeubicho.ui.cadastroanimal.PICK_LTG_LOG
-import kotlinx.android.synthetic.main.activity_animais_detalhes.*
+import br.cademeubicho.ui.detalhes.AnimaisDetalhesActivity.Companion.EXTRA_POST
 import kotlinx.android.synthetic.main.fragment_meus_bichos_perdidos.*
 
 class MeusBichosPerdidosFragment : BaseFragment() {
@@ -27,9 +25,8 @@ class MeusBichosPerdidosFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_meus_bichos_perdidos, container, false)
 
-        return root
+        return inflater.inflate(R.layout.fragment_meus_bichos_perdidos, container, false)
     }
 
     override fun onStart() {
@@ -47,10 +44,9 @@ class MeusBichosPerdidosFragment : BaseFragment() {
         super.onStart()
     }
 
-    //TODO mudar activity
     private fun chamaDetalhes(postConsultas: PostConsulta) {
-        val intent = Intent(context, AnimaisDetalhesActivity::class.java)
-        intent.putExtra(AnimaisDetalhesActivity.EXTRA_POST, postConsultas)
+        val intent = Intent(context, CadastroAnimalActivity::class.java)
+        intent.putExtra(CadastroAnimalActivity.EXTRA_POST, postConsultas)
         startActivity(intent)
     }
 }

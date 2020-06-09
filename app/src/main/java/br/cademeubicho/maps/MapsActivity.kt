@@ -10,6 +10,7 @@ import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
+import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +46,10 @@ class MapsActivity :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
+
         val mapFragment = SupportMapFragment.newInstance()
         mapFragment.getMapAsync(this)
         supportFragmentManager.beginTransaction()
@@ -67,6 +72,8 @@ class MapsActivity :
                 //map?.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 20f))
             }
         }
+
+        setUpMap()
     }
 
     override fun onResume() {
@@ -97,11 +104,8 @@ class MapsActivity :
             btNext.visibility = VISIBLE
         }
 
-        if (map != null) {
-            setUpMap()
 
-            startLocationUpdates()
-        }
+        startLocationUpdates()
 
     }
 
@@ -135,11 +139,12 @@ class MapsActivity :
     private fun getLocationBy(markLatLng: LatLng, context: Context) {
         val geocoder = Geocoder(context, Locale.getDefault())
 
-        var address : Address
+        var address: Address
         try {
-            val locationAddress  = geocoder.getFromLocation(markLatLng.latitude, markLatLng.longitude, 1)
-            address = locationAddress [0]
-        }catch (e : Exception){
+            val locationAddress =
+                geocoder.getFromLocation(markLatLng.latitude, markLatLng.longitude, 1)
+            address = locationAddress[0]
+        } catch (e: Exception) {
             address = Address(Locale.ENGLISH)
         }
 
@@ -153,9 +158,9 @@ class MapsActivity :
         }
 
         tvAddress.text = fullAddress
-        try{
+        try {
             getLocationByLatLng(address.latitude, address.longitude)
-        }catch (e : Exception){
+        } catch (e: Exception) {
             getLocationByLatLng(-17.797713, -50.934774)
         }
     }
@@ -219,7 +224,16 @@ class MapsActivity :
         }
 
         map?.isMyLocationEnabled = false
-        // map!!.mapType = GoogleMap.MAP_TYPE_NORMAL
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

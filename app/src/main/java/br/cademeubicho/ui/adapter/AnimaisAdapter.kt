@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Switch
 import androidx.recyclerview.widget.RecyclerView
 import br.cademeubicho.R
 import br.cademeubicho.model.PostConsulta
-import com.bumptech.glide.Glide
-import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.adapter_animais.view.*
+import java.lang.Exception
 
 
 class AnimaisAdapter(
@@ -50,10 +50,25 @@ class AnimaisAdapter(
         }
         holder.corAnimal.text = animal.corAnimal
 
+        Picasso.get()
+            .load(if (animal.imagens?.isEmpty()!!) null else animal.imagens?.get(0))
+            .error(R.mipmap.logo_camera_round)
+            .into(holder.ivGallery, object : Callback {
+
+                override fun onSuccess() {
+                    holder.progress.visibility = View.GONE
+                }
+
+                override fun onError(e: Exception?) {}
+
+            })
+
     }
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val ivGallery = itemView.ivGallery
+        val progress = itemView.progress
         val nomeAnimal = itemView.txtnomeAnimal
         val racaAnimal = itemView.txtracaAnimal
         val idadeAnimal = itemView.txtidadeAnimal

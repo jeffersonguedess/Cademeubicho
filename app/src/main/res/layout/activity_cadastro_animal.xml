@@ -9,8 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <GridView
             android:id="@+id/gv"
@@ -37,23 +36,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gv" />
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tlDivi"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="371dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etracaAnimal">
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
         <TextView
             android:id="@+id/txtTipoAnimal"
             android:layout_width="wrap_content"
@@ -78,19 +60,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtConfirmacaoReconpensa" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etracaAnimal"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiRacaAnimal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/racaAnimal"
-            android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etcorAnimal" />
+            app:layout_constraintEnd_toEndOf="@+id/tiIdadeAnimal"
+            app:layout_constraintStart_toStartOf="@+id/tiIdadeAnimal"
+            app:layout_constraintTop_toBottomOf="@+id/tiCorAnimal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRacaAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/racaAnimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
             android:id="@+id/spinner_porte_animal"
@@ -110,19 +96,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/spinner_porte_animal" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etNomeAnimal"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiNomeAnimal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:hint="@string/nomeAnimal"
-            android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_porte_animal" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner_porte_animal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNomeAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nomeAnimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnCadastroAnimais"
@@ -133,6 +125,7 @@
             android:layout_marginEnd="140dp"
             android:layout_marginBottom="16dp"
             android:text="@string/cadastro_animais"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,21 +140,25 @@
             android:text="@string/local_perda"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
+            app:layout_constraintTop_toBottomOf="@+id/tiRacaAnimal" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etcorAnimal"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiCorAnimal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/corAnimal"
-            android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+            app:layout_constraintEnd_toEndOf="@+id/tiIdadeAnimal"
+            app:layout_constraintStart_toStartOf="@+id/tiIdadeAnimal"
+            app:layout_constraintTop_toBottomOf="@+id/tiIdadeAnimal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etcorAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/corAnimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabMaps"
@@ -184,7 +181,7 @@
             android:text="@string/permitir_recompensa"
             android:textColor="@color/colorAccent"
             app:layout_constraintStart_toStartOf="@+id/etrecompensa"
-            app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
+            app:layout_constraintTop_toBottomOf="@+id/tiRacaAnimal" />
 
         <TextView
             android:id="@+id/txtPorteAnimal"
@@ -197,17 +194,24 @@
             app:layout_constraintStart_toStartOf="@+id/spinner_porte_animal"
             app:layout_constraintTop_toBottomOf="@+id/btn" />
 
-        <EditText
-            android:id="@+id/editTextNumber"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiIdadeAnimal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:hint="@string/idadeAnimal"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="@+id/etNomeAnimal"
-            app:layout_constraintStart_toStartOf="@+id/etNomeAnimal"
-            app:layout_constraintTop_toBottomOf="@+id/etNomeAnimal" />
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tiNomeAnimal"
+            app:layout_constraintStart_toStartOf="@+id/tiNomeAnimal"
+            app:layout_constraintTop_toBottomOf="@+id/tiNomeAnimal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etIdadeAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/idadeAnimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnDesativaPost"
@@ -216,6 +220,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:text="Desativar Post"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnCadastroAnimais" />
 
@@ -226,9 +231,11 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="Editar Post"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnCadastroAnimais" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.core.widget.NestedScrollView>
 

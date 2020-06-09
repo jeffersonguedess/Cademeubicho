@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:ignore="MissingConstraints">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
 
         <GridView
             android:id="@+id/gv"
@@ -27,124 +26,142 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/gv_item" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tlDivi"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="371dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etracaAnimal" />
-
         <TextView
             android:id="@+id/textTipoAnimal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
             android:text="@string/tipoAnimalCard"
+            android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtConfirmacaoReconpensa"
+            app:layout_constraintStart_toEndOf="@+id/porteAnimal"
             app:layout_constraintTop_toBottomOf="@+id/gv" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etNomeAnimal"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiNomeAnimal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint="@string/nomeAnimal"
-            android:inputType="textEmailAddress"
-            android:longClickable="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewAnimalPorte"
-            tools:text="@string/nomeAnimal" />
+            app:layout_constraintTop_toBottomOf="@+id/txtViewAnimalPorte">
 
-        <TextView
-            android:id="@+id/txtConfirmacaoReconpensa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/permitir_recompensa"
-            android:textColor="@color/colorAccent"
-            app:layout_constraintStart_toStartOf="@+id/etrecompensa"
-            app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNomeAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/nomeAnimal"
+                android:longClickable="false" />
 
-        <EditText
-            android:id="@+id/editTextNumber"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiIdadeAnimal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:clickable="false"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint="@string/idadeAnimal"
-            android:inputType="number"
-            android:longClickable="false"
-            app:layout_constraintEnd_toEndOf="@+id/etNomeAnimal"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/etNomeAnimal"
-            app:layout_constraintTop_toBottomOf="@+id/etNomeAnimal"
-            tools:text="@string/idadeAnimal" />
+            app:layout_constraintEnd_toEndOf="@+id/tiNomeAnimal"
+            app:layout_constraintStart_toStartOf="@+id/tiNomeAnimal"
+            app:layout_constraintTop_toBottomOf="@+id/tiNomeAnimal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etIdadeAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/idadeAnimal"
+                android:longClickable="false" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiCorAnimal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tiIdadeAnimal"
+            app:layout_constraintStart_toStartOf="@+id/tiIdadeAnimal"
+            app:layout_constraintTop_toBottomOf="@+id/tiIdadeAnimal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etcorAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/corAnimal"
+                android:longClickable="false" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiRacaAnimal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tiIdadeAnimal"
+            app:layout_constraintStart_toStartOf="@+id/tiIdadeAnimal"
+            app:layout_constraintTop_toBottomOf="@+id/tiCorAnimal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRacaAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/racaAnimal"
+                android:longClickable="false" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txtConfirmacaoReconpensa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/permitir_recompensa"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textTipoAnimal"
+            app:layout_constraintTop_toTopOf="@+id/textTipoAnimal" />
 
         <TextView
             android:id="@+id/txtLocalPerda"
             android:layout_width="0dp"
-            android:layout_height="19dp"
+            android:layout_height="17dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             android:text="@string/local_perda"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/etrecompensa"
-            app:layout_constraintTop_toBottomOf="@+id/etrecompensa" />
+            app:layout_constraintEnd_toEndOf="@+id/tiRacaAnimal"
+            app:layout_constraintStart_toStartOf="@+id/tiRacaAnimal"
+            app:layout_constraintTop_toBottomOf="@+id/tiRacaAnimal" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etcorAnimal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint="@string/corAnimal"
-            android:inputType="textEmailAddress"
-            android:longClickable="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
-            tools:text="@string/corAnimal" />
-
-        <EditText
+        <TextView
             android:id="@+id/etrecompensa"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:autofillHints="no"
-            android:clickable="false"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint="@string/recompensa"
-            android:inputType="number"
-            android:longClickable="false"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/txtConfirmacaoReconpensa"
+            app:layout_constraintStart_toStartOf="@+id/txtConfirmacaoReconpensa"
             app:layout_constraintTop_toBottomOf="@+id/txtConfirmacaoReconpensa"
             tools:text="@string/recompensa" />
 
@@ -152,13 +169,12 @@
             android:id="@+id/btnChat"
             android:layout_width="269dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:src="@drawable/ic_imagem_chat"
             app:backgroundTint="@color/colorAccent"
             app:fabSize="auto"
-            app:layout_constraintEnd_toEndOf="@+id/textView2"
-            app:layout_constraintHorizontal_bias="0.407"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             app:tint="@android:color/white" />
 
@@ -166,12 +182,12 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="56dp"
-            android:textColor="@color/colorAccent"
+            android:layout_marginTop="8dp"
             android:text="@string/chat"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tlDivi" />
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@+id/btnChat"
+            app:layout_constraintStart_toStartOf="@+id/btnChat"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/textTipo"
@@ -183,44 +199,36 @@
             app:layout_constraintStart_toStartOf="@+id/textTipoAnimal"
             app:layout_constraintTop_toBottomOf="@+id/textTipoAnimal" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etracaAnimal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint="@string/racaAnimal"
-            android:inputType="textEmailAddress"
-            android:longClickable="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etcorAnimal"
-            tools:text="@string/racaAnimal" />
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgMostraLocal"
             android:layout_width="0dp"
             android:layout_height="160dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="@+id/txtLocalPerda"
             app:layout_constraintStart_toStartOf="@+id/txtLocalPerda"
             app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda"
             tools:background="@mipmap/logo_camera_round" />
 
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="@+id/imgMostraLocal"
+            app:layout_constraintStart_toStartOf="@+id/imgMostraLocal"
+            app:layout_constraintTop_toBottomOf="@+id/txtLocalPerda" />
+
         <TextView
             android:id="@+id/porteAnimal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:text="@string/porteAnimalCard"
+            android:textAlignment="center"
             android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toStartOf="@+id/textTipoAnimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gv" />
 
@@ -238,25 +246,39 @@
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="Entrar em Contato"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="@+id/txtLocalPerda"
-            app:layout_constraintStart_toStartOf="@+id/etrecompensa"
+            app:layout_constraintStart_toStartOf="@+id/imgMostraLocal"
             app:layout_constraintTop_toBottomOf="@+id/imgMostraLocal" />
 
-        <Button
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnWhatsApp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="WhatsApp"
-            app:layout_constraintEnd_toEndOf="@+id/txtLocalPerda"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_imagem_whatsapp"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="auto"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:tint="@android:color/white" />
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="WhatsApp"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@+id/btnWhatsApp"
+            app:layout_constraintStart_toStartOf="@+id/btnWhatsApp"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

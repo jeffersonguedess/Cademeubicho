@@ -4,14 +4,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
 import br.cademeubicho.model.PostConsulta
-import br.cademeubicho.model.Sessao
-import br.cademeubicho.webservice.controller.CadastrosController
-import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_animais_detalhes.*
 
@@ -20,23 +18,37 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_POST = "EXTRA_POST"
-
     }
+
     private var post: PostConsulta? = null
+    private var galleryAdapter: DetalhesGalleryAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animais_detalhes)
 
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
+
         post = intent.getParcelableExtra(EXTRA_POST)
 
-        txtViewAnimalPorte.text = post?.descricaoPorte
-        textTipo.text = post?.descricaoTipo
-        etNomeAnimal.setText(post?.nomeAnimal)
-        editTextNumber.setText(post?.idadeAnimal)
-        etcorAnimal.setText(post?.corAnimal)
-        etracaAnimal.setText(post?.racaAnimal)
-        etrecompensa.setText(post?.recompensa)
+        if (post != null) {
+            galleryAdapter = DetalhesGalleryAdapter(this, post?.imagens)
+            gv.adapter = galleryAdapter
+
+            txtViewAnimalPorte.text = post?.descricaoPorte
+            textTipo.text = post?.descricaoTipo
+            etNomeAnimal.setText(post?.nomeAnimal)
+            if (post?.idadeAnimal.equals("1")) {
+                etIdadeAnimal.setText(post?.idadeAnimal + " ano")
+            } else {
+                etIdadeAnimal.setText(post?.idadeAnimal + " anos")
+            }
+            etcorAnimal.setText(post?.corAnimal)
+            etRacaAnimal.setText(post?.racaAnimal)
+            etrecompensa.text = post?.recompensa
+        }
 
 
 //        if (post?.idFirebaseUsu == Sessao.getUser().uidFirebase){
@@ -100,8 +112,16 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
 
         Picasso.get()
             .load(loadMap())
-            .placeholder(R.mipmap.logo_camera_round)
-            .into(imgMostraLocal)
+            .error(R.mipmap.logo_camera_round)
+            .into(imgMostraLocal, object : Callback {
+
+                override fun onSuccess() {
+                    progress.visibility = View.GONE
+                }
+
+                override fun onError(e: java.lang.Exception?) {}
+
+            })
 
         imgMostraLocal.setOnClickListener {
             try {
@@ -125,11 +145,21 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
     private fun loadMap(): String {
         val mapUrlInitial = "https://maps.googleapis.com/maps/api/staticmap?center="
         val latLong: String = post?.latitude + "," + post?.longitude
-        val mapUrlProperties = "&zoom=20&size=800x400"
+        val mapUrlProperties = "&zoom=15&size=400x400"
         val mapUrlMapAPI = "&key=AIzaSyBx-3_O9kRnk67rhwWq7Zf0JAi4eAvQFIc"
         val mapMarker = "&markers=color:red%7C"
 
         return mapUrlInitial + latLong + mapUrlProperties + mapMarker + latLong + mapUrlMapAPI
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

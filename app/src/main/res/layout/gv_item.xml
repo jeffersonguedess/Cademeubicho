@@ -9,9 +9,10 @@
         android:id="@+id/ivGallery"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_margin="8dp"
-        android:scaleType="centerInside"
         android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:padding="16dp"
+        android:scaleType="centerInside"
         tools:src="@mipmap/logo_camera_round" />
 
 </LinearLayout>
