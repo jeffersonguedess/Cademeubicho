@@ -73,21 +73,26 @@ class CadastroAnimalActivity : AppCompatActivity() {
         post = intent.getParcelableExtra(EXTRA_POST)
 
         if (post != null) {
-
+            minhasImagens = ArrayList<Uri>()
             btnCadastroAnimais.visibility = View.GONE
             btnEditaPost.visibility = View.VISIBLE
             btnDesativaPost.visibility = View.VISIBLE
 
 
             etNomeAnimal.setText(post?.nomeAnimal)
-            if (post?.idadeAnimal.equals("1")) {
-                etIdadeAnimal.setText(post?.idadeAnimal + " ano")
-            } else {
-                etIdadeAnimal.setText(post?.idadeAnimal + " anos")
-            }
+
+            etIdadeAnimal.setText(post?.idadeAnimal)
+
             etcorAnimal.setText(post?.corAnimal)
             etRacaAnimal.setText(post?.racaAnimal)
             etrecompensa.setText(post?.recompensa)
+
+            if (post?.postAtivo != "S"){
+                btnEditaPost.visibility = View.GONE
+                btnDesativaPost.visibility = View.GONE
+                btn.visibility = View.GONE
+            }
+
         } else {
             btnCadastroAnimais.visibility = View.VISIBLE
             btnEditaPost.visibility = View.GONE
