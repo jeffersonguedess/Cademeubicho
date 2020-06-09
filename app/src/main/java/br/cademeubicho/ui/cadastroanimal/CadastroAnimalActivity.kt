@@ -299,8 +299,9 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 // O CARA SELECIONOU NOVAS IMAGENS - PERCORRER A LISTA DE IMAGENS E SALVAR NA CLOUD
 
                 for (i in 0 until minhasImagens.size) {
-                    val url = UUID.randomUUID().toString()
-                    storageReference = storage.getReference(url)
+                    val currentTimestamp = System.currentTimeMillis()
+                    val urlReference = UUID.randomUUID().toString()+currentTimestamp+i
+                    storageReference = storage.getReference(urlReference)
                     val uploadTask = storageReference.putFile(minhasImagens.get(i))
                     val task = uploadTask.continueWithTask { task ->
                         if (!task.isSuccessful) {
@@ -309,8 +310,8 @@ class CadastroAnimalActivity : AppCompatActivity() {
                     }.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val downloadUri = task.result
-                            val url = downloadUri!!.toString()
-                            linksImagens += "$url***0ba)img&0@&e4**"
+                            val urlImage = downloadUri!!.toString()
+                            linksImagens += "$urlImage***0ba)img&0@&e4**"
                             if (controle == minhasImagens.size - 1) {
                                 //FAZER O POST QUANDO TODAS AS FOTOS SUBIREM PARA O GOOGLE CLOUD
                                 //VARIAVEL CONTROLE == TAMANHO DO ARRAY DE FOTOS
