@@ -73,7 +73,8 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/num_ddd"
-        app:layout_constraintTop_toBottomOf="@+id/txtTelefone" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTelefone"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/txtDDD"
@@ -110,7 +111,8 @@
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/num_telefone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDDD" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDDD"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/btnSalva"
