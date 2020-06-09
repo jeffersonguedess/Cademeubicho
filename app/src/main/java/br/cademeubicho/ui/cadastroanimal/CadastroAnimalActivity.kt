@@ -18,6 +18,7 @@ import br.cademeubicho.model.PostCadastro
 import br.cademeubicho.model.PostConsulta
 import br.cademeubicho.model.Sessao
 import br.cademeubicho.model.Status
+import br.cademeubicho.ui.detalhes.DetalhesGalleryAdapter
 import br.cademeubicho.webservice.controller.CadastrosController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
@@ -30,6 +31,7 @@ import kotlin.collections.ArrayList
 const val PICK_IMAGE_MULTIPLE = 1000
 const val PICK_LTG_LOG = 350
 private const val SIZE_IN_MB_TO_COMPRESS = 3.7
+private var galleryAdapter: DetalhesGalleryAdapter? = null
 
 class CadastroAnimalActivity : AppCompatActivity() {
 
@@ -73,11 +75,19 @@ class CadastroAnimalActivity : AppCompatActivity() {
         post = intent.getParcelableExtra(EXTRA_POST)
 
         if (post != null) {
+
             minhasImagens = ArrayList<Uri>()
+
+           // galleryAdapter = DetalhesGalleryAdapter(this, post?.imagens)
+          //  gv.adapter = galleryAdapter
+
+
             btnCadastroAnimais.visibility = View.GONE
             btnEditaPost.visibility = View.VISIBLE
             btnDesativaPost.visibility = View.VISIBLE
 
+            latitude = post?.latitude.toString()
+            longitude = post?.longitude.toString()
 
             etNomeAnimal.setText(post?.nomeAnimal)
 
@@ -88,9 +98,19 @@ class CadastroAnimalActivity : AppCompatActivity() {
             etrecompensa.setText(post?.recompensa)
 
             if (post?.postAtivo != "S"){
+                //bloqueia botoes
                 btnEditaPost.visibility = View.GONE
                 btnDesativaPost.visibility = View.GONE
                 btn.visibility = View.GONE
+
+                //bloqueia campos para edicao
+                etNomeAnimal.isEnabled = false
+                etIdadeAnimal.isEnabled = false
+                etcorAnimal.isEnabled = false
+                etRacaAnimal.isEnabled = false
+                etrecompensa.isEnabled = false
+                spinner_porte_animal.isEnabled = false
+                spinner_tipo_animal.isEnabled = false
             }
 
         } else {
@@ -235,15 +255,14 @@ class CadastroAnimalActivity : AppCompatActivity() {
     } // END CLASS
 
     private fun alteraCadastra(tipoInteracao: String) {
-        var linksImagens: String = ""
-        val storage = FirebaseStorage.getInstance("gs://cade-meu-bicho.appspot.com")
-        var controle = 0
         var cadastro = true
 
-        if (minhasImagens.isEmpty()) {
-            Toast.makeText(this, "Selecione pelo menos uma foto", Toast.LENGTH_LONG).show()
-            cadastro = false
-        } else if (etNomeAnimal.toString().isEmpty() ||
+        if (tipoInteracao == "CADASTRAR"){
+            if (minhasImagens.isEmpty()) {
+                Toast.makeText(this, "Selecione pelo menos uma foto", Toast.LENGTH_LONG).show()
+                cadastro = false
+            }
+        }else if (etNomeAnimal.toString().isEmpty() ||
             etRacaAnimal.toString().isEmpty() ||
             etcorAnimal.toString().isEmpty()
         ) {
@@ -254,30 +273,41 @@ class CadastroAnimalActivity : AppCompatActivity() {
             cadastro = false
         }
         if (cadastro) {
-            for (i in 0 until minhasImagens.size) {
-                val url = UUID.randomUUID().toString()
-                storageReference = storage.getReference(url)
-                val uploadTask = storageReference.putFile(minhasImagens.get(i))
-                val task = uploadTask.continueWithTask { task ->
-                    if (!task.isSuccessful) {
-                    }
-                    storageReference.downloadUrl
-                }.addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val downloadUri = task.result
-                        val url = downloadUri!!.toString()
-                        linksImagens += "$url***ROGER_LIMA_GAMBIARRA***"
-                        if (controle == minhasImagens.size - 1) {
+            var linksImagens: String = ""
+            val storage = FirebaseStorage.getInstance("gs://cade-meu-bicho.appspot.com")
+            var controle = 0
 
-                            //FAZER O POST QUANDO TODAS AS FOTOS SUBIREM PARA O GOOGLE CLOUD
-                            //VARIAVEL CONTROLE == TAMANHO DO ARRAY DE FOTOS
-                            post(linksImagens, tipoInteracao)
+            if (tipoInteracao == "EDITAR" && minhasImagens.size == 0){
+                // O CARA TA EDITANDO, MAS NAO ESTA ALTEROU A IMAGEM
+                // PARA PARAMETRO PARA O WEBSERVICE SABER QUE NÃO DEVE REMOVER AS IMAGENS
+                linksImagens = "NAO_ALTERAR_IMAGEM"
+                post(linksImagens, tipoInteracao)
+            }else{
+                // O CARA SELECIONOU NOVAS IMAGENS - PERCORRER A LISTA DE IMAGENS E SALVAR NA CLOUD
 
+                for (i in 0 until minhasImagens.size) {
+                    val url = UUID.randomUUID().toString()
+                    storageReference = storage.getReference(url)
+                    val uploadTask = storageReference.putFile(minhasImagens.get(i))
+                    val task = uploadTask.continueWithTask { task ->
+                        if (!task.isSuccessful) {
                         }
-                        controle++;
-                    } // imagem inserida com sucesso
-                }
-            }  // ENF FOR
+                        storageReference.downloadUrl
+                    }.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val downloadUri = task.result
+                            val url = downloadUri!!.toString()
+                            linksImagens += "$url***0ba)img&0@&e4**"
+                            if (controle == minhasImagens.size - 1) {
+                                //FAZER O POST QUANDO TODAS AS FOTOS SUBIREM PARA O GOOGLE CLOUD
+                                //VARIAVEL CONTROLE == TAMANHO DO ARRAY DE FOTOS
+                                post(linksImagens, tipoInteracao)
+                            }
+                            controle++;
+                        } // imagem inserida com sucesso
+                    }
+                }  // ENF FOR
+            }  // ENF IF
         }
     }
 
