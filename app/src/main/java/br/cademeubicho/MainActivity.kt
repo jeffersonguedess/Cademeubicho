@@ -1,8 +1,10 @@
 package br.cademeubicho
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Base64
 import android.util.Log
 import android.view.Gravity
@@ -16,6 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import br.cademeubicho.ui.tutorial.TutorialActivity
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthProvider
@@ -38,6 +41,10 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (toShowIntro()) {
+            startActivityForResult(Intent(this, TutorialActivity::class.java), 1114)
+        }
 
         setSupportActionBar(toolbar)
 
@@ -111,6 +118,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
     private fun startPhoneNumberVerification(phoneNumber: String) {
         // [START start_phone_auth]
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -118,10 +126,39 @@ class MainActivity : AppCompatActivity() {
             60, // Timeout duration
             TimeUnit.SECONDS, // Unit of timeout
             this, // Activity (for callback binding)
-            callbacks) // OnVerificationStateChangedCallbacks
+            callbacks
+        ) // OnVerificationStateChangedCallbacks
         // [END start_phone_auth]
 
         verificationInProgress = true
+    }
+
+    private fun toShowIntro(): Boolean {
+        val prefs =
+            PreferenceManager.getDefaultSharedPreferences(baseContext)
+        return prefs.getBoolean("isAlreadyShown", true)
+    }
+
+    private fun makeIntroNotRunAgain() {
+        val prefs =
+            PreferenceManager.getDefaultSharedPreferences(baseContext)
+        val previouslyStarted = prefs.getBoolean("isAlreadyShown", false)
+        if (!previouslyStarted) {
+            val edit = prefs.edit()
+            edit.putBoolean("isAlreadyShown", false)
+            edit.apply()
+        }
+    }
+
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1114) {
+            makeIntroNotRunAgain()
+        }
     }
 
 }

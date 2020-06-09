@@ -1,4 +1,4 @@
-package br.cademeubicho.maps
+package br.cademeubicho.ui.maps
 
 import android.Manifest
 import android.app.Activity
@@ -26,7 +26,6 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_maps.*
 import java.lang.Exception
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MapsActivity :
@@ -118,6 +117,11 @@ class MapsActivity :
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
             return
         }
         fusedLocationClient.requestLocationUpdates(
@@ -190,7 +194,11 @@ class MapsActivity :
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
             return
         }
         fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->

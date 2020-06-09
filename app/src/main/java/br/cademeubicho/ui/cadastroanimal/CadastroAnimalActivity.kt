@@ -13,7 +13,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.cademeubicho.R
-import br.cademeubicho.maps.MapsActivity
+import br.cademeubicho.ui.maps.MapsActivity
 import br.cademeubicho.model.PostCadastro
 import br.cademeubicho.model.PostConsulta
 import br.cademeubicho.model.Sessao

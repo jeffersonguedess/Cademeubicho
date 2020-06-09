@@ -33,7 +33,7 @@
         android:label="@string/menu_cadastroanimal" />
     <activity
         android:id="@+id/nav_maps"
-        android:name="br.cademeubicho.maps.MapsActivity"
+        android:name="br.cademeubicho.ui.maps.MapsActivity"
         android:label="@string/menu_maps" />
 
 

@@ -98,4 +98,21 @@
     <string name="selecionar_imagens">Selecionar Imagens</string>
     <string name="imagem_do_animal_desaparecido">Imagem do Animal desaparecido</string>
     <string name="webview">Webview</string>
+
+    <string name="new_user_title">Bem-vindo ao ProcurAnimal!</string>
+    <string name="new_user_description">A solução perfeita para criar e compartilhar seus próprios pacotes de figurinhas do WhatsApp!</string>
+    <string name="permission_title">Precisamos salvar e buscar suas figurinhas!</string>
+    <string name="permission_description">Para que o aplicativo funcione corretamente, conceda as permissões.</string>
+    <string name="grant_permission">Conceder permissão</string>
+    <string name="grant_permission_toast">Você precisa CONCEDER PERMISSÃO para continuar</string>
+    <string name="finish_slide_title">Tudo Pronto!</string>
+    <string name="finish_slide_description">Você pode começar a criar seus pacotes de figurinhas!\n\n
+                        Atenção! As figurinhas criadas ou carregadas pelo Criador de Figurinhas exigem que o aplicativo continue instalado no dispositivo.\n\n
+                        A desinstalação do aplicativo causará a remoção dos pacotes de figurinhas do seu WhatsApp
+                        e serão perdidas se elas não forem compartilhadas.</string>
+    <string name="dialog_permission_button">Permitir</string>
+    <string name="dialog_permission_title">Atenção!</string>
+    <string name="dialog_permission_description">Permita o acesso as fotos, mídia e arquivos do dispositivo é crucial para o aplicativo funcionar. Por favor, conceda a permissão.</string>
+    <string name="dialog_permission_check">Reconhecemos que você negou a permissão de acesso ao armazenamento para este aplicativo. Para que este aplicativo funcione, o acesso ao armazenamento é necessário.</string>
+
 </resources>
