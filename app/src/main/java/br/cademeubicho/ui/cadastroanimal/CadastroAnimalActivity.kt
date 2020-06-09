@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -249,15 +250,11 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
         btnCadastroAnimais.setOnClickListener {
             alteraCadastra("CADASTRAR")
-            btnCadastroAnimais.isClickable = false
-            btnCadastroAnimais.isEnabled = false
         }
 
 
         btnEditaPost.setOnClickListener {
             alteraCadastra("EDITAR")
-            btnEditaPost.isClickable = false
-            btnEditaPost.isEnabled = false
 
         }
 
@@ -304,8 +301,8 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 // O CARA SELECIONOU NOVAS IMAGENS - PERCORRER A LISTA DE IMAGENS E SALVAR NA CLOUD
 
                 for (i in 0 until minhasImagens.size) {
-                    val currentTimestamp = System.currentTimeMillis()
-                    val urlReference = UUID.randomUUID().toString()+currentTimestamp+i
+                    val currentTimestamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+                    val urlReference = UUID.randomUUID().toString()+currentTimestamp+"_"+i
                     storageReference = storage.getReference(urlReference)
                     val uploadTask = storageReference.putFile(minhasImagens.get(i))
                     val task = uploadTask.continueWithTask { task ->
