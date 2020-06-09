@@ -1,8 +1,5 @@
 package br.cademeubicho.model
 
-import com.google.gson.annotations.SerializedName
-
-
 data class Usuario (
     var nomeUsuario: String,
     var numeroCelular: String,

@@ -3,8 +3,8 @@ package br.cademeubicho.model
 import android.os.StrictMode
 import br.cademeubicho.webservice.controller.CadastrosController
 import br.cademeubicho.webservice.controller.ConsultasController
-import br.cademeubicho.model.Usuario
-import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationSettingsRequest
 import com.google.firebase.auth.FirebaseAuth
 
 object Sessao {
@@ -14,21 +14,13 @@ object Sessao {
         "", "", 0, "", ""
     )
 
-    private lateinit var latitude: String
-    private lateinit var longitude: String
-
     fun initUser(user: Usuario?) {
-        println("initUser")
-        println(user)
+
         if (user != null) {
             userSessao = user
         }
 
         println(createLocationRequest().toString());
-
-//    latitude = data.extras?.get("latitude").toString()
-//      longitude = data.extras?.get("longitude").toString()
-
 
     }
 
@@ -51,7 +43,6 @@ object Sessao {
 
 
         if (uid == "") {
-            println("USUARIO SEM UID - NÃO AUTENTICADO")
             return false
         }
 
@@ -61,26 +52,20 @@ object Sessao {
             initUser(responseWS)
             return true
         } else {
-            println("USUARIO NÃO ENCONTRADO NO WEBSERVICE. FAZER CADASTRO")
             val user = Usuario(
-                FirebaseAuth.getInstance().currentUser?. displayName.toString(),
+                FirebaseAuth.getInstance().currentUser?.displayName.toString(),
                 "", "",
                 FirebaseAuth.getInstance().currentUser?.email.toString(),
                 0, uid, ""
             )
 
             val statusCadastro = cadastro.cadastroUsuario(user)
-
             if (statusCadastro.retorno.toLowerCase() == "true") {
-                println("USUARIO CADASTRADO COM SUSCESSO NO WEBSERVICE")
-
                 responseWS = consulta.buscaUsuario(uid)
                 initUser(responseWS)
                 return true
 
             } else {
-                println("ACORREU ALGUM ERRO AO CADASTRAR NO WS")
-                println(statusCadastro)
                 return false
             }
         }

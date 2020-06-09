@@ -30,7 +30,6 @@ import kotlin.collections.ArrayList
 
 const val PICK_IMAGE_MULTIPLE = 1000
 const val PICK_LTG_LOG = 350
-private const val SIZE_IN_MB_TO_COMPRESS = 3.7
 private var galleryAdapter: DetalhesGalleryAdapter? = null
 
 class CadastroAnimalActivity : AppCompatActivity() {
@@ -252,7 +251,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
             alteraCadastra("EDITAR")
         }
 
-    } // END CLASS
+    }
 
     private fun alteraCadastra(tipoInteracao: String) {
         //caso o usuario clique em cadastrar sem selecionar foto
@@ -315,8 +314,8 @@ class CadastroAnimalActivity : AppCompatActivity() {
                             controle++;
                         } // imagem inserida com sucesso
                     }
-                }  // ENF FOR
-            }  // ENF IF
+                }
+            }
         }
     }
 
@@ -388,9 +387,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 R.layout.support_simple_spinner_dropdown_item,
                 tipoAnimal
             ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
                 spinnerTipoAnimal?.adapter = adapter
 
                 if (post != null) {

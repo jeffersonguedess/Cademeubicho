@@ -13,7 +13,4 @@ data class PostCadastro (
     var longitude: String,
     var latitude: String,
     var imagens : String
-){
-
-
-}
+)

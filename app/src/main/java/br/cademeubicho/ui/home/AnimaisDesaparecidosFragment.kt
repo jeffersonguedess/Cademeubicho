@@ -1,7 +1,6 @@
 package br.cademeubicho.ui.home
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,18 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.cademeubicho.LoginActivity
 import br.cademeubicho.R
+import br.cademeubicho.model.PostConsulta
+import br.cademeubicho.model.Sessao
+import br.cademeubicho.ui.adapter.AnimaisAdapter
 import br.cademeubicho.ui.cadastroanimal.CadastroAnimalActivity
 import br.cademeubicho.ui.detalhes.AnimaisDetalhesActivity
-import br.cademeubicho.ui.adapter.AnimaisAdapter
-import br.cademeubicho.model.Sessao
 import br.cademeubicho.webservice.controller.ConsultasController
-import br.cademeubicho.model.PostConsulta
-import br.cademeubicho.ui.cadastroanimal.GalleryAdapter
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_cadastro_animal.*
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
 class AnimaisDesaparecidosFragment : Fragment() {
@@ -34,7 +28,11 @@ class AnimaisDesaparecidosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        listaPosts = ConsultasController().buscarPosts(FirebaseAuth.getInstance().currentUser?.uid!!, "", "")!!
+        listaPosts = ConsultasController().buscarPosts(
+            FirebaseAuth.getInstance().currentUser?.uid!!,
+            "",
+            ""
+        )!!
 
         return inflater.inflate(R.layout.fragment_animais_desaparecidos, container, false)
     }
@@ -53,7 +51,6 @@ class AnimaisDesaparecidosFragment : Fragment() {
             }
             startActivity(intent)
         }
-        //Toast.makeText(activity, "foi", Toast.LENGTH_SHORT).show()
     }
 
     override fun onStart() {
@@ -61,7 +58,6 @@ class AnimaisDesaparecidosFragment : Fragment() {
 
         val adapter = AnimaisAdapter(listaPosts)
         rec_desaparecidos.adapter = adapter
-
 
         adapter.listener = object : AnimaisAdapter.Listener {
             override fun onCardClicked(postConsultas: PostConsulta) {
@@ -98,8 +94,6 @@ class AnimaisDesaparecidosFragment : Fragment() {
                         "Por favor, finalize seu cadastro!",
                         Toast.LENGTH_LONG
                     ).show()
-
-
                 }
             }
         }

@@ -1,6 +1,5 @@
 package br.cademeubicho.webservice.api
 
-import android.os.StrictMode
 import br.cademeubicho.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -22,7 +21,6 @@ object RetrofitClient {
         val retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.API_URL)
             .addConverterFactory(GsonConverterFactory.create())
-//           .client(okHttpClient)
             .build()
         retrofit.create(Api::class.java)
     }

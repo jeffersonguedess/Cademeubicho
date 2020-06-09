@@ -64,11 +64,6 @@ class MapsActivity :
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
-/*
-                val location = locationResult.lastLocation
-*/
-                /*val currentLatLng = LatLng(location.latitude, location.longitude)*/
-                //map?.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 20f))
             }
         }
 
@@ -82,13 +77,6 @@ class MapsActivity :
             getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val enabled: Boolean = service.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
-        // check if enabled and if not send user to the GSP settings
-        // Better solution would be to display a dialog and suggesting to
-        // go to the settings
-
-        // check if enabled and if not send user to the GSP settings
-        // Better solution would be to display a dialog and suggesting to
-        // go to the settings
         if (!enabled) {
             val mySnackbar = Snackbar.make(rootView, "GPS destivado", Snackbar.LENGTH_INDEFINITE)
             mySnackbar.setAction(R.string.activate) {
@@ -119,7 +107,7 @@ class MapsActivity :
         ) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
             return
@@ -143,13 +131,13 @@ class MapsActivity :
     private fun getLocationBy(markLatLng: LatLng, context: Context) {
         val geocoder = Geocoder(context, Locale.getDefault())
 
-        var address: Address
-        try {
+        val address: Address
+        address = try {
             val locationAddress =
                 geocoder.getFromLocation(markLatLng.latitude, markLatLng.longitude, 1)
-            address = locationAddress[0]
+            locationAddress[0]
         } catch (e: Exception) {
-            address = Address(Locale.ENGLISH)
+            Address(Locale.ENGLISH)
         }
 
         return getLocationBy(address)
@@ -196,7 +184,7 @@ class MapsActivity :
         ) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
             return
@@ -220,12 +208,12 @@ class MapsActivity :
     private fun setUpMap() {
         if (ActivityCompat.checkSelfPermission(
                 this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
             return

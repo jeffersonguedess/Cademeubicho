@@ -1,16 +1,15 @@
 package br.cademeubicho.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import br.cademeubicho.R
 import br.cademeubicho.model.PostConsulta
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.adapter_animais.view.*
-import java.lang.Exception
 
 
 class AnimaisAdapter(
@@ -37,6 +36,7 @@ class AnimaisAdapter(
 
     override fun getItemCount(): Int = animaisDesaparecidos.size
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val animal = animaisDesaparecidos[position]
 

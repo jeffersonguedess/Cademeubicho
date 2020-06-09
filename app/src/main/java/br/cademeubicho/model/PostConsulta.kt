@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class PostConsulta (
-    var idUsuario: Integer?,
+    var idUsuario: Int?,
     var idFirebaseUsu : String?,
     var nomeAnimal : String?,
     var descricaoTipo : String?,

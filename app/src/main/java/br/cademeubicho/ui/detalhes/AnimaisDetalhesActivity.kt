@@ -1,5 +1,6 @@
 package br.cademeubicho.ui.detalhes
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -24,6 +25,7 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
     private var post: PostConsulta? = null
     private var galleryAdapter: DetalhesGalleryAdapter? = null
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animais_detalhes)
@@ -57,9 +59,9 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
         if (FirebaseAuth.getInstance().currentUser == null
             || FirebaseAuth.getInstance().currentUser?.uid == post?.idFirebaseUsu
         ){
-            textView.setText("")
-            textView2.setText("")
-            textView3.setText("")
+            textView.text = ""
+            textView2.text = ""
+            textView3.text = ""
             btnWhatsApp.visibility = View.GONE
             btnChat.visibility = View.GONE
         }
@@ -70,7 +72,7 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
         /*OCULTAR O BOTAO DO WHATSAPP CASO NAO TENHA VINDO UM NUMERO VALIDO*/
 
         if (post?.celularWhatsApp == ""){
-            textView3.setText("")
+            textView3.text = ""
             btnWhatsApp.visibility = View.GONE
         }
 

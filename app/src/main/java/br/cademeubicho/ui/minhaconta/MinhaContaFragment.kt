@@ -1,5 +1,6 @@
 package br.cademeubicho.ui.minhaconta
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import br.cademeubicho.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_minha_conta.*
 import kotlinx.android.synthetic.main.fragment_minha_conta.view.*
+import java.util.*
 
 
 class MinhaContaFragment : BaseFragment() {
@@ -34,17 +36,19 @@ class MinhaContaFragment : BaseFragment() {
 
         view.tvNome.text =  Sessao.getUser().nomeUsuario
         view.tvEmail.text = Sessao.getUser().emailUsuario
+
        if (Sessao.getUser().dddCelular.isNotEmpty()) {
            view.num_ddd.setText(Sessao.getUser().dddCelular)
            view.num_telefone.setText(Sessao.getUser().numeroCelular)
         }
-        view.result.setText(Sessao.getUser().distanciaFeed.toString())
-        view.seekBar.setProgress(Sessao.getUser().distanciaFeed)
+        view.result.text = Sessao.getUser().distanciaFeed.toString()
+        view.seekBar.progress = Sessao.getUser().distanciaFeed
     }
 
     override fun onResume() {
         super.onResume()
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            @SuppressLint("SetTextI18n")
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 result.text = " $progress KM"
             }
@@ -66,8 +70,8 @@ class MinhaContaFragment : BaseFragment() {
 
             val usuario = Usuario(
                 tvNome.text as String,
-                num_telefone.getText().toString(),
-                num_ddd.getText().toString(),
+                num_telefone.text.toString(),
+                num_ddd.text.toString(),
                 tvEmail.text.toString(),
                 seekBar.progress,
                 FirebaseAuth.getInstance().currentUser?.uid!!,
@@ -78,9 +82,9 @@ class MinhaContaFragment : BaseFragment() {
 
             Toast.makeText(activity, response.statusMensagem, Toast.LENGTH_LONG).show()
 
-            if (response.retorno.toLowerCase() == "true"){
+            if (response.retorno.toLowerCase(Locale.ROOT) == "true"){
 
-                var uid = Sessao.getUser().uidFirebase
+                val uid = Sessao.getUser().uidFirebase
                 Sessao.loadSessao(uid)
                 alteraDadosTela(view )
                 //recarrega a sessao com os dados atuais que acabaram de ser cadastrados

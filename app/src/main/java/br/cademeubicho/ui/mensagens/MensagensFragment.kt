@@ -14,8 +14,7 @@ class MensagensFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_mensagens, container, false)
-        return root
+        return inflater.inflate(R.layout.fragment_mensagens, container, false)
 
     }
 
