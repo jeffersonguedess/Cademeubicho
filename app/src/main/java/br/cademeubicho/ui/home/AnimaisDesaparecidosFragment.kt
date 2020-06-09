@@ -27,9 +27,12 @@ class AnimaisDesaparecidosFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        var uid = ""
+        if (FirebaseAuth.getInstance().currentUser != null){
+            uid = FirebaseAuth.getInstance().currentUser!!.uid
+        }
         listaPosts = ConsultasController().buscarPosts(
-            FirebaseAuth.getInstance().currentUser?.uid!!,
+            uid,
             "",
             ""
         )!!

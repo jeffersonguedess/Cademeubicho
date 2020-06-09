@@ -66,6 +66,10 @@ class MinhaContaFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnSalva.setOnClickListener {
+            var uid = ""
+            if (FirebaseAuth.getInstance().currentUser != null){
+                uid = FirebaseAuth.getInstance().currentUser!!.uid
+            }
 
 
             val usuario = Usuario(
@@ -74,9 +78,10 @@ class MinhaContaFragment : BaseFragment() {
                 num_ddd.text.toString(),
                 tvEmail.text.toString(),
                 seekBar.progress,
-                FirebaseAuth.getInstance().currentUser?.uid!!,
+                uid,
                 Sessao.getUser().idFacebook
             )
+
 
            val response = CadastrosController().atualizaUsuario(usuario)
 

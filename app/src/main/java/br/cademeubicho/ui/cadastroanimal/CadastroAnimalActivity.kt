@@ -234,7 +234,12 @@ class CadastroAnimalActivity : AppCompatActivity() {
         alteraSpinnerPorteAnimal()
 
         btnDesativaPost.setOnClickListener {
-            val status = CadastrosController().desativaPost(FirebaseAuth.getInstance().currentUser?.uid!!);
+            var uid = ""
+            if (FirebaseAuth.getInstance().currentUser != null){
+                uid = FirebaseAuth.getInstance().currentUser!!.uid
+            }
+
+            val status = CadastrosController().desativaPost(uid);
             Toast.makeText(this, status.statusMensagem, Toast.LENGTH_LONG).show()
             if (status.retorno == "true") {
                 btnEditaPost.visibility = View.GONE

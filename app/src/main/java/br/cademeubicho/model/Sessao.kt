@@ -45,8 +45,12 @@ object Sessao {
         if (uid == "") {
             return false
         }
+        var uidUser = ""
+        if (FirebaseAuth.getInstance().currentUser != null){
+            uidUser = FirebaseAuth.getInstance().currentUser!!.uid
+        }
 
-        var responseWS = consulta.buscaUsuario(FirebaseAuth.getInstance().currentUser?.uid!!)
+        var responseWS = consulta.buscaUsuario(uidUser)
 
         if (responseWS.uidFirebase != "") { //USUARIO CADASTRADO NO WS
             initUser(responseWS)

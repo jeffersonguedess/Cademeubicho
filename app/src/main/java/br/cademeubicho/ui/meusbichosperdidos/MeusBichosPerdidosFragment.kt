@@ -28,8 +28,11 @@ class MeusBichosPerdidosFragment : BaseFragment() {
     }
 
     override fun onStart() {
-
-        listaPosts = ConsultasController().buscarMeusPosts(FirebaseAuth.getInstance().currentUser?.uid!!)!!
+        var uid = ""
+        if (FirebaseAuth.getInstance().currentUser != null){
+            uid = FirebaseAuth.getInstance().currentUser!!.uid
+        }
+        listaPosts = ConsultasController().buscarMeusPosts(uid)!!
 
         val adapter = AnimaisAdapter(listaPosts)
         rec_meus_bichos_perdidos.adapter = adapter

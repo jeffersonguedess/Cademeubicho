@@ -46,7 +46,13 @@ class LoginActivity : AppCompatActivity() {
 
             when (resultCode) {
                 Activity.RESULT_OK -> {
-                    val r = Sessao.loadSessao(FirebaseAuth.getInstance().currentUser?.uid!!)
+                    var uid = ""
+                    if (FirebaseAuth.getInstance().currentUser != null){
+                        uid = FirebaseAuth.getInstance().currentUser!!.uid
+                    }
+
+
+                    val r = Sessao.loadSessao(uid)
                     if (r) {
                         Toast.makeText(
                             this,
