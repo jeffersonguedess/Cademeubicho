@@ -26,15 +26,18 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/gv_item" />
 
-        <Button
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn"
-            android:layout_width="297dp"
-            android:layout_height="62dp"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/select"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gv" />
+            android:src="@drawable/imagem_adiciona_foo"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="auto"
+            app:layout_constraintEnd_toEndOf="@+id/txtAdicionaFoto"
+            app:layout_constraintStart_toStartOf="@+id/txtAdicionaFoto"
+            app:layout_constraintTop_toBottomOf="@+id/txtAdicionaFoto"
+            app:tint="@android:color/white" />
 
         <TextView
             android:id="@+id/txtTipoAnimal"
@@ -230,10 +233,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="Editar Post"
+            android:text="Alterar dados Post"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnCadastroAnimais" />
+
+        <TextView
+            android:id="@+id/txtAdicionaFoto"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/adicionar_foto"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
