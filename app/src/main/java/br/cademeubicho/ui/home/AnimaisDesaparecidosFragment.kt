@@ -95,7 +95,6 @@ class AnimaisDesaparecidosFragment : Fragment(), SwipeRefreshLayout.OnRefreshLis
     }
 
     private fun validaLogin() {
-        println("VALIDA LOGIN")
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null && Sessao.getUser().uidFirebase == "") {
             //CARA ENTÁ LOGADO (NÃO TEM COMO SABER SE ELE

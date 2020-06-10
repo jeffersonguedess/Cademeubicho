@@ -20,8 +20,6 @@ object Sessao {
             userSessao = user
         }
 
-        println(createLocationRequest().toString());
-
     }
 
     fun getUser(): Usuario {
@@ -74,17 +72,4 @@ object Sessao {
             }
         }
     }
-
-    private fun createLocationRequest(): LocationSettingsRequest.Builder? {
-        val locationRequest = LocationRequest.create()?.apply {
-            interval = 10000
-            fastestInterval = 10000
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-        return locationRequest?.let {
-            LocationSettingsRequest.Builder()
-                .addLocationRequest(it)
-        }
-    }
-
 }

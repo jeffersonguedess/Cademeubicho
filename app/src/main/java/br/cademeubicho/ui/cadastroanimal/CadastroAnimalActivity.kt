@@ -226,7 +226,6 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 }
             }
        } catch (e: Exception) {
-            println(e)
             Toast.makeText(this, "Algo deu errado", Toast.LENGTH_LONG)
                 .show()
         }
@@ -332,8 +331,11 @@ class CadastroAnimalActivity : AppCompatActivity() {
                     val urlReference = UUID.randomUUID().toString()+currentTimestamp+"_"+i
                     storageReference = storage.getReference(urlReference)
                     val uploadTask = storageReference.putFile(minhasImagens.get(i))
+                    Thread.sleep(500)
+
                     val task = uploadTask.continueWithTask { task ->
                         if (!task.isSuccessful) {
+
                         }
                         storageReference.downloadUrl
                     }.addOnCompleteListener { task ->
