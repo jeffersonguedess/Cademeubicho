@@ -28,25 +28,19 @@ class MeusBichosPerdidosFragment : BaseFragment() {
     }
 
     override fun onStart() {
-        var uid = ""
-        if (FirebaseAuth.getInstance().currentUser != null){
+
+        val uid: String
+        if (FirebaseAuth.getInstance().currentUser != null) {
             uid = FirebaseAuth.getInstance().currentUser!!.uid
-        }
-        listaPosts = ConsultasController().buscarMeusPosts(uid)!!
+            listaPosts = ConsultasController().buscarMeusPosts(uid)!!
 
-        var uid = ""
-        if (FirebaseAuth.getInstance().currentUser != null){
-            uid = FirebaseAuth.getInstance().currentUser!!.uid
-        }
+            val adapter = AnimaisAdapter(listaPosts)
+            rec_meus_bichos_perdidos.adapter = adapter
 
-        listaPosts = ConsultasController().buscarMeusPosts(FirebaseAuth.getInstance().currentUser?.uid!!)!!
-
-        val adapter = AnimaisAdapter(listaPosts)
-        rec_meus_bichos_perdidos.adapter = adapter
-
-        adapter.listener = object : AnimaisAdapter.Listener {
-            override fun onCardClicked(postConsultas: PostConsulta) {
-                chamaDetalhes(postConsultas)
+            adapter.listener = object : AnimaisAdapter.Listener {
+                override fun onCardClicked(postConsultas: PostConsulta) {
+                    chamaDetalhes(postConsultas)
+                }
             }
         }
         super.onStart()

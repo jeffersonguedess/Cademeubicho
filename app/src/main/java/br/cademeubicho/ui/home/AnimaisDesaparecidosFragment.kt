@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import br.cademeubicho.LoginActivity
 import br.cademeubicho.R
 import br.cademeubicho.model.PostConsulta
@@ -18,9 +19,9 @@ import br.cademeubicho.webservice.controller.ConsultasController
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_animais_desaparecidos.*
 
-class AnimaisDesaparecidosFragment : Fragment() {
+class AnimaisDesaparecidosFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
-    private lateinit var listaPosts: List<PostConsulta>
+    private var listaPosts = listOf<PostConsulta>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,14 +29,26 @@ class AnimaisDesaparecidosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        loadRecyclerViewData()
+
+        return inflater.inflate(R.layout.fragment_animais_desaparecidos, container, false)
+    }
+
+    private fun loadRecyclerViewData() {
         var uid = ""
-        if (FirebaseAuth.getInstance().currentUser != null){
+        if (FirebaseAuth.getInstance().currentUser != null) {
             uid = FirebaseAuth.getInstance().currentUser!!.uid
         }
 
-        listaPosts = ConsultasController().buscarPosts(uid, "","")!!
+        listaPosts = ConsultasController().buscarPosts(
+            uid,
+            "",
+            ""
+        )!!
 
-        return inflater.inflate(R.layout.fragment_animais_desaparecidos, container, false)
+        if (swipeContainer != null) {
+            swipeContainer.isRefreshing = false
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +67,7 @@ class AnimaisDesaparecidosFragment : Fragment() {
         }
     }
 
-    override fun onStart() {
+    override fun onResume() {
         validaLogin()
 
         val adapter = AnimaisAdapter(listaPosts)
@@ -66,7 +79,13 @@ class AnimaisDesaparecidosFragment : Fragment() {
             }
         }
 
-        super.onStart()
+        swipeContainer.setOnRefreshListener(this)
+        swipeContainer.setColorSchemeResources(
+            R.color.colorPrimary,
+            R.color.colorAccent
+        )
+
+        super.onResume()
     }
 
     private fun chamaDetalhes(postConsultas: PostConsulta) {
@@ -98,6 +117,14 @@ class AnimaisDesaparecidosFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onRefresh() {
+        if (swipeContainer != null) {
+            swipeContainer.isRefreshing = true
+        }
+
+        loadRecyclerViewData()
     }
 
 
