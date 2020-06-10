@@ -233,14 +233,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="Alterar dados Post"
+            android:text="Alterar"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnCadastroAnimais" />
 
         <TextView
             android:id="@+id/txtAdicionaFoto"
-            android:layout_width="94dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/adicionar_foto"
