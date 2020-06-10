@@ -267,7 +267,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
             minhasImagens = ArrayList<Uri>()
         }
         if (!::imagesEncodedList.isInitialized) {
-            minhasImagens = ArrayList()
+            imagesEncodedList = ArrayList(3)
         }
 
         var cadastro = true
