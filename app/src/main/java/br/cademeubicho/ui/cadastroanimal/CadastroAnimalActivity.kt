@@ -151,7 +151,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
         if (!::imagesEncodedList.isInitialized) {
             imagesEncodedList = ArrayList(3)
         }
-      //  try {
+        try {
             //  Quando uma imagem é selecionada
             if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == Activity.RESULT_OK
                 && null != data
@@ -225,11 +225,11 @@ class CadastroAnimalActivity : AppCompatActivity() {
                     }
                 }
             }
-      /* } catch (e: Exception) {
+       } catch (e: Exception) {
             println(e)
             Toast.makeText(this, "Algo deu errado", Toast.LENGTH_LONG)
                 .show()
-        }*/
+        }
 
         if (requestCode == PICK_LTG_LOG && resultCode == Activity.RESULT_OK
             && null != data
