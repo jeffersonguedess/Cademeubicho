@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
@@ -24,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_cadastro_animal.*
+import kotlinx.android.synthetic.main.adapter_animais.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -331,18 +333,18 @@ class CadastroAnimalActivity : AppCompatActivity() {
                     val urlReference = UUID.randomUUID().toString()+currentTimestamp+"_"+i
                     storageReference = storage.getReference(urlReference)
                     val uploadTask = storageReference.putFile(minhasImagens.get(i))
-                    Thread.sleep(500)
-
                     val task = uploadTask.continueWithTask { task ->
                         if (!task.isSuccessful) {
 
                         }
                         storageReference.downloadUrl
                     }.addOnCompleteListener { task ->
+                        Thread.sleep(350)
                         if (task.isSuccessful) {
                             val downloadUri = task.result
                             val urlImage = downloadUri!!.toString()
                             linksImagens += "$urlImage***0ba)img&0@&e4**"
+
                             if (controle == minhasImagens.size - 1) {
                                 //FAZER O POST QUANDO TODAS AS FOTOS SUBIREM PARA O GOOGLE CLOUD
                                 //VARIAVEL CONTROLE == TAMANHO DO ARRAY DE FOTOS

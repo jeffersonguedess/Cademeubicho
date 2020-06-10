@@ -2,6 +2,7 @@ package br.cademeubicho.ui.cadastroanimal
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.media.Image
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,11 @@ class GalleryAdapter(private val context: Context, private var mArrayUris: Array
     private var pos: Int = 0
     private var inflater: LayoutInflater? = null
     private var ivGallery: ImageView? = null
+
+
+    fun getImageView() : ImageView? {
+        return ivGallery
+    }
 
     override fun getCount(): Int {
         return mArrayUris.size
