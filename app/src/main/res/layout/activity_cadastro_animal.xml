@@ -26,15 +26,18 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/gv_item" />
 
-        <Button
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn"
-            android:layout_width="297dp"
-            android:layout_height="62dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/select"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/imagem_adiciona_foo"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="auto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gv" />
+            app:layout_constraintTop_toBottomOf="@+id/gv"
+            app:tint="@android:color/white" />
 
         <TextView
             android:id="@+id/txtTipoAnimal"
@@ -230,7 +233,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="Editar Post"
+            android:text="Alterar dados Post"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnCadastroAnimais" />
