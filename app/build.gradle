@@ -25,7 +25,7 @@ android {
 
         //LEMBRAR DE COLOCAR COM httpS
         //https://cade-meu-bicho-ws.herokuapp.com
-        def serverUrl = '\"' + (System.getenv("API_URL") ?: "https://24a4834f2751.ngrok.io") + '\"'
+        def serverUrl = '\"' + (System.getenv("API_URL") ?: "https://cade-meu-bicho-ws.herokuapp.com") + '\"'
         buildConfigField "String", "API_URL", serverUrl
 
         resValue "string", "google_maps_key",
