@@ -56,7 +56,8 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
     private lateinit var imageEncoded: String
     private lateinit var imagesEncodedList: MutableList<String>
-    private var galleryAdapter: DetalhesGalleryAdapter? = null
+    private var galleryAdapterDetalhes: DetalhesGalleryAdapter? = null
+    private var galleryAdapterCadastro: GalleryAdapter? = null
     private lateinit var minhasImagens: ArrayList<Uri>
 
     private var post: PostConsulta? = null
@@ -78,8 +79,8 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
             minhasImagens = ArrayList<Uri>()
 
-            galleryAdapter = DetalhesGalleryAdapter(this, post?.imagens)
-            gv.adapter = galleryAdapter
+            galleryAdapterDetalhes = DetalhesGalleryAdapter(this, post?.imagens)
+            gv.adapter = galleryAdapterDetalhes
 
 
             btnCadastroAnimais.visibility = View.GONE
@@ -142,7 +143,15 @@ class CadastroAnimalActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        try {
+        //caso o usuario clique em cadastrar sem selecionar foto
+        // ira crashar, pois a variavel nao foi inicializada
+        if (!::minhasImagens.isInitialized) {
+            minhasImagens = ArrayList<Uri>()
+        }
+        if (!::imagesEncodedList.isInitialized) {
+            imagesEncodedList = ArrayList(3)
+        }
+      //  try {
             //  Quando uma imagem é selecionada
             if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == Activity.RESULT_OK
                 && null != data
@@ -158,8 +167,14 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
                     val mArrayUri = ArrayList<Uri>()
                     mImageUri?.let { mArrayUri.add(it) }
-                    galleryAdapter = DetalhesGalleryAdapter(this, post?.imagens)
-                    gv.adapter = galleryAdapter
+
+                    if (post != null){
+                        galleryAdapterDetalhes = DetalhesGalleryAdapter(this, post?.imagens)
+                        gv.adapter = galleryAdapterDetalhes
+                    }else {
+                        galleryAdapterCadastro = GalleryAdapter(applicationContext, mArrayUri)
+                        gv.adapter = galleryAdapterCadastro
+                    }
 
                 } else {
                     if (data.clipData != null) {
@@ -192,9 +207,13 @@ class CadastroAnimalActivity : AppCompatActivity() {
                             imagesEncodedList.add(imageEncoded)
                             cursor?.close()
 
-                            galleryAdapter = DetalhesGalleryAdapter(this, post?.imagens)
-                            gv.adapter = galleryAdapter
-
+                            if (post != null){
+                                galleryAdapterDetalhes = DetalhesGalleryAdapter(this, post?.imagens)
+                                gv.adapter = galleryAdapterDetalhes
+                            }else {
+                                galleryAdapterCadastro = GalleryAdapter(applicationContext, mArrayUri)
+                                gv.adapter = galleryAdapterCadastro
+                            }
 
                         }
                         Log.v("LOG_TAG", "Imagens selecionadas" + mArrayUri.size)
@@ -206,10 +225,11 @@ class CadastroAnimalActivity : AppCompatActivity() {
                     }
                 }
             }
-        } catch (e: Exception) {
+      /* } catch (e: Exception) {
+            println(e)
             Toast.makeText(this, "Algo deu errado", Toast.LENGTH_LONG)
                 .show()
-        }
+        }*/
 
         if (requestCode == PICK_LTG_LOG && resultCode == Activity.RESULT_OK
             && null != data
