@@ -39,7 +39,6 @@ class ConsultasController {
             StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
 
-
         val response: Response<Posts> = RetrofitClient.instance.getPosts(
             uid, longitude, latitude
         ).execute()
