@@ -31,7 +31,7 @@ import kotlin.collections.ArrayList
 
 const val PICK_IMAGE_MULTIPLE = 1000
 const val PICK_LTG_LOG = 350
-private var galleryAdapter: DetalhesGalleryAdapter? = null
+
 
 class CadastroAnimalActivity : AppCompatActivity() {
 
@@ -56,7 +56,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
     private lateinit var imageEncoded: String
     private lateinit var imagesEncodedList: MutableList<String>
-    private var galleryAdapter: GalleryAdapter? = null
+    private var galleryAdapter: DetalhesGalleryAdapter? = null
     private lateinit var minhasImagens: ArrayList<Uri>
 
     private var post: PostConsulta? = null
@@ -78,8 +78,8 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
             minhasImagens = ArrayList<Uri>()
 
-           // galleryAdapter = DetalhesGalleryAdapter(this, post?.imagens)
-          //  gv.adapter = galleryAdapter
+            galleryAdapter = DetalhesGalleryAdapter(this, post?.imagens)
+            gv.adapter = galleryAdapter
 
 
             btnCadastroAnimais.visibility = View.GONE
@@ -158,7 +158,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
                     val mArrayUri = ArrayList<Uri>()
                     mImageUri?.let { mArrayUri.add(it) }
-                    galleryAdapter = GalleryAdapter(applicationContext, mArrayUri)
+                    galleryAdapter = DetalhesGalleryAdapter(this, post?.imagens)
                     gv.adapter = galleryAdapter
 
                 } else {
@@ -192,7 +192,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
                             imagesEncodedList.add(imageEncoded)
                             cursor?.close()
 
-                            galleryAdapter = GalleryAdapter(applicationContext, mArrayUri)
+                            galleryAdapter = DetalhesGalleryAdapter(this, post?.imagens)
                             gv.adapter = galleryAdapter
 
 
