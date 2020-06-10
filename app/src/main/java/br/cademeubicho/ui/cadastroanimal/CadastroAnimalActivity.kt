@@ -281,6 +281,7 @@ class CadastroAnimalActivity : AppCompatActivity() {
     }
 
     private fun alteraCadastra(tipoInteracao: String) {
+
         //caso o usuario clique em cadastrar sem selecionar foto
         // ira crashar, pois a variavel nao foi inicializada
         if (!::minhasImagens.isInitialized) {
@@ -297,17 +298,23 @@ class CadastroAnimalActivity : AppCompatActivity() {
                 Toast.makeText(this, "Selecione pelo menos uma foto", Toast.LENGTH_LONG).show()
                 cadastro = false
             }
-        }else if (etNomeAnimal.toString().isEmpty() ||
-            etRacaAnimal.toString().isEmpty() ||
-            etcorAnimal.toString().isEmpty()
-        ) {
+        }
+
+        if (etNomeAnimal.text!!.isEmpty() ||
+            etRacaAnimal.text!!.isEmpty() ||
+            etcorAnimal.text!!.isEmpty() ) {
             Toast.makeText(this, "Insira todos os campos!", Toast.LENGTH_LONG).show()
             cadastro = false
-        } else if (longitude == "" || latitude == "") {
+        }else if (longitude == "" || latitude == "") {
             Toast.makeText(this, "Escolha uma localização!", Toast.LENGTH_LONG).show()
             cadastro = false
         }
         if (cadastro) {
+            btnCadastroAnimais.isClickable=false
+            btnEditaPost.isClickable=false
+            btnCadastroAnimais.setText("Aguarde")
+            btnEditaPost.setText("Aguarde...")
+
             var linksImagens: String = ""
             val storage = FirebaseStorage.getInstance("gs://cade-meu-bicho.appspot.com")
             var controle = 0
@@ -367,6 +374,12 @@ class CadastroAnimalActivity : AppCompatActivity() {
 
         if (status.retorno == "true") {
             finish()
+        }else{
+            btnCadastroAnimais.isClickable=true
+            btnEditaPost.isClickable=true
+            btnCadastroAnimais.setText("CADASTRAR")
+            btnEditaPost.setText("ALTERAR")
+
         }
 
 
