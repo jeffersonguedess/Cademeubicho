@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "172778597123-jh2tvjrp113c9o124eeipru1np76b4qq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.cademeubicho",
+            "certificate_hash": "1beae2c9b9c75593fd885b373e7c9c84aec7f4d7"
+          }
+        },
+        {
           "client_id": "172778597123-tg65frgu7e0ait27g3evs8lnngn8tj82.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
