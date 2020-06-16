@@ -17,69 +17,73 @@ class TutorialActivity : IntroActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        try{
+            super.onCreate(savedInstanceState)
 
-        isButtonBackVisible = false
-        isFullscreen = true
+            isButtonBackVisible = false
+            isFullscreen = true
 
-        addSlide(
-            SimpleSlide.Builder()
-                .title(R.string.new_user_title)
-                .description(R.string.new_user_description)
-                .background(R.color.colorPrimary)
-                .backgroundDark(R.color.colorAccent)
-                .scrollable(false)
-                .build()
-        )
-
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
             addSlide(
                 SimpleSlide.Builder()
-                    .title(R.string.permission_title)
-                    .description(R.string.permission_description)
-                    .background(R.color.colorAccent)
-                    .backgroundDark(R.color.colorPrimary)
+                    .title(R.string.new_user_title)
+                    .description(R.string.new_user_description)
+                    .background(R.color.colorPrimary)
+                    .backgroundDark(R.color.colorAccent)
                     .scrollable(false)
-                    .buttonCtaLabel(R.string.grant_permission)
-                    .buttonCtaClickListener { verifyStoragePermissions(this) }
                     .build()
             )
-            addOnNavigationBlockedListener { _, _ ->
-                Toast.makeText(this, R.string.grant_permission_toast, Toast.LENGTH_LONG).show()
-            }
-        }
-        addSlide(
-            SimpleSlide.Builder()
-                .title(R.string.finish_slide_title)
-                .description(R.string.finish_slide_description)
-                .background(R.color.colorPrimary)
-                .backgroundDark(R.color.colorAccent)
-                .scrollable(false)
-                .build()
-        )
-        addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(i: Int, v: Float, i1: Int) {}
-            override fun onPageSelected(i: Int) {
-                if (i > 0 && i != slides.size - 1) {
-                    setNavigation(forward = false, backward = true)
-                } else {
-                    setNavigation(forward = true, backward = false)
+
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                addSlide(
+                    SimpleSlide.Builder()
+                        .title(R.string.permission_title)
+                        .description(R.string.permission_description)
+                        .background(R.color.colorAccent)
+                        .backgroundDark(R.color.colorPrimary)
+                        .scrollable(false)
+                        .buttonCtaLabel(R.string.grant_permission)
+                        .buttonCtaClickListener { verifyStoragePermissions(this) }
+                        .build()
+                )
+                addOnNavigationBlockedListener { _, _ ->
+                    Toast.makeText(this, R.string.grant_permission_toast, Toast.LENGTH_LONG).show()
                 }
             }
+            addSlide(
+                SimpleSlide.Builder()
+                    .title(R.string.finish_slide_title)
+                    .description(R.string.finish_slide_description)
+                    .background(R.color.colorPrimary)
+                    .backgroundDark(R.color.colorAccent)
+                    .scrollable(false)
+                    .build()
+            )
+            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrolled(i: Int, v: Float, i1: Int) {}
+                override fun onPageSelected(i: Int) {
+                    if (i > 0 && i != slides.size - 1) {
+                        setNavigation(forward = false, backward = true)
+                    } else {
+                        setNavigation(forward = true, backward = false)
+                    }
+                }
 
-            override fun onPageScrollStateChanged(i: Int) {}
-        })
+                override fun onPageScrollStateChanged(i: Int) {}
+            })
+        }catch (e : Exception){
+            println(e)
+        }
     }
 
     override fun onBackPressed() {

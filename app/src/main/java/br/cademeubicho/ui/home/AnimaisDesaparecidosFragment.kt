@@ -28,9 +28,12 @@ class AnimaisDesaparecidosFragment : Fragment(), SwipeRefreshLayout.OnRefreshLis
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        loadRecyclerViewData()
-
+        try {
+            loadRecyclerViewData()
+        }catch(e : Exception){
+            println("CRASHOU")
+            loadRecyclerViewData()
+        }
         return inflater.inflate(R.layout.fragment_animais_desaparecidos, container, false)
     }
 

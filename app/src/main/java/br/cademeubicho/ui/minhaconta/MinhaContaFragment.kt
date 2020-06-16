@@ -89,7 +89,6 @@ class MinhaContaFragment : BaseFragment() {
 
             if (response.retorno.toLowerCase(Locale.ROOT) == "true"){
 
-                val uid = Sessao.getUser().uidFirebase
                 Sessao.loadSessao(uid)
                 alteraDadosTela(view )
                 //recarrega a sessao com os dados atuais que acabaram de ser cadastrados
