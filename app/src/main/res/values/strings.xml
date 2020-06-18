@@ -112,5 +112,6 @@
     <string name="dialog_permission_title">Atenção!</string>
     <string name="dialog_permission_description">Permita o acesso as fotos, mídia e arquivos do dispositivo é crucial para o aplicativo funcionar. Por favor, conceda a permissão.</string>
     <string name="dialog_permission_check">Reconhecemos que você negou a permissão de acesso ao armazenamento para este aplicativo. Para que este aplicativo funcione, o acesso ao armazenamento é necessário.</string>
+    <string name="mensagem_aviso">Em breve estaremos com o chat de mensagens internas funcionando!! Para contatar algum dono de animal, redirecione via WhatsApp.</string>
 
 </resources>

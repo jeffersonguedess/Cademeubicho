@@ -37,6 +37,7 @@
             android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:progress="25"
             app:layout_constraintBottom_toBottomOf="@+id/ivGallery"
             app:layout_constraintEnd_toEndOf="@+id/ivGallery"
             app:layout_constraintStart_toStartOf="@+id/ivGallery"

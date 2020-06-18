@@ -1,8 +1,11 @@
 package br.cademeubicho
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -20,8 +23,6 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import br.cademeubicho.ui.tutorial.TutorialActivity
 import com.firebase.ui.auth.AuthUI
-import com.google.firebase.FirebaseApp
-import com.google.firebase.FirebaseOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.android.synthetic.main.activity_main.*
@@ -45,6 +46,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+       /* val cm = baseContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = cm.activeNetworkInfo*/
+
+        val connectivityManager = baseContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+
+        if(!isConnected){
+            //Você está conectado à internet
+            if(activeNetwork?.type == ConnectivityManager.TYPE_WIFI){
+                Toast.makeText(baseContext, "Conectado via rede Wi-Fi\n", Toast.LENGTH_SHORT).show()
+            }
+            if(activeNetwork?.type == ConnectivityManager.TYPE_MOBILE){
+                Toast.makeText(baseContext, "Conectado via rede Movel\n", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(baseContext, "Não possui conecxão com a Internet\n", Toast.LENGTH_SHORT).show()
+                this.finish()
+            }
+
+        }
         if (toShowIntro()) {
             startActivityForResult(Intent(this, TutorialActivity::class.java), 1114)
         }
@@ -79,6 +100,7 @@ class MainActivity : AppCompatActivity() {
         } catch (e: PackageManager.NameNotFoundException) {
         } catch (e: NoSuchAlgorithmException) {
         }
+
 
     }
 
