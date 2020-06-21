@@ -32,6 +32,7 @@ class AnimaisDetalhesActivity : AppCompatActivity() {
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
+            setTitle(R.string.detalhes_animal)
         }
 
         post = intent.getParcelableExtra(EXTRA_POST)

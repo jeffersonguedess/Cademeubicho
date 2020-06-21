@@ -8,7 +8,7 @@
 
     <string name="menu_home">Animais desaparecidos</string>
     <string name="menu_meus_pets">Meus bichos perdidos</string>
-    <string name="menu_mensagens">Mensagens</string>
+    <string name="menu_mensagens">Chat</string>
     <string name="menu_minha_conta">Minha conta</string>
     <string name="menu_configuracao">Configurações</string>
     <string name="menu_cadastroanimal">Cadastro de Animais</string>
@@ -64,7 +64,7 @@
     <string name="click">+</string>
 
 <!--    //Maps-->
-    <string name="title_activity_maps">"Mapa "</string>
+    <string name="title_activity_maps">"Marcar Localização "</string>
     <string name="fabMaps">+</string>
     <string name="Almentar_zoom">+</string>
     <string name="Diminuir_zoom">-</string>
@@ -113,5 +113,8 @@
     <string name="dialog_permission_description">Permita o acesso as fotos, mídia e arquivos do dispositivo é crucial para o aplicativo funcionar. Por favor, conceda a permissão.</string>
     <string name="dialog_permission_check">Reconhecemos que você negou a permissão de acesso ao armazenamento para este aplicativo. Para que este aplicativo funcione, o acesso ao armazenamento é necessário.</string>
     <string name="mensagem_aviso">Em breve estaremos com o chat de mensagens internas funcionando!! Para contatar algum dono de animal, redirecione via WhatsApp.</string>
+    <string name="detalhes_animal">Detalhes do Animal</string>
+    <string name="title_cadastro_animal">Cadastro de Animais</string>
+    <string name="editar_cadastro">Editar Cadastro</string>
 
 </resources>

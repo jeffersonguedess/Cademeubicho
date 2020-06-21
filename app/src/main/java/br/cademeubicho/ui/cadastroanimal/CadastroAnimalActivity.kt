@@ -71,11 +71,12 @@ class CadastroAnimalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val root = setContentView(R.layout.activity_cadastro_animal)
 
+        post = intent.getParcelableExtra(EXTRA_POST)
+
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
+            if(post!= null)setTitle(R.string.editar_cadastro)
         }
-
-        post = intent.getParcelableExtra(EXTRA_POST)
 
         if (post != null) {
 
